@@ -1,27 +1,40 @@
 /* app body css */
 body {
-  background: linear-gradient(90deg, #FFA300, #FFD100, #FFA300);
+  background: linear-gradient(90deg, #ffd043, #ffdf53, #ffd043);
 }
 
 /* head & nav css */
 #headstyle {
-  position: absolute-top;
   background: white;
   border: 2px solid white;
+  border-left: 2px solid #866D4B;
   border-bottom: 3px solid #866D4B;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #040987;
 }
+
+
 
 h1 {
   display: flex;
   justify-content: start;
   /* font-family: 'Bungee', cursive; */
   font-family: 'Graduate', cursive;
-  font-size: 3.5rem;
+  font-size: 1.75rem;
   margin: 0;
 }
 
 p {
   margin: 0;
+}
+#disclaimer {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  font-size: 0.5rem;
 }
 
 /* nav css */
@@ -34,14 +47,73 @@ p {
 
 /* style for links */
 .navItem {
-  display: flex;
-  padding-left: 20px;
-  color: #002244;
+  padding-left: 7px;
+  padding-right: 7px;
+  color: #040987;
+  font-family: 'Graduate', cursive;
   text-decoration: none;
 }
 
-.navItem:hover {
-  color: #FF8200;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+/* nav button animation code */
+
+button {
+background: #ffffff;
+color: #fff;
+/* border: 0.25rem solid #010101; */
+padding-bottom: 4px;
+border-width: 0;
+position: relative;
+z-index: 1;
+overflow: hidden;
+}
+button:hover {
+color: #3498db;
+}
+button::after {
+content: "";
+/* background: #ecf0f1; */
+border-bottom: 0.25rem solid #ffdf53;
+position: absolute;
+z-index: -1;
+/* padding: 0.85em 0.75em; */
+display: block;
+
+transition: all 0.35s;
+top: 0;
+bottom: 0;
+left: -100%;
+right: 100%;
+}
+
+button:hover::after {
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+transition: all 0.35s;
+}
+
+/* -------------BULLETIN FLEXBOX AND STYLING-------------- */
+
+.container {
+  display:flex;
+  flex-direction: column;
+  
+  margin: 0;
+  padding: 0;
+
+}
+.containerHead {
+  background: rgb(235, 235, 235);
+  border: 2px solid rgb(235, 235, 235);
+
+}
+h2 {
+  margin: 0;
+  padding: 0;
+}
+.containerContent {
+  background: rgb(255, 255, 255);
+  border: 2px solid white;
+
 }

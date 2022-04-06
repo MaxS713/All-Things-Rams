@@ -4,10 +4,10 @@ import '../App.css';
 export default function Navbar() {
     return (
         <div id='navstyle'>
-        <NavLink to='/' className='navItem'>Home</NavLink>
-        <NavLink to='/' className='navItem'>News</NavLink>
-        <NavLink to='/' className='navItem'>Socials</NavLink>
-        <NavLink to='/' className='navItem'>Team</NavLink>
+        <button><NavLink to='/' className='navItem'>Home</NavLink></button>
+        <button><NavLink to='/' className='navItem'>News</NavLink></button>
+        <button><NavLink to='/' className='navItem'>Socials</NavLink></button>
+        <button><NavLink to='/' className='navItem'>Team</NavLink></button>
         </div>
     )
 }
