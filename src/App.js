@@ -3,7 +3,10 @@ import React from 'react';
 import './App.css';
 import Bulletin from './components/bulletin';
 
+
+
 function App() {
+
   return (
     <body>
     <Head />

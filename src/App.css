@@ -9,7 +9,6 @@ body {
   border: 2px solid white;
   border-left: 2px solid #866D4B;
   border-bottom: 3px solid #866D4B;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,6 +29,7 @@ h1 {
 p {
   margin: 0;
 }
+
 #disclaimer {
   display: flex;
   justify-content: start;
@@ -116,4 +116,29 @@ h2 {
   background: rgb(255, 255, 255);
   border: 2px solid white;
 
+}
+
+#tweets {
+  height: 50vh;
+  width: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#tweets::-webkit-scrollbar {
+  width: 20px;
+}
+
+#tweets::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+#tweets::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+  background-color: #8ba6a9;
 }
