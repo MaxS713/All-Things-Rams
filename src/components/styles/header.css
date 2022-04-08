@@ -1,0 +1,93 @@
+/* head & nav css */
+#headstyle {
+  background: white;
+  border: 2px solid white;
+  /* border-left: 2px solid #866D4B; */
+  /* subtle change allowing visual distinction between "page" and header */
+  border-bottom: 1px solid rgba(255, 201, 92, 0.969);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(4, 9, 135);
+  height: 20vh;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+}
+
+.title-and-disclaimer {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.title-and-disclaimer h1 {
+  font-family: "Graduate", cursive;
+  font-size: 4vw;
+  margin: 0;
+}
+
+#disclaimer {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  margin: 0;
+  font-size: 0.7vw;
+}
+
+/* nav css */
+#navstyle {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  gap: 2vw;
+}
+
+/* style for links */
+.navItem {
+  font-size: 1.15vw;
+  color: rgb(4, 9, 135);
+  font-family: "Graduate", cursive;
+  text-decoration: none;
+}
+
+/* nav button animation */
+
+button {
+  background: white;
+  color: #fff;
+  padding-bottom: 10px;
+  border-width: 0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+button:hover {
+  color: #3498db;
+}
+button::after {
+  content: "";
+  border-bottom: 0.25rem solid rgb(255, 223, 83);
+  margin: 0 auto;
+  width: 60%;
+  position: absolute;
+  z-index: -1;
+  display: block;
+  transition: all 0.5s;
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  right: 100%;
+}
+
+button:hover::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 0.5s;
+}

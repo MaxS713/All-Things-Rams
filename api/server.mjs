@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { TwitterApi } from "twitter-api-v2";
 import cheerio from "cheerio";
 import axios from "axios";
+import puppeteer from "puppeteer";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -83,11 +84,11 @@ tweetJourdanRodrigue.tweets.forEach((tweet) => {
 
 // https://twitter.com/LATimesklein
 //Twitter Numeric ID: 33620284
-const tweetLaTimesKlien = await client.v2.userTimeline("33620284", {
+const tweetLATimesklein = await client.v2.userTimeline("33620284", {
   exclude: "replies",
 });
 
-tweetLaTimesKlien.tweets.forEach((tweet) => {
+tweetLATimesklein.tweets.forEach((tweet) => {
   allTweetsIDs.push(tweet.id);
 });
 
@@ -103,44 +104,51 @@ app.get("/get-latest-tweets", async (req, res) => {
 
 //------------------ Instagram Data -----------------//
 
-// Cam Akers (camakers3) https://www.instagram.com/camakers3/
-//Unique ID: 386502732
-
-// Jalen Ramsey (jalenramsey) https://www.instagram.com/jalenramsey/
-//Unique ID: 391487356
-
-// Cooper Kupp (cooperkupp) https://www.instagram.com/cooperkupp/
-//Unique ID: 176194853
-
-// Jordan Fuller (j_fuller4)  https://www.instagram.com/j_fuller4/
-//Unique ID: 1018539486
-
-// Aaron Donald (aarondonald99) https://www.instagram.com/aarondonald99/
-//Unique ID: 1299204118
-
-// Troy Hill (thill_13) https://www.instagram.com/thill_13/
-//Unique ID: 288964835
-
-// Robert Woods (robertw10ds) https://www.instagram.com/robertw10ds/
-//Unique ID: 298848265
-
-// Morgan Fox (m.d.fox007) https://www.instagram.com/m.d.fox007/
-//Unique ID: 3208457572
-
-// Tyler Higbee (higbeedoe) https://www.instagram.com/higbeedoe/
-//Unique ID: 231478443
-
-// Michael Brockers (mbrockers90) https://www.instagram.com/mbrockers90/
-//Unique ID: 230905575
-
-// Kenny Young (young_forever42) https://www.instagram.com/young_forever42/
-//Unique ID: 17809798
+let instaAccountsArray = [
+  // https://www.instagram.com/camakers3/
+  { fullName: "Cam Akers", username: "camakers3" },
+  // https://www.instagram.com/jalenramsey/
+  { fullName: "Jalen Ramsey", username: "jalenramsey" },
+  // https://www.instagram.com/cooperkupp/
+  { fullName: "Cooper Kupp", username: "cooperkupp" },
+  // https://www.instagram.com/j_fuller4/
+  { fullName: "Jordan Fuller", username: "j_fuller4" },
+  // https://www.instagram.com/aarondonald99/
+  { fullName: "Aaron Donald", username: "aarondonald99" },
+  // https://www.instagram.com/thill_13/
+  { fullName: "Troy Hill", username: "thill_13" },
+  // https://www.instagram.com/robertw10ds/
+  { fullName: "Robert Woods", username: "robertw10ds" },
+  //. https://www.instagram.com/m.d.fox007/
+  { fullName: "Morgan Fox", username: "m.d.fox007" },
+  // https://www.instagram.com/higbeedoe/
+  { fullName: "Tyler Higbee", username: "higbeedoe" },
+  // https://www.instagram.com/mbrockers90/
+  { fullName: "Michael Brockers", username: "mbrockers90" },
+  // https://www.instagram.com/young_forever42/
+  { fullName: "Kenny Young", username: "young_forever42" },
+  //https://www.instagram.com/jhekk/?hl=en
+  { fullName: "Johnny Hekker", username: "jhekk" },
+];
 
 // Los Angeles Rams (rams) https://www.instagram.com/rams/
-//Unique ID: 198850174
+let laramsInstaAccount = { fullName: "Los Angeles Rams", username: "rams" };
 
-// Johnny Hekker (jhekk) https://www.instagram.com/jhekk/?hl=en
-//Unique ID: 32440405
+function shuffleInstaAccounts() {
+  for (var i = instaAccountsArray.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = instaAccountsArray[i];
+    instaAccountsArray[i] = instaAccountsArray[j];
+    instaAccountsArray[j] = temp;
+  }
+  instaAccountsArray.unshift(laramsInstaAccount);
+  instaAccountsArray = instaAccountsArray.slice(0, 8);
+}
+shuffleInstaAccounts();
+
+app.get("/get-insta-accounts", async (req, res) => {
+  res.send(instaAccountsArray);
+});
 
 //------------------ Podcasts Data -----------------//
 
@@ -153,9 +161,9 @@ app.get("/get-latest-tweets", async (req, res) => {
 // https://www.buzzsprout.com/235435
 
 //------------------ News Data -----------------//
+// What we want to get from news source: Title/Headline, date, image
 
-// https://ramblinfan.com
-// https://theramswire.usatoday.com
+// 
 // https://www.turfshowtimes.com
 // https://www.downtownrams.com
 // https://profootballtalk.nbcsports.com/category/teams/nfc/los-angeles-rams/
@@ -166,6 +174,88 @@ app.get("/get-latest-tweets", async (req, res) => {
 // https://www.dailynews.com/sports/nfl/los-angeles-rams/
 // https://www.ocregister.com/sports/nfl/los-angeles-rams/
 // https://www.sandiegouniontribune.com/sports/chargers-rams
+
+// async function getNewsData() {
+//   const browser = await puppeteer.launch();
+//   const page = await browser.newPage();
+//   let newsArticleArray = [];
+
+//   //Webpage we are scraping from --- https://ramblinfan.com
+//   await page.goto("https://ramblinfan.com/");
+//   await page.waitForSelector(".article-meta .title a");
+//   let ramblinLinks = await page.evaluate(() => {
+//     let posts = document.querySelectorAll(
+//       ".article-meta .title a:nth-child(-n+3)"
+//     );
+//     let articleLinksList = [];
+//     posts.forEach((links) => {
+//       let link = links.href;
+//       articleLinksList.push(link);
+//     });
+//     return articleLinksList;
+//   });
+//   for (let link of ramblinLinks) {
+//     await page.goto(link);
+//     await page.waitForSelector(".article-header h1");
+//     let newsData = await page.evaluate(() => {
+//       let title = document.querySelector(".article-header h1").innerText;
+//       let time = document.querySelector("time");
+//       time = time.getAttribute("datetime");
+//       let summary = document.querySelector(".speakable-content");
+//       summary = summary.innerText;
+//       let imageLink = document.querySelector(".wp-caption a");
+//       if (imageLink !== null) {
+//         imageLink = imageLink.href;
+//       }
+//       return {
+//         title: title,
+//         time: time,
+//         summary: summary,
+//         imageLink: imageLink,
+//       };
+//     });
+//     newsArticleArray.push(newsData)
+//   }
+
+//   // Webpage we are scraping from --- https://theramswire.usatoday.com
+//   await page.goto("https://theramswire.usatoday.com");
+//   await page.waitForSelector("header .post .post__title");
+//   let articleLinks = await page.evaluate(() => {
+//     let posts = document.querySelectorAll(
+//       "header .post .post__title:nth-child(-n+3)"
+//     );
+//     let articleLinksList = [];
+//     posts.forEach((links) => {
+//       let link = links.href;
+//       articleLinksList.push(link);
+//     });
+//     return articleLinksList;
+//   });
+//   for (let link of articleLinks) {
+//     await page.goto(link);
+//     await page.waitForSelector(".article-header h1");
+//     let newsData = await page.evaluate(() => {
+//       let title = document.querySelector(".article-header h1").innerText;
+//       let time = document.querySelector("time");
+//       time = time.getAttribute("datetime");
+//       let summary = document.querySelector(".speakable-content");
+//       summary = summary.innerText;
+//       let imageLink = document.querySelector(".wp-caption a");
+//       if (imageLink !== null) {
+//         imageLink = imageLink.href;
+//       }
+//       return {
+//         title: title,
+//         time: time,
+//         summary: summary,
+//         imageLink: imageLink,
+//       };
+//     });
+//     newsArticleArray.push(newsData)
+//   }
+//   console.log(newsArticleArray);
+// }
+// getNewsData();
 
 app.listen(port, () => {
   console.log("Now listening on http://localhost:" + port);

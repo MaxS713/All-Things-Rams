@@ -8,10 +8,10 @@ import Bulletin from './components/bulletin';
 function App() {
 
   return (
-    <body>
+    <main>
     <Head />
     <Bulletin />
-    </body>
+    </main>
   );
 }
 

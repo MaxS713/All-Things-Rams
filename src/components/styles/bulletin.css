@@ -1,0 +1,119 @@
+
+/* -------------BULLETIN FLEXBOX AND STYLING-------------- */
+#grid {
+  display: grid;
+  margin: 0;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "a a a a a a b b"
+    "d d d d d d c c";
+  align-items: start;
+}
+
+/* all content boxes */
+
+.containerMain {
+  grid-area: a;
+  /* display: flex;
+  flex-direction: column; */
+  margin: 0.5rem;
+  padding: 0;
+}
+
+.containerMore {
+  grid-area: b;
+  /* display: flex;
+  flex-direction: column; */
+  margin: 0.5rem;
+  padding: 0;
+}
+
+.containerTweets {
+  grid-area: c;
+  /* display: flex;
+  flex-direction: column; */
+  margin: 0.5rem;
+  padding: 0;
+}
+
+.containerInsta {
+  grid-area: d;
+  /* display: flex;
+  flex-direction: column; */
+  margin: 0.5rem;
+  padding: 0;
+}
+
+/* default container styling */
+
+.containerHead {
+  /* background-color: #040987; */
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: #040762;
+  color: #ffffff;
+  border-top: 2px solid rgb(235, 235, 235);
+  border-left: 2px solid rgb(235, 235, 235);
+  border-right: 2px solid rgb(235, 235, 235);
+  padding:0.5rem;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  font-family: "Graduate", cursive;
+  font-size: 1.75vw;
+}
+
+.containerContent {
+  background: rgb(255, 255, 255);
+  border-bottom: 2px solid rgb(235, 235, 235);
+  border-left: 2px solid rgb(235, 235, 235);
+  border-right: 2px solid rgb(235, 235, 235);
+  /* border-radius: 5px; */
+  display: flex;
+  /* flex-direction: row-reverse;
+  justify-content: space-between; */
+}
+
+/* sections styling */
+
+#mainArticle {
+}
+
+#socials {
+}
+
+#tweetContainer {
+}
+
+/* embedded Twitter and Instagram styling */
+
+#tweets {
+  height: 82.5vh;
+  width: 250px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#tweets::-webkit-scrollbar {
+  width: 20px;
+}
+
+#tweets::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+#tweets::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+  background-color: rgb(4, 9, 135);
+}
+
+#insta-slider {
+  width: 100%;
+}
