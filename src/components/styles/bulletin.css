@@ -1,52 +1,45 @@
-
 /* -------------BULLETIN FLEXBOX AND STYLING-------------- */
 #grid {
   display: grid;
-  margin: 0;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 2fr repeat(2, 1fr);
   grid-template-areas:
-    "a a a a a a b b"
-    "d d d d d d c c";
-  align-items: start;
+  "a a a b"
+  ". . c d";
 }
 
 /* all content boxes */
 
-.containerMain {
+#main-container {
   grid-area: a;
+  margin:1rem;
   /* display: flex;
   flex-direction: column; */
-  margin: 0.5rem;
-  padding: 0;
 }
 
-.containerMore {
+#aside-container {
   grid-area: b;
+  margin:1rem;
   /* display: flex;
   flex-direction: column; */
-  margin: 0.5rem;
-  padding: 0;
 }
 
-.containerTweets {
+#instagram-container {
   grid-area: c;
+  margin:1rem;
   /* display: flex;
   flex-direction: column; */
-  margin: 0.5rem;
-  padding: 0;
 }
 
-.containerInsta {
+#tweets-container {
   grid-area: d;
+  margin:1rem;
   /* display: flex;
   flex-direction: column; */
-  margin: 0.5rem;
-  padding: 0;
 }
 
 /* default container styling */
 
-.containerHead {
+.container-header {
   /* background-color: #040987; */
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
@@ -55,17 +48,18 @@
   border-top: 2px solid rgb(235, 235, 235);
   border-left: 2px solid rgb(235, 235, 235);
   border-right: 2px solid rgb(235, 235, 235);
-  padding:0.5rem;
+  padding: 0.5rem;
 }
 
-h2 {
+.container-header h2 {
+  font-family: "Graduate";
+  font-size: 1.75vw;
   margin: 0;
   padding: 0;
-  font-family: "Graduate", cursive;
-  font-size: 1.75vw;
 }
 
-.containerContent {
+.container-content {
+  min-height:30vh;
   background: rgb(255, 255, 255);
   border-bottom: 2px solid rgb(235, 235, 235);
   border-left: 2px solid rgb(235, 235, 235);
@@ -77,21 +71,21 @@ h2 {
 }
 
 /* sections styling */
+/* 
+#mainArticle {}
 
-#mainArticle {
-}
+#socials {}
 
-#socials {
-}
-
-#tweetContainer {
-}
+#tweetContainer {} */
 
 /* embedded Twitter and Instagram styling */
 
-#tweets {
+#instagram-embed, #tweets-embed{
+  margin:1rem;
+}
+
+#tweets, #instagram-posts {
   height: 82.5vh;
-  width: 250px;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
@@ -99,21 +93,17 @@ h2 {
   align-items: center;
 }
 
-#tweets::-webkit-scrollbar {
+#tweets::-webkit-scrollbar, #instagram-posts::-webkit-scrollbar {
   width: 20px;
 }
 
-#tweets::-webkit-scrollbar-track {
+#tweets::-webkit-scrollbar-track, #instagram-posts::-webkit-scrollbar-track {
   border-radius: 100px;
 }
 
-#tweets::-webkit-scrollbar-thumb {
+#tweets::-webkit-scrollbar-thumb, #instagram-posts::-webkit-scrollbar-thumb {
   border-radius: 100px;
   border: 5px solid transparent;
   background-clip: content-box;
   background-color: rgb(4, 9, 135);
-}
-
-#insta-slider {
-  width: 100%;
 }

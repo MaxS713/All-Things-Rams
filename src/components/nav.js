@@ -3,7 +3,7 @@ import "../App.css";
 
 export default function Navbar() {
   return (
-    <div id="navstyle">
+    <div id="nav-style">
       {/* Suggest making home link through the site title. Then we can lose the Home Link */}
       {/* Also curious as  to why these are all buttons? */}
       <button>

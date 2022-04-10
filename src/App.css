@@ -1,11 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Graduate');
+
 body {
-  height: 100vh;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
-/* app body css */
+
 main {
-  /* border: 1px solid red; */
   background: linear-gradient(
     90deg,
     rgb(255, 214, 92),
@@ -13,8 +14,6 @@ main {
     rgb(255, 214, 92)
   );
   width: 100%;
+  min-height: 100%;
 }
-
-/* Use Graduate font for Titles and Headers */
-/* Main body text and paragraphs should use sans-serif font */
 

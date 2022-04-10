@@ -1,5 +1,5 @@
 /* head & nav css */
-#headstyle {
+#head-style {
   background: white;
   border: 2px solid white;
   /* border-left: 2px solid #866D4B; */
@@ -22,7 +22,7 @@
 .title-and-disclaimer {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .title-and-disclaimer h1 {
@@ -33,17 +33,17 @@
 
 #disclaimer {
   display: flex;
-  justify-content: start;
-  align-items: end;
+  justify-content: flex-start;
+  align-items: flex-end;
   margin: 0;
   font-size: 0.7vw;
 }
 
 /* nav css */
-#navstyle {
+#nav-style {
   display: flex;
-  justify-content: end;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: flex-end;
   gap: 2vw;
 }
 
@@ -51,7 +51,7 @@
 .navItem {
   font-size: 1.15vw;
   color: rgb(4, 9, 135);
-  font-family: "Graduate", cursive;
+  font-family: "Graduate";
   text-decoration: none;
 }
 
