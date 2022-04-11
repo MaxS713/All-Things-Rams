@@ -20,5 +20,6 @@
     "Rodrigue",
     "Timesklein",
     "browserslist"
-  ]
+  ],
+  "javascript.validate.enable": false
 }

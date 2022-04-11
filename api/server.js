@@ -29,9 +29,9 @@ app.use(express.json());
 
 (async function checkTimeOfLatestAPICall() {
   let currentTime = Date.now();
-  let lastTwitterCall = await LastAPICallTime.findOne({API: "twitter"});
-  let lastInstagramCall = await LastAPICallTime.findOne({API: "instagram"});
-  let lastNewsCall = await LastAPICallTime.findOne({API: "news"});
+  let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
+  let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
+  let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
 
   if (!lastTwitterCall || currentTime - lastTwitterCall.time > 3600000) {
     await getLatestTweets();
@@ -46,17 +46,17 @@ app.use(express.json());
 
 app.get("/get-latest-tweets", async (req, res) => {
   let allLatestTweets = await TweetID.find({});
-  res.send(allLatestTweets);
+  await res.send(allLatestTweets);
 });
 
 app.get("/get-instagram-posts", async (req, res) => {
   let allLatestInstagramPosts = await InstagramPost.find({});
-  res.send(allLatestInstagramPosts);
+  await res.send(allLatestInstagramPosts);
 });
 
 app.get("/get-news-article", async (req, res) => {
   let allLatestNewsArticle = await NewsArticle.find({});
-  res.send(allLatestNewsArticle);
+  await res.send(allLatestNewsArticle);
 });
 
 app.listen(port, () => {

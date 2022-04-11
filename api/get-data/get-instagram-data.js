@@ -5,13 +5,6 @@ const puppeteer = require ("puppeteer")
 //------------------ Get Instagram Data -----------------//
 module.exports = async function getLatestInstagramPosts() {
 
-  await LastAPICallTime.deleteOne({API: "instagram"});
-  let timeOfApiCallRequest = new LastAPICallTime({
-    API: "instagram",
-    time: Date.now(),
-  });
-  await timeOfApiCallRequest.save();
-
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -82,6 +75,12 @@ module.exports = async function getLatestInstagramPosts() {
   }
   console.log("Success!")
   console.table(latestInstagramPosts)
+  await LastAPICallTime.deleteOne({API: "instagram"});
+  let timeOfApiCallRequest = new LastAPICallTime({
+    API: "instagram",
+    time: Date.now(),
+  });
+  await timeOfApiCallRequest.save();
 }
 
 //function to convert the instagram "time ago" measure of time into a number

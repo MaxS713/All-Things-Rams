@@ -3,19 +3,13 @@ const puppeteer = require("puppeteer");
 
 //------------------ News Data -----------------//
 module.exports = async function getLatestNewsData() {
-  await LastAPICallTime.deleteOne({API: "news"});
-  let timeOfApiCallRequest = new LastAPICallTime({
-    API: "news",
-    time: Date.now(),
-  });
-  await timeOfApiCallRequest.save();
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   let newsArticleArray = [];
 
   //https://ramblinfan.com
-  await page.goto("https://ramblinfan.com/", {waitUntil: "domcontentloaded"});
+  await page.goto("https://ramblinfan.com/", {waitUntil: "domcontentloaded", timeout: 0});
   let ramblinLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".article-meta .title a");
     let articleLinksList = [];
@@ -29,7 +23,7 @@ module.exports = async function getLatestNewsData() {
 
   for (let link of ramblinLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".article-header h1").innerText;
       let time = document.querySelector("time");
@@ -53,7 +47,7 @@ module.exports = async function getLatestNewsData() {
 
   //https://theramswire.usatoday.com
   await page.goto("https://theramswire.usatoday.com", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "domcontentloaded", timeout: 0
   });
   let ramsWireLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll("header .bundle .post .post__title");
@@ -67,7 +61,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of ramsWireLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "networkidle2"});
+    await page.goto(link, {waitUntil: "networkidle2", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".entry__title__wrapper h1").innerText;
       let time = document.querySelector('[itemprop="datePublished"]');
@@ -93,7 +87,7 @@ module.exports = async function getLatestNewsData() {
 
   //https://www.turfshowtimes.com
   await page.goto("https://www.turfshowtimes.com", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "domcontentloaded", timeout: 0
   });
   let turfLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll('[data-analytics-link="article"]');
@@ -107,7 +101,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of turfLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".c-page-title").innerText;
       let time = document.querySelector('[data-ui="timestamp"]');
@@ -131,7 +125,7 @@ module.exports = async function getLatestNewsData() {
 
   //https://www.downtownrams.com
   await page.goto("https://www.downtownrams.com/single-post/category/rams/", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "domcontentloaded", timeout: 0
   });
   let downtownRamsLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".list-post .entry-title a");
@@ -145,7 +139,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of downtownRamsLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".post-title").innerText;
       let time = document.querySelector(".entry-date");
@@ -170,7 +164,7 @@ module.exports = async function getLatestNewsData() {
   //https://profootballtalk.nbcsports.com/
   await page.goto(
     "https://profootballtalk.nbcsports.com/category/teams/nfc/los-angeles-rams/",
-    {waitUntil: "domcontentloaded"}
+    {waitUntil: "domcontentloaded", timeout: 0}
   );
   let proFootballTalkLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".entry-header .entry-title a");
@@ -184,7 +178,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of proFootballTalkLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".entry-title").innerText;
       let time = document.querySelector(".entry-date").innerText;
@@ -207,7 +201,7 @@ module.exports = async function getLatestNewsData() {
 
   //http://ramstalk.net/
   await page.goto("http://ramstalk.net/tag/rams/", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "domcontentloaded", timeout: 0
   });
   let ramsTalkLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(
@@ -223,7 +217,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of ramsTalkLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".post-title").innerText;
       let time = document.querySelector(".post-date time");
@@ -247,7 +241,7 @@ module.exports = async function getLatestNewsData() {
 
   //https://fansided.com/
   await page.goto("https://fansided.com/nfl/teams/los-angeles-rams/", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "domcontentloaded", timeout: 0
   });
   let fanSidedLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".title a");
@@ -260,7 +254,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of fanSidedLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".article-header h1").innerText;
       let time = document.querySelector(".byline time");
@@ -282,7 +276,7 @@ module.exports = async function getLatestNewsData() {
 
   //https://www.espn.com/
   await page.goto("https://www.espn.com/nfl/team/_/name/lar/los-angeles-rams", {
-    waitUntil: "networkidle2",
+    waitUntil: "networkidle2", timeout: 0
   });
   let espnLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".contentItem__content--standard");
@@ -303,7 +297,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of espnLinks) {
     console.log(`Fetching data from ${link.postURL}...`);
-    await page.goto(link.postURL, {waitUntil: "domcontentloaded"});
+    await page.goto(link.postURL, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".article-header h1").innerText;
       let time = document.querySelector(".article-meta .timestamp");
@@ -325,7 +319,7 @@ module.exports = async function getLatestNewsData() {
 
   //https://www.latimes.com/
   await page.goto("https://www.latimes.com/sports/rams", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "domcontentloaded", timeout: 0
   });
   let laTimesLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".promo-title .link");
@@ -338,7 +332,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of laTimesLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".headline").innerText;
       let time = document.querySelector(".byline time");
@@ -361,7 +355,7 @@ module.exports = async function getLatestNewsData() {
   //https://www.dailynews.com/
 
   await page.goto("https://www.dailynews.com/sports/nfl/los-angeles-rams/", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "domcontentloaded", timeout: 0
   });
   let dailyNewsLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll("main .entry-title .article-title");
@@ -374,7 +368,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of dailyNewsLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded"});
+    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(
         ".headline-area .entry-title"
@@ -421,4 +415,10 @@ module.exports = async function getLatestNewsData() {
   }
   console.log("Success!");
   console.log(newsArticleArray);
+  await LastAPICallTime.deleteOne({API: "news"});
+  let timeOfApiCallRequest = new LastAPICallTime({
+    API: "news",
+    time: Date.now(),
+  });
+  await timeOfApiCallRequest.save();
 };

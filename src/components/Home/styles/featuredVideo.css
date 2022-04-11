@@ -1,0 +1,15 @@
+#featured-video-container {
+  grid-area: video;
+  margin:1rem;
+}
+
+#featured-video-content{
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+#youtube-wrapper{
+  width:40vw;
+  margin:1rem;
+}

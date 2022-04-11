@@ -38,4 +38,4 @@ const LastAPICallTime = mongoose.model(
   lastAPICallTimeSchema
 );
 
-module.exports = {TweetID, InstagramPost, NewsArticle, LastAPICallTime};
+module.exports = { TweetID, InstagramPost, NewsArticle, LastAPICallTime };

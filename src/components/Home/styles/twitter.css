@@ -1,0 +1,36 @@
+#tweets-container {
+  grid-area: twitter;
+  margin:1rem;
+}
+
+
+
+
+#instagram-embed, #tweets-embed{
+  margin:1rem;
+}
+
+#tweets-wrapper, #instagram-wrapper {
+  height: 55vh;
+  width:100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#tweets-wrapper::-webkit-scrollbar {
+  width: 20px;
+}
+
+#tweets-wrapper::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+#tweets-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+  background-color: rgb(4, 9, 135);
+}

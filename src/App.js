@@ -1,13 +1,20 @@
-import Header from "./components/header";
+//Library Imports
 import React from "react";
-import "./App.css";
+
+//Component Imports
+import Header from "./components/header";
 import Bulletin from "./components/bulletin";
+import Footer from "./components/footer";
+
+//Style Imports
+import "./App.css";
 
 function App() {
   return (
     <main>
       <Header />
       <Bulletin />
+      <Footer />
     </main>
   );
 }

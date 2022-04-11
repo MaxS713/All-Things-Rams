@@ -1,0 +1,28 @@
+#featured-news-container{
+  grid-area: news;
+  margin:1rem;
+}
+
+#latest-news{
+  height: 55vh;
+  width:100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+#latest-news::-webkit-scrollbar {
+  width: 20px;
+}
+
+#latest-news::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+#latest-news::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+  background-color: rgb(4, 9, 135);
+}

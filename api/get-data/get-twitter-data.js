@@ -4,12 +4,6 @@ const {TwitterApi} = require ("twitter-api-v2");
 //------------------ Get Twitter Data -----------------//
 
 module.exports = async function getLatestTweets() {
-  await LastAPICallTime.deleteOne({API: "twitter"});
-  let timeOfApiCallRequest = new LastAPICallTime({
-    API: "twitter",
-    time: Date.now(),
-  });
-  await timeOfApiCallRequest.save();
 
   const client = new TwitterApi({
     appKey: "Vx3ZSb24vmi5uIT2VUTzNzU7i",
@@ -54,4 +48,10 @@ module.exports = async function getLatestTweets() {
   }
   console.log("Success!")
   console.table(allTweetsIDs)
+  await LastAPICallTime.deleteOne({API: "twitter"});
+  let timeOfApiCallRequest = new LastAPICallTime({
+    API: "twitter",
+    time: Date.now(),
+  });
+  await timeOfApiCallRequest.save();
 }

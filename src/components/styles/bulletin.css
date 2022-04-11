@@ -1,46 +1,18 @@
-/* -------------BULLETIN FLEXBOX AND STYLING-------------- */
+/* -------------BULLETIN GRID STYLING-------------- */
 #grid {
   display: grid;
-  grid-template-columns: 2fr repeat(2, 1fr);
+  width:80vw;
+  margin:0 auto;
   grid-template-areas:
-  "a a a b"
-  ". . c d";
-}
-
-/* all content boxes */
-
-#main-container {
-  grid-area: a;
-  margin:1rem;
-  /* display: flex;
-  flex-direction: column; */
-}
-
-#aside-container {
-  grid-area: b;
-  margin:1rem;
-  /* display: flex;
-  flex-direction: column; */
-}
-
-#instagram-container {
-  grid-area: c;
-  margin:1rem;
-  /* display: flex;
-  flex-direction: column; */
-}
-
-#tweets-container {
-  grid-area: d;
-  margin:1rem;
-  /* display: flex;
-  flex-direction: column; */
+  "video video video survey"
+  "video video video googlead"
+  "news news news instagram"
+  ". . . twitter";
 }
 
 /* default container styling */
 
 .container-header {
-  /* background-color: #040987; */
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: #040762;
@@ -64,46 +36,4 @@
   border-bottom: 2px solid rgb(235, 235, 235);
   border-left: 2px solid rgb(235, 235, 235);
   border-right: 2px solid rgb(235, 235, 235);
-  /* border-radius: 5px; */
-  display: flex;
-  /* flex-direction: row-reverse;
-  justify-content: space-between; */
-}
-
-/* sections styling */
-/* 
-#mainArticle {}
-
-#socials {}
-
-#tweetContainer {} */
-
-/* embedded Twitter and Instagram styling */
-
-#instagram-embed, #tweets-embed{
-  margin:1rem;
-}
-
-#tweets, #instagram-posts {
-  height: 82.5vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#tweets::-webkit-scrollbar, #instagram-posts::-webkit-scrollbar {
-  width: 20px;
-}
-
-#tweets::-webkit-scrollbar-track, #instagram-posts::-webkit-scrollbar-track {
-  border-radius: 100px;
-}
-
-#tweets::-webkit-scrollbar-thumb, #instagram-posts::-webkit-scrollbar-thumb {
-  border-radius: 100px;
-  border: 5px solid transparent;
-  background-clip: content-box;
-  background-color: rgb(4, 9, 135);
 }
