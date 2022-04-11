@@ -1,9 +1,8 @@
-const {NewsArticle, LastAPICallTime} = require ("../models.js");
-const puppeteer = require ("puppeteer")
+const {NewsArticle, LastAPICallTime} = require("../models.js");
+const puppeteer = require("puppeteer");
 
 //------------------ News Data -----------------//
 module.exports = async function getLatestNewsData() {
-
   await LastAPICallTime.deleteOne({API: "news"});
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "news",
@@ -358,8 +357,7 @@ module.exports = async function getLatestNewsData() {
     });
     newsArticleArray.push(newsData);
   }
-  
-  
+
   //https://www.dailynews.com/
 
   await page.goto("https://www.dailynews.com/sports/nfl/los-angeles-rams/", {
@@ -395,20 +393,19 @@ module.exports = async function getLatestNewsData() {
         newsSource: "LA Daily News",
       };
     });
-    await browser.close();
     newsArticleArray.push(newsData);
   }
-  
 
-  console.log(`Sorting Data...`)
+  await browser.close();
+
+  console.log(`Sorting Data...`);
   newsArticleArray = newsArticleArray.sort(
     (a, b) => Date.parse(b.time) - Date.parse(a.time)
   );
-  
 
-  console.log(`Slicing Data...`)
+  console.log(`Slicing Data...`);
   newsArticleArray = newsArticleArray.slice(0, 10);
-  
+
   await NewsArticle.deleteMany({});
 
   for (let newsArticle of newsArticleArray) {
@@ -422,6 +419,6 @@ module.exports = async function getLatestNewsData() {
     });
     await newPost.save();
   }
-  console.log("Success!")
-  console.log(newsArticleArray)
-}
+  console.log("Success!");
+  console.log(newsArticleArray);
+};
