@@ -4,21 +4,25 @@
   margin:1rem;
 }
 
-
-
-
-#instagram-embed {
-  margin:1rem;
-}
-
 #instagram-wrapper {
   height: 55vh;
-  width:100%;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#instagram-embed {
+  margin:0 0.5rem;
+}
+
+#instagram-embed p{
+  font-weight:550;
+}
+
+#instagram-embed p span{
+  color:rgb(4, 9, 135);
 }
 
 #instagram-wrapper::-webkit-scrollbar {

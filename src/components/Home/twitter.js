@@ -27,9 +27,9 @@ export default function Twitter() {
         </div>
         <div className="container-content">
           <div id="tweets-wrapper">
-            <div id="tweets-embed">
-              {twitterData.map((tweet) => {
-                return (
+            {twitterData.map((tweet) => {
+              return (
+                <div id="tweets-embed">
                   <TwitterEmbed
                     url={`https://twitter.com/PixelAndBracket/status/${tweet.tweetID}`}
                     width="100%"
@@ -38,9 +38,9 @@ export default function Twitter() {
                       marginBottom: 10,
                     }}
                   />
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

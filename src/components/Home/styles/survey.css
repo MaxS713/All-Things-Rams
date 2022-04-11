@@ -1,8 +1,10 @@
 #survey-container {
   grid-area: survey;
   margin:1rem;
-}
+
+  }
 
 #survey-wrapper{
   padding:1rem;
 }
+

@@ -1,11 +1,12 @@
 //Library Imports
 import React, { useState, useEffect } from "react";
 
-import FeaturedVideo from "./Home/featuredVideo";
-import LatestNews from "./Home/news";
-import Instagram from "./Home/instagram";
-import Twitter from "./Home/twitter";
-import Survey from "./Home/survey";
+import FeaturedVideo from "../Home/featuredVideo";
+import LatestNews from "../Home/news";
+import Instagram from "../Home/instagram";
+import Twitter from "../Home/twitter";
+import Survey from "../Home/survey";
+import GoogleAdPlaceholder from "../Home/googleAds";
 
 import "./styles/bulletin.css"
 
@@ -16,6 +17,7 @@ export default function Bulletin() {
         <FeaturedVideo />
         <LatestNews />
         <Survey />
+        <GoogleAdPlaceholder />
         <Twitter />
         <Instagram />
       </div>

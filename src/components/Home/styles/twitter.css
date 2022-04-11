@@ -3,21 +3,17 @@
   margin:1rem;
 }
 
-
-
-
-#instagram-embed, #tweets-embed{
-  margin:1rem;
-}
-
-#tweets-wrapper, #instagram-wrapper {
+#tweets-wrapper {
   height: 55vh;
-  width:100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+#tweets-embed{
+  margin:0.5rem;
 }
 
 #tweets-wrapper::-webkit-scrollbar {

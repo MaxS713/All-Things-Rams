@@ -2,9 +2,9 @@
 import React from "react";
 
 //Component Imports
-import Header from "./components/header";
-import Bulletin from "./components/bulletin";
-import Footer from "./components/footer";
+import Header from "./components/Global/header";
+import Bulletin from "./components/Global/bulletin";
+import Footer from "./components/Global/footer";
 
 //Style Imports
 import "./App.css";

@@ -1,7 +1,7 @@
 //Library Imports
 import React, { useState, useEffect } from "react";
 import { InstagramEmbed } from "react-social-media-embed";
-import "./styles/instagram.css"
+import "./styles/instagram.css";
 
 export default function Instagram() {
   const [instagramData, setInstagramData] = useState([]);
@@ -26,17 +26,18 @@ export default function Instagram() {
 
         <div className="container-content">
           <div id="instagram-wrapper">
-            <div id="instagram-embed">
-              {instagramData.map((instagramPost) => {
-                return (
+            {instagramData.map((instagramPost) => {
+              return (
+                <div id="instagram-embed">
+                  <p><span>{instagramPost.author}</span> posted:</p>
                   <InstagramEmbed
                     url={`https://www.instagram.com${instagramPost.path}`}
                     width="100%"
                     linkText="Loading"
                   />
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

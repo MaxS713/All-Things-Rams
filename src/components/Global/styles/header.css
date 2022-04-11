@@ -23,7 +23,6 @@
 .title-and-disclaimer {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
 }
 
 .title-and-disclaimer h1 {
@@ -33,12 +32,10 @@
 }
 
 #disclaimer {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
+  padding:0;
   margin: 0;
   font-size: 0.7vw;
-  font-family: Arial, Helvetica, sans-serif;
+  font-style:italic;
 }
 
 /* nav css */
@@ -51,7 +48,7 @@
 
 /* style for links */
 .navItem {
-  font-size: 1vw;
+  font-size: 1.1vw;
   color: rgb(4, 9, 135);
   font-family: "Graduate";
   text-decoration: none;
@@ -88,7 +85,6 @@
   border-radius: 3px;
   transition: border-color 0.2s ease-in;
 }
-
 
 #donate-button:hover{
   border-color: rgb(255, 223, 83);

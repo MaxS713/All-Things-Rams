@@ -4,7 +4,7 @@
 }
 
 #latest-news{
-  height: 55vh;
+  max-height: 120vh;
   width:100%;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -25,4 +25,16 @@
   border: 5px solid transparent;
   background-clip: content-box;
   background-color: rgb(4, 9, 135);
+}
+
+h3{
+  padding-left: 1.5vw;
+}
+
+p{
+  padding-left: 1.5vw;
+}
+
+img{
+  padding-left: 1.5vw;
 }

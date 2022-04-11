@@ -7,7 +7,7 @@
   "video video video survey"
   "video video video googlead"
   "news news news instagram"
-  ". . . twitter";
+  "news news news twitter";
 }
 
 /* default container styling */
@@ -31,7 +31,6 @@
 }
 
 .container-content {
-  min-height:30vh;
   background: rgb(255, 255, 255);
   border-bottom: 2px solid rgb(235, 235, 235);
   border-left: 2px solid rgb(235, 235, 235);

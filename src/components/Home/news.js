@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./styles/news.css"
-
+import "./styles/news.css";
 
 export default function LatestNews() {
-
   const [newsArticleData, setNewsArticleData] = useState([]);
 
   async function getServerData() {
@@ -33,12 +31,20 @@ export default function LatestNews() {
             {newsArticleData.map((newsArticle) => {
               return (
                 <>
-                  <img src={newsArticle.imgSrc} width="200" />
-                  <a href={newsArticle.link}>
+                  <a
+                    href={newsArticle.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <h3>{newsArticle.title}</h3>
                   </a>
-                  <p>Date: {newsArticle.time}</p>
-                  <p>Source: {newsArticle.source}</p>
+                  <img src={newsArticle.imgSrc} width="300" />
+
+                  <p>
+                    Date: {newsArticle.time} 
+                    <br></br>
+                    Source:{newsArticle.source}
+                  </p>
                 </>
               );
             })}
@@ -48,3 +54,44 @@ export default function LatestNews() {
     </>
   );
 }
+
+/*
+//REACT SLICK documentation for faded carousel
+
+import React, { Component } from "react";
+import Slider from "react-slick";
+import { baseUrl } from "./config";
+
+export default class Fade extends Component {
+  render() {
+    const settings = {
+      dots: true,
+      fade: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    return (
+      <div>
+        <h2>Fade</h2>
+        <Slider {...settings}>
+          <div>
+            <img src={baseUrl + "/abstract01.jpg"} />
+          </div>
+          <div>
+            <img src={baseUrl + "/abstract02.jpg"} />
+          </div>
+          <div>
+            <img src={baseUrl + "/abstract03.jpg"} />
+          </div>
+          <div>
+            <img src={baseUrl + "/abstract04.jpg"} />
+          </div>
+        </Slider>
+      </div>
+    );
+  }
+}
+
+ */

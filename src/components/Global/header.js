@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "./nav";
 
 //Assets Import
-import logoLink from "../images/placeholder-logo.jpg";
+import logoLink from "../../images/placeholder-logo.jpg";
 
 //Style Imports
 import "./styles/header.css";
