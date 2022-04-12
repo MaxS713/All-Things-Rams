@@ -29,6 +29,9 @@ module.exports = async function getLatestTweets() {
       exclude: "replies",
     });
     for (let tweet of latestTweets.tweets) {
+      console.log(tweet)
+      console.log(tweet.time)
+      console.log(tweet.date)
       allTweetsIDs.push(tweet.id);
     }
   }

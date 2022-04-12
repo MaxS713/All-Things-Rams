@@ -38,7 +38,7 @@ export default function LatestNews() {
                   >
                     <h3>{newsArticle.title}</h3>
                   </a>
-                  <img src={newsArticle.imgSrc} width="300" />
+                  <img src={newsArticle.imgSrc} alt="news article main illustration" width="300" />
 
                   <p>
                     Date: {newsArticle.time} 

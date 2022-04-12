@@ -29,7 +29,7 @@ export default function Instagram() {
             {instagramData.map((instagramPost) => {
               return (
                 <div id="instagram-embed">
-                  <p><span>{instagramPost.author}</span> posted:</p>
+                  <p><span>{instagramPost.author}</span> posted {instagramPost.time}</p>
                   <InstagramEmbed
                     url={`https://www.instagram.com${instagramPost.path}`}
                     width="100%"

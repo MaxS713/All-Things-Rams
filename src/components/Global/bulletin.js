@@ -1,5 +1,3 @@
-//Library Imports
-import React, { useState, useEffect } from "react";
 
 import FeaturedVideo from "../Home/featuredVideo";
 import LatestNews from "../Home/news";

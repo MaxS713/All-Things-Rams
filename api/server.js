@@ -28,6 +28,7 @@ app.use(express.json());
 // https://www.buzzsprout.com/235435
 
 (async function checkTimeOfLatestAPICall() {
+  await getLatestTweets();
   let currentTime = Date.now();
   let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
   let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
