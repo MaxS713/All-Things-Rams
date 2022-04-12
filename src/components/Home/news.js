@@ -43,7 +43,7 @@ export default function LatestNews() {
                   <p>
                     Date: {newsArticle.time} 
                     <br></br>
-                    Source:{newsArticle.source}
+                    Source: {newsArticle.source}
                   </p>
                 </>
               );

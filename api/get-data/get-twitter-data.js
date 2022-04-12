@@ -65,5 +65,5 @@ module.exports = async function getLatestTweets() {
 };
 
 function tweetIDToTime(tweetId) {
-  return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657);
+  return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
 }

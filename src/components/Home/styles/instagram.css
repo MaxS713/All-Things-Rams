@@ -13,15 +13,22 @@
   align-items: center;
 }
 
-#instagram-embed {
-  margin:0 0.5rem;
-}
-
 #instagram-embed p{
-  font-weight:550;
+  padding:0;
+  font-style:italic;
+  font-size:0.9vw;
 }
 
 #instagram-embed p span{
+  font-size:1.25vw;
+  font-style:normal;
+  font-weight:550;
+  color:rgb(4, 9, 135);
+}
+
+#instagram-embed p span{
+  font-style:normal;
+  font-weight:550;
   color:rgb(4, 9, 135);
 }
 

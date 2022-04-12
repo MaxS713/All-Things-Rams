@@ -16,6 +16,19 @@
   margin:0.5rem;
 }
 
+#tweets-embed p{
+  padding:0;
+  font-style:italic;
+  font-size:0.9vw;
+}
+
+#tweets-embed p span{
+  font-size:1.25vw;
+  font-style:normal;
+  font-weight:550;
+  color:rgb(4, 9, 135);
+}
+
 #tweets-wrapper::-webkit-scrollbar {
   width: 20px;
 }

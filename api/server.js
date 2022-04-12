@@ -28,7 +28,6 @@ app.use(express.json());
 // https://www.buzzsprout.com/235435
 
 (async function checkTimeOfLatestAPICall() {
-  await getLatestTweets();
   let currentTime = Date.now();
   let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
   let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
@@ -58,6 +57,10 @@ app.get("/get-instagram-posts", async (req, res) => {
 app.get("/get-news-article", async (req, res) => {
   let allLatestNewsArticle = await NewsArticle.find({});
   await res.send(allLatestNewsArticle);
+});
+
+app.get("/", async (req, res) => {
+  await res.send("Hi Maix");
 });
 
 app.listen(port, () => {

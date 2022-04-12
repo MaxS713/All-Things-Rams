@@ -4,10 +4,11 @@
   width:80vw;
   margin:0 auto;
   grid-template-areas:
+  
   "video video video survey"
   "video video video googlead"
   "news news news instagram"
-  "news news news twitter";
+  "news news news twitter"
 }
 
 /* default container styling */

@@ -9,46 +9,46 @@ import "./styles/twitter.css";
 
 export default function Twitter() {
 
-  // function relativeTime(tweetTime) {
-  //   let diff = Date.now() - Date.parse(tweetTime);
-  //   if (diff < 0) {
-  //     return "From the future!";
-  //   }
-  //   const datetimeUnits = [
-  //     "year",
-  //     "month",
-  //     "day",
-  //     "hour",
-  //     "minute",
-  //     "second",
-  //     "millisecond",
-  //   ];
-  //   let datetimeParts = new Date(diff)
-  //     .toISOString()
-  //     .split(/\D/)
-  //     .map((x) => parseInt(x));
-  //   datetimeParts[0] -= 1970;
-  //   datetimeParts[1] -= 1;
-  //   datetimeParts[2] -= 1;
-  //   let primaryUnit, secondaryUnit, primaryQuotient, secondaryQuotient;
-  //   for (let i = 0; i < datetimeUnits.length - 1; i++) {
-  //     if (datetimeParts[i] === 0) {
-  //       continue;
-  //     }
-  //     [primaryUnit, secondaryUnit] = datetimeUnits.slice(i, i + 2);
-  //     [primaryQuotient, secondaryQuotient] = datetimeParts.slice(i, i + 2);
-  //     break;
-  //   }
-  //   let diffStr = `${primaryQuotient} ${primaryUnit}${
-  //     primaryQuotient !== 1 ? "s" : ""
-  //   }`;
-  //   if (secondaryQuotient > 0) {
-  //     diffStr += ` and ${secondaryQuotient} ${secondaryUnit}${
-  //       secondaryQuotient !== 1 ? "s" : ""
-  //     }`;
-  //   }
-  //   return `${diffStr} ago`;
-  // }
+  function relativeTime(tweetTime) {
+    let diff = Date.now() - tweetTime;
+    if (diff < 0) {
+      return "From the future!";
+    }
+    const datetimeUnits = [
+      "year",
+      "month",
+      "day",
+      "hour",
+      "minute",
+      "second",
+      "millisecond",
+    ];
+    let datetimeParts = new Date(diff)
+      .toISOString()
+      .split(/\D/)
+      .map((x) => parseInt(x));
+    datetimeParts[0] -= 1970;
+    datetimeParts[1] -= 1;
+    datetimeParts[2] -= 1;
+    let primaryUnit, secondaryUnit, primaryQuotient, secondaryQuotient;
+    for (let i = 0; i < datetimeUnits.length - 1; i++) {
+      if (datetimeParts[i] === 0) {
+        continue;
+      }
+      [primaryUnit, secondaryUnit] = datetimeUnits.slice(i, i + 2);
+      [primaryQuotient, secondaryQuotient] = datetimeParts.slice(i, i + 2);
+      break;
+    }
+    let diffStr = `${primaryQuotient} ${primaryUnit}${
+      primaryQuotient !== 1 ? "s" : ""
+    }`;
+    if (secondaryQuotient > 0) {
+      diffStr += ` and ${secondaryQuotient} ${secondaryUnit}${
+        secondaryQuotient !== 1 ? "s" : ""
+      }`;
+    }
+    return `${diffStr} ago`;
+  }
 
   const [twitterData, setTwitterData] = useState([]);
 
@@ -73,7 +73,7 @@ export default function Twitter() {
             {twitterData.map((tweet) => {
               return (
                 <div id="tweets-embed">
-                  {/* <p>{tweet.author} tweeted {relativeTime(tweet.time)}</p> */}
+                  <p><span>{tweet.author}</span> tweeted {relativeTime(tweet.time)}</p>
                   <TwitterEmbed
                     url={`https://twitter.com/PixelAndBracket/status/${tweet.ID}`}
                     width="100%"

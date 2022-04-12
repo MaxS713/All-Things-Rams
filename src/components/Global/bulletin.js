@@ -18,6 +18,7 @@ export default function Bulletin() {
         <GoogleAdPlaceholder />
         <Twitter />
         <Instagram />
+        <GoogleAdPlaceholder />
       </div>
     </>
   );
