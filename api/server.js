@@ -6,6 +6,7 @@ const {
   InstagramPost,
   NewsArticle,
   LastAPICallTime,
+  SurveyData,
 } = require("./models.js");
 const getLatestTweets = require("./get-data/get-twitter-data.js");
 const getLatestInstagramPosts = require("./get-data/get-instagram-data.js");
@@ -44,6 +45,10 @@ app.use(express.json());
   }
 })();
 
+app.get("/", async (req, res) => {
+  await res.send("Hi Maix");
+});
+
 app.get("/get-latest-tweets", async (req, res) => {
   let allLatestTweets = await Tweet.find({});
   await res.send(allLatestTweets);
@@ -56,12 +61,46 @@ app.get("/get-instagram-posts", async (req, res) => {
 
 app.get("/get-news-article", async (req, res) => {
   let allLatestNewsArticle = await NewsArticle.find({});
+  allLatestNewsArticle = allLatestNewsArticle.slice(3);
   await res.send(allLatestNewsArticle);
 });
 
-app.get("/", async (req, res) => {
-  await res.send("Hi Maix");
+app.get("/get-featured-news", async (req, res) => {
+  let allLatestNewsArticle = await NewsArticle.find({});
+  allLatestNewsArticle = allLatestNewsArticle.slice(0,3);
+  await res.send(allLatestNewsArticle);
 });
+
+app.get("/get-survey-data", async (req, res) => {
+  let surveyData = await SurveyData.find({});
+  await res.send(surveyData);
+});
+
+app.post("/post-survey-vote", async (req, res) => {
+  let surveyData = await SurveyData.findOne({});
+  if (req.body.text===surveyData.textAnswer1){
+    surveyData.votesAnswer1++
+    await surveyData.save();
+  } else if (req.body.text===surveyData.textAnswer2){
+    surveyData.votesAnswer2++
+    await surveyData.save();
+  }
+  console.log(surveyData)
+});
+
+async function createNewSurvey() {
+  let question = "What do you prefer?";
+  let answer1 = "Hamburgers";
+  let answer2 = "Hot-Dogs";
+  let newQuestion = new SurveyData({
+    surveyQuestion: question,
+    textAnswer1: answer1,
+    // votesAnswer1: Number,
+    textAnswer2: answer2,
+    // votesAnswer2: Number,
+  });
+  await newQuestion.save();
+}
 
 app.listen(port, () => {
   console.log("Now listening on http://localhost:" + port);

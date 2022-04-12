@@ -79,7 +79,7 @@ module.exports = async function getLatestNewsData() {
         time: time,
         summary: summary,
         imageLink: imageLink,
-        newsSource: "USA Today",
+        newsSource: "Ramswire - USA Today",
       };
     });
     newsArticleArray.push(newsData);
@@ -410,6 +410,7 @@ module.exports = async function getLatestNewsData() {
       imgSrc: newsArticle.imageLink,
       summary: newsArticle.summary,
       source: newsArticle.newsSource,
+      sourceLogoRef: newsArticle.newsSource.replace(/\s/g, ''),
     });
     await newPost.save();
   }

@@ -10,18 +10,16 @@ export default function FeaturedVideo() {
           <h2>Featured Video</h2>
         </div>
         <div className="container-content">
-          <div id="featured-video-content">
             <div id="youtube-wrapper">
               <div id="youtube-embed">
                 <YouTubeEmbed
-                  url="https://www.youtube.com/watch?v=TEyMBxbnN54"
+                  url="https://www.youtube.com/watch?v=HpCAHRcwbbc"
                   width="100%"
                   linkText="Loading"
                 />
               </div>
             </div>
           </div>
-        </div>
       </div>
     </>
   );

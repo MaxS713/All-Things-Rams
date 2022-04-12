@@ -1,10 +1,13 @@
 #survey-container {
   grid-area: survey;
-  margin:1rem;
-
-  }
-
-#survey-wrapper{
-  padding:1rem;
+  margin: 1rem;
+  width: 90%;
 }
 
+#survey-wrapper {
+  padding: 0.5rem;
+}
+
+h1 {
+  font-size: 1rem;
+}

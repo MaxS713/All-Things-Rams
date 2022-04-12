@@ -1,14 +1,25 @@
 /* -------------BULLETIN GRID STYLING-------------- */
 #grid {
   display: grid;
-  width:80vw;
-  margin:0 auto;
+  justify-content: center;
+  width: 85%;
+  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
-  
-  "video video video survey"
-  "video video video googlead"
-  "news news news instagram"
-  "news news news twitter"
+    "feat  feat  feat news"
+    "feat  feat  feat news"
+    "googlead2  googlead2  googlead2 googlead2"
+    "twitter instagram instagram survey"
+    "twitter instagram instagram survey"
+    "googlead  googlead googlead googlead";
+}
+
+@media only screen and (max-width: 500px) {
+  #grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 /* default container styling */

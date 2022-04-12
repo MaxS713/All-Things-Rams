@@ -2,31 +2,30 @@
 #instagram-container {
   grid-area: instagram;
   margin:1rem;
+  /* width:100%; */
 }
 
 #instagram-wrapper {
   height: 55vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
+
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #instagram-embed p{
   padding:0;
   font-style:italic;
   font-size:0.9vw;
+  padding-bottom:5px;
 }
 
 #instagram-embed p span{
   font-size:1.25vw;
-  font-style:normal;
-  font-weight:550;
-  color:rgb(4, 9, 135);
-}
-
-#instagram-embed p span{
   font-style:normal;
   font-weight:550;
   color:rgb(4, 9, 135);
@@ -45,4 +44,9 @@
   border: 5px solid transparent;
   background-clip: content-box;
   background-color: rgb(4, 9, 135);
+}
+p.source{
+  padding-left: 1.5vw;
+  border-bottom: 3px solid rgb(4, 9, 135);
+  width: 100%;
 }

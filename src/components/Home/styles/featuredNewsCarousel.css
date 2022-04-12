@@ -1,0 +1,15 @@
+#featured-news-container {
+  grid-area: feat;
+  margin:1rem;
+}
+
+/* #carousel-wrapper{
+} */
+
+#carousel-item{
+  margin:2rem;
+}
+
+/* .carousel-img {
+  height:300px;
+} */

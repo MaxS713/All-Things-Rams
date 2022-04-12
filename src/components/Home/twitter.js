@@ -60,7 +60,6 @@ export default function Twitter() {
   useEffect(() => {
     getServerData();
   }, []);
-  console.log(twitterData)
 
   return (
     <>
@@ -73,7 +72,7 @@ export default function Twitter() {
             {twitterData.map((tweet) => {
               return (
                 <div id="tweets-embed">
-                  <p><span>{tweet.author}</span> tweeted {relativeTime(tweet.time)}</p>
+                  <p className="source"><span>{tweet.author}</span> tweeted {relativeTime(tweet.time)}</p>
                   <TwitterEmbed
                     url={`https://twitter.com/PixelAndBracket/status/${tweet.ID}`}
                     width="100%"

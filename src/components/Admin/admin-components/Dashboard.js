@@ -1,10 +1,8 @@
-// import { Card, CardContent, CardHeader } from "@material-ui/core";
+import * as React from "react";
 
-// export default function Dashboard() {
-//   return (
-//     <Card>
-//       <CardHeader title="Welcome to Admin Portal" />
-//       <CardContent>I see great things in your future...</CardContent>
-//     </Card>
-//   );
-// }
+export default () => (
+        <>
+        <h1>Welcome to All Things Rams Admin</h1>
+        <h3>Login</h3>
+        </>
+);

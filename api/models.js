@@ -25,11 +25,24 @@ const newsArticleSchema = new mongoose.Schema({
   imgSrc: String,
   summary: String,
   source: String,
+  sourceLogoRef: String,
 });
 
 const lastAPICallTimeSchema = new mongoose.Schema({
   API: String,
   time: Number,
+});
+
+const surveyDataSchema = new mongoose.Schema({
+  surveyQuestion: String,
+  textAnswer1: String,
+  votesAnswer1: { type: Number, default: 0 },
+  textAnswer2: String,
+  votesAnswer2: { type: Number, default: 0 },
+  textAnswer3: String,
+  votesAnswer3: { type: Number, default: 0 },
+  textAnswer4: String,
+  votesAnswer4: { type: Number, default: 0 },
 });
 
 const Tweet = mongoose.model("Tweet", twitterDataSchema);
@@ -39,5 +52,12 @@ const LastAPICallTime = mongoose.model(
   "LastAPICallTime",
   lastAPICallTimeSchema
 );
+const SurveyData = mongoose.model("SurveyData", surveyDataSchema);
 
-module.exports = {Tweet, InstagramPost, NewsArticle, LastAPICallTime};
+module.exports = {
+  Tweet,
+  InstagramPost,
+  NewsArticle,
+  LastAPICallTime,
+  SurveyData,
+};

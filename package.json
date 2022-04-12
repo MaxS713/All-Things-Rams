@@ -15,6 +15,7 @@
     "react-admin": "^3.19.11",
     "react-dom": "^18.0.0",
     "react-leaf-polls": "^1.0.3",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "react-slick": "^0.28.1",

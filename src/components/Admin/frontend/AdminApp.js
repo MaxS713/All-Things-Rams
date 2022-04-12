@@ -7,13 +7,14 @@ import jsonServerProvider from "ra-data-json-server";
 import {PostList, PostEdit, PostCreate} from "../admin-components/posts";
 // import custom ListGuesser component for users
 import {UserList} from "../admin-components/users";
+import Dashboard from "../admin-components/dashboard";
 
 // create variable to hold REST API info
 const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 // create variable to hold the function that calls the Admin component with dataProvider PROP that contains REST API info.
 
 const AdminApp = () => (
-  <Admin dataProvider={dataProvider}>
+  <Admin dashboard={Dashboard} dataProvider={dataProvider}>
     {/* Inside the Admin component add Resource child components to use CRUD operations; list, create, edit, and show.*/}
     <Resource
       name="posts"

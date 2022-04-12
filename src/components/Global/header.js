@@ -6,6 +6,7 @@ import Navbar from "./nav";
 
 //Assets Import
 import logoLink from "../../images/placeholder-logo.jpg";
+// import logoLink from "https://javelin.neocities.org/EXT/ALL_THINGS_RAMS/ATR.jpg";
 
 //Style Imports
 import "./styles/header.css";

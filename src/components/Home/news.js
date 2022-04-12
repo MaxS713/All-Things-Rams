@@ -22,7 +22,7 @@ export default function LatestNews() {
 
   return (
     <>
-      <div id="featured-news-container">
+      <div id="news-container">
         <div className="container-header">
           <h2>Latest Rams News</h2>
         </div>
@@ -31,20 +31,38 @@ export default function LatestNews() {
             {newsArticleData.map((newsArticle) => {
               return (
                 <>
-                  <a
-                    href={newsArticle.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <h3>{newsArticle.title}</h3>
-                  </a>
-                  <img src={newsArticle.imgSrc} alt="news article main illustration" width="300" />
+                  <div className="news-header">
+                    <a
+                      href={newsArticle.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    ></a>
+                    <a
+                      href={newsArticle.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <h3>{newsArticle.title}</h3>
+                    </a>
+                  </div>
 
-                  <p>
-                    Date: {newsArticle.time} 
-                    <br></br>
-                    Source: {newsArticle.source}
-                  </p>
+                  <div className="source-container">
+                  <div className="logo-container">
+                    <img
+                      src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
+                      alt={`${newsArticle.source}'s logo`}
+                      height="40"
+                      className="news-logo"
+                    />
+                    </div>
+                    <div className="source-date">
+                      <p className="source">
+                        Date: {newsArticle.time}
+                        <br></br>
+                        Source: {newsArticle.source}
+                      </p>
+                    </div>
+                  </div>
                 </>
               );
             })}
