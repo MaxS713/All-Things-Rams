@@ -1,10 +1,9 @@
-const {TweetID, LastAPICallTime} = require ("../models.js");
-const {TwitterApi} = require ("twitter-api-v2");
+const {Tweet, LastAPICallTime} = require("../models.js");
+const {TwitterApi} = require("twitter-api-v2");
 
 //------------------ Get Twitter Data -----------------//
 
 module.exports = async function getLatestTweets() {
-
   const client = new TwitterApi({
     appKey: "Vx3ZSb24vmi5uIT2VUTzNzU7i",
     appSecret: "W89gf4TJsicNjurmSxk9ySO4Xc63WdNpY5jP2TjRYFOMm0r4nb",
@@ -21,40 +20,50 @@ module.exports = async function getLatestTweets() {
     {twitterHandle: "@LATimesklein", userID: "33620284"}, // @LATimesklein
   ];
 
-  let allTweetsIDs = [];
+  let allTweetsData = [];
 
   for (let twitterUser of listOfTwitterUsers) {
-    console.log(`Fetching latest tweets from ${twitterUser.twitterHandle}`)
+    console.log(`Fetching latest tweets from ${twitterUser.twitterHandle}`);
     let latestTweets = await client.v2.userTimeline(twitterUser.userID, {
       exclude: "replies",
     });
     for (let tweet of latestTweets.tweets) {
-      console.log(tweet)
-      console.log(tweet.time)
-      console.log(tweet.date)
-      allTweetsIDs.push(tweet.id);
+      let tweetTime = tweetIDToTime(tweet.id);
+      allTweetsData.push({
+        author: twitterUser.twitterHandle,
+        ID: tweet.id,
+        time: tweetTime,
+      });
     }
   }
 
   //Sorting Tweet Data by ID#
-  console.log(`Sorting Data...`)
-  allTweetsIDs = allTweetsIDs.sort((a, b) => b - a);
+  console.log(`Sorting Data...`);
+  allTweetsData = allTweetsData.sort((a, b) => b.ID - a.ID);
 
   //Slice out first 10 tweets
-  console.log(`Slicing Data...`)
-  allTweetsIDs = allTweetsIDs.slice(0, 10);
+  console.log(`Slicing Data...`);
+  allTweetsData = allTweetsData.slice(0, 10);
 
-  await TweetID.deleteMany({});
-  for (let tweetID of allTweetsIDs) {
-    let newTweet = new TweetID({tweetID: tweetID});
+  await Tweet.deleteMany({});
+  for (let tweet of allTweetsData) {
+    let newTweet = new Tweet({
+      author: tweet.author,
+      ID: tweet.ID,
+      time: tweet.time,
+    });
     await newTweet.save();
   }
-  console.log("Success!")
-  console.table(allTweetsIDs)
+  console.log("Success!");
+  console.table(allTweetsData);
   await LastAPICallTime.deleteOne({API: "twitter"});
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "twitter",
     time: Date.now(),
   });
   await timeOfApiCallRequest.save();
+};
+
+function tweetIDToTime(tweetId) {
+  return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657);
 }

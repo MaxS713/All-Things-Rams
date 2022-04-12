@@ -7,7 +7,9 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 
 const twitterDataSchema = new mongoose.Schema({
-  tweetID: String,
+  author: String,
+  ID: String,
+  time: String,
 });
 
 const instagramDataSchema = new mongoose.Schema({
@@ -30,7 +32,7 @@ const lastAPICallTimeSchema = new mongoose.Schema({
   time: Number,
 });
 
-const TweetID = mongoose.model("TweetID", twitterDataSchema);
+const Tweet = mongoose.model("Tweet", twitterDataSchema);
 const InstagramPost = mongoose.model("InstagramPost", instagramDataSchema);
 const NewsArticle = mongoose.model("NewsArticle", newsArticleSchema);
 const LastAPICallTime = mongoose.model(
@@ -38,4 +40,4 @@ const LastAPICallTime = mongoose.model(
   lastAPICallTimeSchema
 );
 
-module.exports = { TweetID, InstagramPost, NewsArticle, LastAPICallTime };
+module.exports = {Tweet, InstagramPost, NewsArticle, LastAPICallTime};

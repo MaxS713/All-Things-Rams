@@ -22,19 +22,19 @@ export default function Footer() {
             <a className="footer-link" href="/">
               <li>About Us</li>
             </a>
-            <li class="separation">|</li>
+            <li className="separation">|</li>
             <a className="footer-link" href="/">
               <li>Contact</li>
             </a>
-            <li class="separation">|</li>
+            <li className="separation">|</li>
             <a className="footer-link" href="/">
               <li>Privacy</li>
             </a>
-            <li class="separation">|</li>
+            <li className="separation">|</li>
             <a className="footer-link" href="/">
               <li>Terms of Use</li>
             </a>
-            <li class="separation">|</li>
+            <li className="separation">|</li>
             <a className="footer-link" href="/admin-login">
               <li>Admin Login</li>
             </a>

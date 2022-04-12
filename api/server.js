@@ -2,7 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const {
-  TweetID,
+  Tweet,
   InstagramPost,
   NewsArticle,
   LastAPICallTime,
@@ -46,7 +46,7 @@ app.use(express.json());
 })();
 
 app.get("/get-latest-tweets", async (req, res) => {
-  let allLatestTweets = await TweetID.find({});
+  let allLatestTweets = await Tweet.find({});
   await res.send(allLatestTweets);
 });
 
