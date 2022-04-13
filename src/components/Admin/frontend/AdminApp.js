@@ -7,7 +7,7 @@ import jsonServerProvider from "ra-data-json-server";
 import {PostList, PostEdit, PostCreate} from "../admin-components/posts";
 // import custom ListGuesser component for users
 import {UserList} from "../admin-components/users";
-import Dashboard from "../admin-components/dashboard";
+import Dashboard from "../admin-components/Dashboard";
 
 // create variable to hold REST API info
 const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");

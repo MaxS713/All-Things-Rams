@@ -3,15 +3,19 @@
   display: grid;
   justify-content: center;
   width: 85%;
-  margin: 0 auto;
-  grid-template-columns: repeat(4, 1fr);
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom:0;
+  gap:1rem;
+  grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "feat  feat  feat news"
-    "feat  feat  feat news"
-    "googlead2  googlead2  googlead2 googlead2"
-    "twitter instagram instagram survey"
-    "twitter instagram instagram survey"
-    "googlead  googlead googlead googlead";
+    "feat  feat feat feat news news"
+    "feat  feat feat feat news news"
+    "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
+    "twitter twitter instagram instagram survey survey"
+    "twitter twitter instagram instagram . ."
+    "googlead googlead googlead googlead googlead googlead";
 }
 
 @media only screen and (max-width: 500px) {

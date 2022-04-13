@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+
+import "./styles/react-slick-carousel/slick.css";
+import "./styles/react-slick-carousel/slick-theme.css";
 import "./styles/featuredNewsCarousel.css";
 
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import NextArrow from "./styles/react-slick-carousel/customNextArrow";
+import PrevArrow from "./styles/react-slick-carousel/customPrevArrow";
+
 
 export default function FeaturedNewsCarousel() {
+
   const [newsArticleData, setNewsArticleData] = useState([]);
+
   async function getServerData() {
     let newsArticlesData = await fetch(
       `http://localhost:5000/get-featured-news`
@@ -28,9 +32,14 @@ export default function FeaturedNewsCarousel() {
   const carouselSettings = {
     dots: true,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    speed: 500,
+    autoplaySpeed: 7000,
+    cssEase: "linear",
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
   return (
@@ -42,22 +51,20 @@ export default function FeaturedNewsCarousel() {
 
         <div className="container-content">
           <div id="carousel-wrapper">
-            <div>
-            <Carousel showThumbs={false} showStatus={false} autoPlay={true}>
-              {newsArticleData.map((newsArticle) => {
-                return (
-                  <div className="carousel-item">
-                    <img
-                      src={newsArticle.imgSrc}
-                      className='carousel-img'
-                      height="200"
-                      width="300"
-                      alt="news article main illustration"
-                    />
-                  </div>
-                );
-              })}
-            </Carousel>
+            <div id="carousel">
+              <Slider {...carouselSettings}>
+                {newsArticleData.map((newsArticle) => {
+                  return (
+                    <div className="carousel-item">
+                      <img
+                        src={newsArticle.imgSrc}
+                        className='carousel-img'
+                        alt="news article main illustration"
+                      />
+                    </div>
+                  );
+                })}
+              </Slider>
             </div>
           </div>
         </div>
@@ -66,37 +73,3 @@ export default function FeaturedNewsCarousel() {
   );
 }
 
-{
-  /* 
-<div className="news-header">
-                    <div className="logo-container">
-                      <a
-                        href={newsArticle.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <img
-                          src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
-                          alt={`${newsArticle.source}'s logo`}
-                          height="40"
-                          className="news-logo"
-                        />
-                      </a>
-                    </div>
-                    <div className="news-title">
-                      <a
-                        href={newsArticle.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <h3>{newsArticle.title}</h3>
-                      </a>
-                    </div>
-                  </div>
-
-                  <p className="source">
-                    Date: {newsArticle.time}
-                    <br></br>
-                    Source: {newsArticle.source}
-                  </p> */
-}

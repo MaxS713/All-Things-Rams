@@ -1,6 +1,5 @@
 #tweets-container {
   grid-area: twitter;
-  margin:1rem;
 }
 
 #tweets-wrapper {

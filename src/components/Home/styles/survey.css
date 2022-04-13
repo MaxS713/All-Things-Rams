@@ -1,7 +1,5 @@
 #survey-container {
   grid-area: survey;
-  margin: 1rem;
-  width: 90%;
 }
 
 #survey-wrapper {
