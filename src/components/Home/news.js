@@ -13,12 +13,23 @@ export default function LatestNews() {
       article.time = Date.parse(article.time);
       let date = new Date(article.time);
       article.time = date.toLocaleString();
+      article.title = trimTitleLength(article.title);
     });
     setNewsArticleData(newsArticlesData);
   }
   useEffect(() => {
     getServerData();
   }, []);
+
+  function trimTitleLength(trimmedString) {
+    trimmedString = trimmedString.substr(0, 100);
+    trimmedString =
+      trimmedString.substr(
+        0,
+        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+      ) + "\u2026";
+    return trimmedString;
+  }
 
   return (
     <>
@@ -36,32 +47,25 @@ export default function LatestNews() {
                       href={newsArticle.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                    ></a>
-                    <a
-                      href={newsArticle.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
-                      <h3>{newsArticle.title}</h3>
+                      <div className="logo-container">
+                        <img
+                          src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
+                          alt={`${newsArticle.source}'s logo`}
+                          height="50"
+                          className="news-logo"
+                        />
+                      </div>
+                      <div className="title-container">
+                        <h3>{newsArticle.title}</h3>
+                      </div>
                     </a>
                   </div>
 
-                  <div className="source-container">
-                  <div className="logo-container">
-                    <img
-                      src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
-                      alt={`${newsArticle.source}'s logo`}
-                      height="40"
-                      className="news-logo"
-                    />
-                    </div>
-                    <div className="source-date">
-                      <p className="source">
-                        Date: {newsArticle.time}
-                        <br></br>
-                        Source: {newsArticle.source}
-                      </p>
-                    </div>
+                  <div className="source-date">
+                    <p className="source">
+                      Date: {newsArticle.time} &nbsp;|&nbsp; Source:{newsArticle.source}
+                    </p>
                   </div>
                 </>
               );
@@ -72,44 +76,3 @@ export default function LatestNews() {
     </>
   );
 }
-
-/*
-//REACT SLICK documentation for faded carousel
-
-import React, { Component } from "react";
-import Slider from "react-slick";
-import { baseUrl } from "./config";
-
-export default class Fade extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      fade: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-    return (
-      <div>
-        <h2>Fade</h2>
-        <Slider {...settings}>
-          <div>
-            <img src={baseUrl + "/abstract01.jpg"} />
-          </div>
-          <div>
-            <img src={baseUrl + "/abstract02.jpg"} />
-          </div>
-          <div>
-            <img src={baseUrl + "/abstract03.jpg"} />
-          </div>
-          <div>
-            <img src={baseUrl + "/abstract04.jpg"} />
-          </div>
-        </Slider>
-      </div>
-    );
-  }
-}
-
- */

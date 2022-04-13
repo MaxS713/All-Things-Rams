@@ -9,8 +9,9 @@ export default function Footer() {
     <>
       <footer>
         <p className="main-disclaimer">
-          &copy; {new Date().getFullYear()} - AllThingsFootball.us - All Rights Reserved. The content
-          on this site is for entertainment and educational purposes only.
+          &copy; {new Date().getFullYear()} - AllThingsFootball.us - All Rights
+          Reserved. The content on this site is for entertainment and
+          educational purposes only.
           <br></br> All Things Rams is not affiliated with the L.A. Rams or the
           National Football League.
         </p>
@@ -19,16 +20,12 @@ export default function Footer() {
           {/* Links from original concept */}
           <ul id="footer-links">
             {/* need to add in actual connections */}
-            <a className="footer-link" href="/">
+            <a className="footer-link" href="/about">
               <li>About Us</li>
             </a>
             <li className="separation">|</li>
-            <a className="footer-link" href="/">
+            <a className="footer-link" href="/contact">
               <li>Contact</li>
-            </a>
-            <li className="separation">|</li>
-            <a className="footer-link" href="/">
-              <li>Privacy</li>
             </a>
             <li className="separation">|</li>
             <a className="footer-link" href="/">

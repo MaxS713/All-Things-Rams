@@ -28,6 +28,14 @@ const newsArticleSchema = new mongoose.Schema({
   sourceLogoRef: String,
 });
 
+const videosLinkSchema = new mongoose.Schema({
+  title: String,
+  link: String,
+  time: String,
+  imgSrc: String,
+  summary: String,
+});
+
 const lastAPICallTimeSchema = new mongoose.Schema({
   API: String,
   time: Number,
@@ -48,6 +56,7 @@ const surveyDataSchema = new mongoose.Schema({
 const Tweet = mongoose.model("Tweet", twitterDataSchema);
 const InstagramPost = mongoose.model("InstagramPost", instagramDataSchema);
 const NewsArticle = mongoose.model("NewsArticle", newsArticleSchema);
+const Video = mongoose.model("Videos", videosLinkSchema);
 const LastAPICallTime = mongoose.model(
   "LastAPICallTime",
   lastAPICallTimeSchema
@@ -58,6 +67,7 @@ module.exports = {
   Tweet,
   InstagramPost,
   NewsArticle,
+  Video,
   LastAPICallTime,
   SurveyData,
 };

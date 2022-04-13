@@ -5,6 +5,7 @@ import LatestNews from "../Home/news";
 import Instagram from "../Home/instagram";
 import Twitter from "../Home/twitter";
 import Survey from "../Home/survey";
+import LatestVideos from "../Home/videos";
 import GoogleAdPlaceholder from "../Home/googleAds";
 import GoogleAdPlaceholder2 from "../Home/googleAds2";
 
@@ -21,6 +22,7 @@ export default function Bulletin() {
         <Survey />
         <Twitter />
         <Instagram />
+        <LatestVideos />
         <GoogleAdPlaceholder />
       </div>
     </>

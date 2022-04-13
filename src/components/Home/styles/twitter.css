@@ -3,7 +3,7 @@
 }
 
 #tweets-wrapper {
-  height: 55vh;
+  height:100vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display:flex;

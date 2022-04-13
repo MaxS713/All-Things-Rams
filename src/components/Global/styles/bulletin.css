@@ -6,7 +6,6 @@
   margin-top: 1rem;
   margin-left: auto;
   margin-right:auto;
-  margin-bottom:0;
   gap:1rem;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
@@ -14,7 +13,7 @@
     "feat  feat feat feat news news"
     "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
     "twitter twitter instagram instagram survey survey"
-    "twitter twitter instagram instagram . ."
+    "twitter twitter instagram instagram videos videos"
     "googlead googlead googlead googlead googlead googlead";
 }
 

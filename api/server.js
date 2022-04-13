@@ -1,16 +1,19 @@
 //Library Imports -----------//
 const express = require("express");
+// const nodemailer = require("nodemailer");
 const cors = require("cors");
 const {
   Tweet,
   InstagramPost,
   NewsArticle,
   LastAPICallTime,
+  Video,
   SurveyData,
 } = require("./models.js");
 const getLatestTweets = require("./get-data/get-twitter-data.js");
 const getLatestInstagramPosts = require("./get-data/get-instagram-data.js");
 const getLatestNewsData = require("./get-data/get-news-data.js");
+const getVideoData = require("./get-data/get-videos-data.js");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,10 +32,12 @@ app.use(express.json());
 // https://www.buzzsprout.com/235435
 
 (async function checkTimeOfLatestAPICall() {
+  await getVideoData();
   let currentTime = Date.now();
   let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
   let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
   let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
+  let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
 
   if (!lastTwitterCall || currentTime - lastTwitterCall.time > 3600000) {
     await getLatestTweets();
@@ -42,6 +47,9 @@ app.use(express.json());
   }
   if (!lastNewsCall || currentTime - lastNewsCall.time > 3600000) {
     await getLatestNewsData();
+  }
+  if (!lastVideoCall || currentTime - lastVideoCall.time > 3600000) {
+    await getVideoData();
   }
 })();
 
@@ -71,6 +79,11 @@ app.get("/get-featured-news", async (req, res) => {
   await res.send(allLatestNewsArticle);
 });
 
+app.get("/get-latest-videos", async (req, res) => {
+  let allLatestVideos = await Video.find({});
+  await res.send(allLatestVideos);
+});
+
 app.get("/get-survey-data", async (req, res) => {
   let surveyData = await SurveyData.find({});
   await res.send(surveyData);
@@ -85,7 +98,6 @@ app.post("/post-survey-vote", async (req, res) => {
     surveyData.votesAnswer2++
     await surveyData.save();
   }
-  console.log(surveyData)
 });
 
 async function createNewSurvey() {
@@ -101,6 +113,35 @@ async function createNewSurvey() {
   });
   await newQuestion.save();
 }
+
+//-------- Contact -------- //
+
+
+/*
+const contactEmail = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: "***************@gmail.com",
+    pass: "********",
+  },
+});
+
+contactEmail.verify((error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Ready to Send");
+  }
+});
+
+
+
+  
+ */
+
+
+
+
 
 app.listen(port, () => {
   console.log("Now listening on http://localhost:" + port);

@@ -27,9 +27,12 @@
 
 .title-and-disclaimer h1 {
   font-family: "Graduate", cursive;
+  color: rgb(4, 9, 135);
   font-size: 4vw;
   margin: 0;
+  padding:0;
 }
+
 
 #disclaimer {
   padding:0;

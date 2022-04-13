@@ -20,7 +20,7 @@ export default function Survey() {
 
   const customTheme = {
     textColor: "black",
-    mainColor: "#00B87B",
+    mainColor: "#B0B3FC",
     backgroundColor: "rgb(255,255,255)",
     alignment: "center",
   };

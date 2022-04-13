@@ -1,7 +1,8 @@
 .google-ad {
   grid-area: googlead;
+  margin-bottom:1rem;
 }
 .ad-wrapper {
-  padding: 1rem;
+  padding: 2rem;
   background-color: aliceblue;
 }

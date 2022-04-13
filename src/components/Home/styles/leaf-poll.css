@@ -22,7 +22,7 @@
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  transition: background-color 0.3s ease-out;
+  transition: background-color 0.5s ease-out;
 }
 
 ._28NA5:hover {
@@ -62,6 +62,7 @@
   cursor: pointer;
 }
 
+/* container */
 ._1xGEd {
   color: #19181f;
   display: flex;
@@ -69,24 +70,28 @@
   align-items: center;
 }
 
+/* Button Styling */
 ._3gEzx {
-  width: 100%;
+  width: 95%;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+  border: 1px rgba(255, 201, 92, .6) solid;
+  box-shadow: 1px 2px 5px 1.5px rgba(255, 201, 92, 0.8);
   position: relative;
   transition: background-color 0.3s ease-out;
 }
+
+/* Button hover styling */
 ._cCkxB:hover {
-  background-color: #efefef !important;
+  background-color: rgba(255, 201, 92, 0.25) !important;
 }
 
 ._3gEzx:hover {
-  cursor: pointe
+  cursor: pointer;
 }
 
 ._is6ww {
-  width: 0;
+  width: 100%;
   left: 0;
   margin: 0;
   height: 100%;

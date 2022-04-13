@@ -8,9 +8,7 @@ import "./styles/featuredNewsCarousel.css";
 import NextArrow from "./styles/react-slick-carousel/customNextArrow";
 import PrevArrow from "./styles/react-slick-carousel/customPrevArrow";
 
-
 export default function FeaturedNewsCarousel() {
-
   const [newsArticleData, setNewsArticleData] = useState([]);
 
   async function getServerData() {
@@ -22,6 +20,7 @@ export default function FeaturedNewsCarousel() {
       article.time = Date.parse(article.time);
       let date = new Date(article.time);
       article.time = date.toLocaleString();
+      article.title = trimTitleLength(article.title);
     });
     setNewsArticleData(newsArticlesData);
   }
@@ -29,12 +28,22 @@ export default function FeaturedNewsCarousel() {
     getServerData();
   }, []);
 
+  function trimTitleLength(trimmedString) {
+    trimmedString = trimmedString.substr(0, 80);
+    trimmedString =
+      trimmedString.substr(
+        0,
+        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+      ) + "\u2026";
+    return trimmedString;
+  }
+
   const carouselSettings = {
     dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     speed: 500,
     autoplaySpeed: 7000,
     cssEase: "linear",
@@ -58,9 +67,38 @@ export default function FeaturedNewsCarousel() {
                     <div className="carousel-item">
                       <img
                         src={newsArticle.imgSrc}
-                        className='carousel-img'
+                        className="carousel-img"
                         alt="news article main illustration"
                       />
+                      <div className="carousel-article-title">
+                        <div className="carousel-news-header">
+                          <a
+                            href={newsArticle.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <div className="carousel-logo-and-title">
+                              <div className="carousel-logo-container">
+                                <img
+                                  src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
+                                  alt={`${newsArticle.source}'s logo`}
+                                  height="50"
+                                  className="carousel-news-logo"
+                                />
+                              </div>
+                              <div className="carousel-title-container">
+                                <h3>{newsArticle.title}</h3>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="carousel-source-date">
+                          <p className="carousel-source">
+                            Date: {newsArticle.time} &nbsp;|&nbsp; Source:
+                            {newsArticle.source}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   );
                 })}
@@ -72,4 +110,3 @@ export default function FeaturedNewsCarousel() {
     </>
   );
 }
-

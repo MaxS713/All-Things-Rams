@@ -3,9 +3,11 @@
 }
 
 #survey-wrapper {
+  min-height:25vh;
   padding: 0.5rem;
 }
 
 h1 {
-  font-size: 1rem;
+  font-size: 1.2rem;
+  padding-bottom: 1vw;
 }
