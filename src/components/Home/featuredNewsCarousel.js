@@ -28,13 +28,14 @@ export default function FeaturedNewsCarousel() {
     getServerData();
   }, []);
 
-  function trimTitleLength(trimmedString) {
-    trimmedString = trimmedString.substr(0, 80);
-    trimmedString =
-      trimmedString.substr(
+  function trimTitleLength(string) {
+    let trimmedString = string.substr(0, 140);
+    if (trimmedString !== string) {
+      trimmedString = trimmedString.substr(
         0,
         Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
       ) + "\u2026";
+    }
     return trimmedString;
   }
 
@@ -43,9 +44,9 @@ export default function FeaturedNewsCarousel() {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
     speed: 500,
-    autoplaySpeed: 7000,
+    autoplaySpeed: 6000,
     cssEase: "linear",
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -94,8 +95,7 @@ export default function FeaturedNewsCarousel() {
                         </div>
                         <div className="carousel-source-date">
                           <p className="carousel-source">
-                            Date: {newsArticle.time} &nbsp;|&nbsp; Source:
-                            {newsArticle.source}
+                            Date: {newsArticle.time} &nbsp;|&nbsp; Source: {newsArticle.source}
                           </p>
                         </div>
                       </div>

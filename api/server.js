@@ -32,12 +32,11 @@ app.use(express.json());
 // https://www.buzzsprout.com/235435
 
 (async function checkTimeOfLatestAPICall() {
-  await getVideoData();
   let currentTime = Date.now();
-  let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
-  let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
-  let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
-  let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
+  let lastTwitterCall = await LastAPICallTime.findOne({API: "twitter"});
+  let lastInstagramCall = await LastAPICallTime.findOne({API: "instagram"});
+  let lastNewsCall = await LastAPICallTime.findOne({API: "news"});
+  let lastVideoCall = await LastAPICallTime.findOne({API: "videos"});
 
   if (!lastTwitterCall || currentTime - lastTwitterCall.time > 3600000) {
     await getLatestTweets();
@@ -58,29 +57,80 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/get-latest-tweets", async (req, res) => {
+  let firstTweet = await Tweet.findOne({});
   let allLatestTweets = await Tweet.find({});
-  await res.send(allLatestTweets);
+  let dataToSend = [firstTweet];
+  for (let data of allLatestTweets){
+    if (!dataToSend.some(e => e.author === data.author)) {
+      dataToSend.push(data);
+    }
+  }
+  allLatestTweets.forEach((data) => {
+    if (dataToSend.includes(data) === false) {
+      dataToSend.push(data);
+    }
+  });
+  dataToSend = dataToSend.slice(0, 10);
+  await res.send(dataToSend);
 });
 
 app.get("/get-instagram-posts", async (req, res) => {
+  let firstPost = await InstagramPost.findOne({});
   let allLatestInstagramPosts = await InstagramPost.find({});
-  await res.send(allLatestInstagramPosts);
+  let dataToSend = [firstPost];
+  allLatestInstagramPosts.forEach((data) => {
+    if (!dataToSend.some(e => e.author === data.author)) {
+      dataToSend.push(data);
+    }
+  });
+  allLatestInstagramPosts.forEach((data) => {
+    if (dataToSend.includes(data) === false) {
+      dataToSend.push(data);
+    }
+  });
+  dataToSend = dataToSend.slice(0, 5);
+  await res.send(dataToSend);
 });
 
 app.get("/get-news-article", async (req, res) => {
+  let firstArticle = await NewsArticle.findOne({});
   let allLatestNewsArticle = await NewsArticle.find({});
-  allLatestNewsArticle = allLatestNewsArticle.slice(3);
-  await res.send(allLatestNewsArticle);
+  let dataToSend = [firstArticle];
+  allLatestNewsArticle.forEach((data) => {
+    if (!dataToSend.some(e => e.source === data.source)) {
+      dataToSend.push(data);
+    }
+  });
+  allLatestNewsArticle.forEach((data) => {
+    if (dataToSend.includes(data) === false) {
+      dataToSend.push(data);
+    }
+  });
+  dataToSend = dataToSend.slice(3, 13);
+  await res.send(dataToSend);
 });
 
 app.get("/get-featured-news", async (req, res) => {
+  let firstArticle = await NewsArticle.findOne({});
   let allLatestNewsArticle = await NewsArticle.find({});
-  allLatestNewsArticle = allLatestNewsArticle.slice(0,3);
-  await res.send(allLatestNewsArticle);
+  let dataToSend = [firstArticle];
+  allLatestNewsArticle.forEach((data) => {
+    if (!dataToSend.some(e => e.source === data.source)) {
+      dataToSend.push(data);
+    }
+  });
+  allLatestNewsArticle.forEach((data) => {
+    if (dataToSend.includes(data) === false) {
+      dataToSend.push(data);
+    }
+  });
+  dataToSend = dataToSend.slice(0, 3);
+  await res.send(dataToSend);
 });
 
 app.get("/get-latest-videos", async (req, res) => {
   let allLatestVideos = await Video.find({});
+  allLatestVideos = allLatestVideos.slice(0, 6);
   await res.send(allLatestVideos);
 });
 
@@ -91,31 +141,30 @@ app.get("/get-survey-data", async (req, res) => {
 
 app.post("/post-survey-vote", async (req, res) => {
   let surveyData = await SurveyData.findOne({});
-  if (req.body.text===surveyData.textAnswer1){
-    surveyData.votesAnswer1++
+  if (req.body.text === surveyData.textAnswer1) {
+    surveyData.votesAnswer1++;
     await surveyData.save();
-  } else if (req.body.text===surveyData.textAnswer2){
-    surveyData.votesAnswer2++
+  } else if (req.body.text === surveyData.textAnswer2) {
+    surveyData.votesAnswer2++;
     await surveyData.save();
   }
 });
 
-async function createNewSurvey() {
-  let question = "What do you prefer?";
-  let answer1 = "Hamburgers";
-  let answer2 = "Hot-Dogs";
-  let newQuestion = new SurveyData({
-    surveyQuestion: question,
-    textAnswer1: answer1,
-    // votesAnswer1: Number,
-    textAnswer2: answer2,
-    // votesAnswer2: Number,
-  });
-  await newQuestion.save();
-}
+// async function createNewSurvey() {
+//   let question = "What do you prefer?";
+//   let answer1 = "Hamburgers";
+//   let answer2 = "Hot-Dogs";
+//   let newQuestion = new SurveyData({
+//     surveyQuestion: question,
+//     textAnswer1: answer1,
+//     // votesAnswer1: Number,
+//     textAnswer2: answer2,
+//     // votesAnswer2: Number,
+//   });
+//   await newQuestion.save();
+// }
 
 //-------- Contact -------- //
-
 
 /*
 const contactEmail = nodemailer.createTransport({
@@ -138,10 +187,6 @@ contactEmail.verify((error) => {
 
   
  */
-
-
-
-
 
 app.listen(port, () => {
   console.log("Now listening on http://localhost:" + port);

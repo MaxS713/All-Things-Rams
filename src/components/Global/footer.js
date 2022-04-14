@@ -1,14 +1,11 @@
 //Style Imports
 import "./styles/footer.css";
 
-// What does he want to be in the footer?
-// Any social links or images?
-
 export default function Footer() {
   return (
     <>
       <footer>
-        <p className="main-disclaimer">
+        <p id="main-disclaimer">
           &copy; {new Date().getFullYear()} - AllThingsFootball.us - All Rights
           Reserved. The content on this site is for entertainment and
           educational purposes only.
@@ -28,7 +25,7 @@ export default function Footer() {
               <li>Contact</li>
             </a>
             <li className="separation">|</li>
-            <a className="footer-link" href="/">
+            <a className="footer-link" href="/terms-of-use">
               <li>Terms of Use</li>
             </a>
             <li className="separation">|</li>

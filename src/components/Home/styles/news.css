@@ -4,7 +4,7 @@
 
 #latest-news {
   width: 100%;
-  max-height: 60vh;
+  max-height: 58.5vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
@@ -38,7 +38,7 @@ a {
   grid-column: 2/3;
 }
 
-h3 {
+h3.article-title{
   padding-left: 1.5vw;
   font-family: "Graduate", cursive;
   color: rgb(4, 9, 135);
@@ -52,6 +52,7 @@ h3 {
 p.source {
   width: 100%;
   font-size: 0.75rem;
+  border-bottom: 3px solid rgb(4, 9, 135);
 }
 
 .news-logo {
@@ -63,6 +64,6 @@ p.source {
   transition: 300ms;
 }
 
-img {
+img.news-logo{
   padding-left: 1.5vw;
 }

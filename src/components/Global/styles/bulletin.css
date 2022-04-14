@@ -15,7 +15,14 @@
     "twitter twitter instagram instagram survey survey"
     "twitter twitter instagram instagram videos videos"
     "googlead googlead googlead googlead googlead googlead";
+    animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
 }
+
+/* Media Query for Mobile Device Design */
 
 @media only screen and (max-width: 500px) {
   #grid {
@@ -50,4 +57,33 @@
   border-bottom: 2px solid rgb(235, 235, 235);
   border-left: 2px solid rgb(235, 235, 235);
   border-right: 2px solid rgb(235, 235, 235);
+}
+
+.hidden{
+  display:none !important;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
 }

@@ -3,13 +3,15 @@ const puppeteer = require("puppeteer");
 
 //------------------ News Data -----------------//
 module.exports = async function getLatestNewsData() {
-
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   let newsArticleArray = [];
 
   //https://ramblinfan.com
-  await page.goto("https://ramblinfan.com/", {waitUntil: "domcontentloaded", timeout: 0});
+  await page.goto("https://ramblinfan.com/", {
+    waitUntil: "domcontentloaded",
+    timeout: 0,
+  });
   let ramblinLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".article-meta .title a");
     let articleLinksList = [];
@@ -42,12 +44,22 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Ramblin Fan",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "Ramblin Fan"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://theramswire.usatoday.com
   await page.goto("https://theramswire.usatoday.com", {
-    waitUntil: "domcontentloaded", timeout: 0
+    waitUntil: "domcontentloaded",
+    timeout: 0,
   });
   let ramsWireLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll("header .bundle .post .post__title");
@@ -82,12 +94,24 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Ramswire - USA Today",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({
+      source: "Ramswire - USA Today",
+    });
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://www.turfshowtimes.com
   await page.goto("https://www.turfshowtimes.com", {
-    waitUntil: "domcontentloaded", timeout: 0
+    waitUntil: "domcontentloaded",
+    timeout: 0,
   });
   let turfLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll('[data-analytics-link="article"]');
@@ -120,12 +144,22 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Turf Show Times",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "Turf Show Times"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://www.downtownrams.com
   await page.goto("https://www.downtownrams.com/single-post/category/rams/", {
-    waitUntil: "domcontentloaded", timeout: 0
+    waitUntil: "domcontentloaded",
+    timeout: 0,
   });
   let downtownRamsLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".list-post .entry-title a");
@@ -158,7 +192,16 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Downtown Rams",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "Downtown Rams"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://profootballtalk.nbcsports.com/
@@ -196,12 +239,22 @@ module.exports = async function getLatestNewsData() {
         newsSource: "NBC Sports",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "NBC Sports"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //http://ramstalk.net/
   await page.goto("http://ramstalk.net/tag/rams/", {
-    waitUntil: "domcontentloaded", timeout: 0
+    waitUntil: "domcontentloaded",
+    timeout: 0,
   });
   let ramsTalkLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(
@@ -236,12 +289,22 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Rams Talk",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "Rams Talk"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://fansided.com/
   await page.goto("https://fansided.com/nfl/teams/los-angeles-rams/", {
-    waitUntil: "domcontentloaded", timeout: 0
+    waitUntil: "domcontentloaded",
+    timeout: 0,
   });
   let fanSidedLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".title a");
@@ -271,12 +334,22 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Fansided",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "Fansided"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://www.espn.com/
   await page.goto("https://www.espn.com/nfl/team/_/name/lar/los-angeles-rams", {
-    waitUntil: "networkidle2", timeout: 0
+    waitUntil: "networkidle2",
+    timeout: 0,
   });
   let espnLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".contentItem__content--standard");
@@ -313,13 +386,24 @@ module.exports = async function getLatestNewsData() {
         newsSource: "ESPN",
       };
     });
-    newsData = {...newsData, imageLink: link.imageLink};
-    newsArticleArray.push(newsData);
+
+    let storedNewsData = await NewsArticle.find({source: "ESPN"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsData = {...newsData, imageLink: link.imageLink};
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://www.latimes.com/
   await page.goto("https://www.latimes.com/sports/rams", {
-    waitUntil: "domcontentloaded", timeout: 0
+    waitUntil: "domcontentloaded",
+    timeout: 0,
   });
   let laTimesLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".promo-title .link");
@@ -349,13 +433,23 @@ module.exports = async function getLatestNewsData() {
         newsSource: "LA Times",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "LA Times"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   //https://www.dailynews.com/
 
   await page.goto("https://www.dailynews.com/sports/nfl/los-angeles-rams/", {
-    waitUntil: "domcontentloaded", timeout: 0
+    waitUntil: "domcontentloaded",
+    timeout: 0,
   });
   let dailyNewsLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll("main .entry-title .article-title");
@@ -387,7 +481,16 @@ module.exports = async function getLatestNewsData() {
         newsSource: "LA Daily News",
       };
     });
-    newsArticleArray.push(newsData);
+    let storedNewsData = await NewsArticle.find({source: "LA Daily News"});
+    let hasDuplicate = false;
+    for (let storedNews of storedNewsData) {
+      if (newsData.title === storedNews.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      newsArticleArray.push(newsData);
+    }
   }
 
   await browser.close();
@@ -400,8 +503,6 @@ module.exports = async function getLatestNewsData() {
   console.log(`Slicing Data...`);
   newsArticleArray = newsArticleArray.slice(0, 10);
 
-  await NewsArticle.deleteMany({});
-
   for (let newsArticle of newsArticleArray) {
     let newPost = new NewsArticle({
       title: newsArticle.title,
@@ -410,10 +511,21 @@ module.exports = async function getLatestNewsData() {
       imgSrc: newsArticle.imageLink,
       summary: newsArticle.summary,
       source: newsArticle.newsSource,
-      sourceLogoRef: newsArticle.newsSource.replace(/\s/g, ''),
+      sourceLogoRef: newsArticle.newsSource.replace(/\s/g, ""),
     });
     await newPost.save();
   }
+
+  let newsData = await NewsArticle.find({});
+  if (newsData.length > 50) {
+    for (let i = 0; i < newsData.length; i++) {
+      if (i > 50) {
+        let currentID = newsData[i]._id;
+        await NewsArticle.deleteOne({ _id: currentID });
+      }
+    }
+  }
+  
   console.log("Success!");
   console.log(newsArticleArray);
   await LastAPICallTime.deleteOne({API: "news"});

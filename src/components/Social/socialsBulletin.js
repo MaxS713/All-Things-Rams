@@ -1,11 +1,20 @@
+//Scraped Data Imports
+import Instagram from "../Home/instagram";
+import Twitter from "../Home/twitter";
 
-
+//Styling Imports
+import "./styles/socialsBulletin.css"
 
 export default function SocialsBulletin() {
   return (
     <>
-      <div id="grid">
-        <h1>Socials Stuff</h1>
+      <div id="socials-grid">
+        <div id="insta-bulletin">
+        <Instagram />
+        </div>
+        <div id="twitter-bulletin">
+        <Twitter />
+        </div>
       </div>
     </>
   );

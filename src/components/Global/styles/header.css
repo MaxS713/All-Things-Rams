@@ -33,7 +33,6 @@
   padding:0;
 }
 
-
 #disclaimer {
   padding:0;
   margin: 0;
@@ -87,6 +86,10 @@
   border: 0.2em solid rgb(4, 9, 135);
   border-radius: 3px;
   transition: border-color 0.2s ease-in;
+
+  display: inline-block;
+  position: relative;
+
 }
 
 #donate-button:hover{
@@ -99,4 +102,23 @@
 
 #donate-button:hover::after{
   all: initial;
+}
+
+.dropdown-content {
+  display: none;
+  /* position: absolute; */
+  width: 100%;
+  /* overflow: auto; */
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+#donate-button:hover .dropdown-content {
+  display: block;
+}
+button {
+  text-decoration: none;
+  border: none;
+  background: white;
+  font-family: "Graduate";
+  font-size: 1.1vw;
+  color: rgb(4, 9, 135);
 }

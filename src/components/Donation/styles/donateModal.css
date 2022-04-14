@@ -1,0 +1,33 @@
+.PopUp{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+
+    /* width: 30%; */
+
+    border: 1px solid #011627;
+    border-radius: 0.25em;
+    /* box-shadow: -2px 5px 5px #E71D36; */
+    background-color: #FDFFFC;
+
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+
+    color: #011627;
+}
+.pu-header{
+    display: flex;
+
+}
+.popup-content{
+}
+.popup-content-container{
+    width: 100%;
+}
+.popup-x {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}

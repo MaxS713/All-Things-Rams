@@ -21,13 +21,14 @@ export default function LatestNews() {
     getServerData();
   }, []);
 
-  function trimTitleLength(trimmedString) {
-    trimmedString = trimmedString.substr(0, 100);
-    trimmedString =
-      trimmedString.substr(
+  function trimTitleLength(string) {
+    let trimmedString = string.substr(0, 140);
+    if (trimmedString !== string) {
+      trimmedString = trimmedString.substr(
         0,
         Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
       ) + "\u2026";
+    }
     return trimmedString;
   }
 
@@ -57,14 +58,15 @@ export default function LatestNews() {
                         />
                       </div>
                       <div className="title-container">
-                        <h3>{newsArticle.title}</h3>
+                        <h3 className="article-title">{newsArticle.title}</h3>
                       </div>
                     </a>
                   </div>
 
                   <div className="source-date">
                     <p className="source">
-                      Date: {newsArticle.time} &nbsp;|&nbsp; Source:{newsArticle.source}
+                      Date: {newsArticle.time} &nbsp;|&nbsp; Source:
+                      {newsArticle.source}
                     </p>
                   </div>
                 </>

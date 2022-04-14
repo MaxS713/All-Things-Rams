@@ -28,12 +28,21 @@ module.exports = async function getLatestTweets() {
       exclude: "replies",
     });
     for (let tweet of latestTweets.tweets) {
+      let storedTweetData = await Tweet.find({});
+      let hasDuplicate = false;
+      for (let storedTweet of storedTweetData) {
+        if (tweet.id === storedTweet.ID) {
+          hasDuplicate = true;
+        }
+      }
       let tweetTime = tweetIDToTime(tweet.id);
-      allTweetsData.push({
-        author: twitterUser.twitterHandle,
-        ID: tweet.id,
-        time: tweetTime,
-      });
+      if (hasDuplicate !== true) {
+        allTweetsData.push({
+          author: twitterUser.twitterHandle,
+          ID: tweet.id,
+          time: tweetTime,
+        });
+      }
     }
   }
 
@@ -45,15 +54,25 @@ module.exports = async function getLatestTweets() {
   console.log(`Slicing Data...`);
   allTweetsData = allTweetsData.slice(0, 10);
 
-  await Tweet.deleteMany({});
   for (let tweet of allTweetsData) {
-    let newTweet = new Tweet({
-      author: tweet.author,
-      ID: tweet.ID,
-      time: tweet.time,
-    });
-    await newTweet.save();
+      let newTweet = new Tweet({
+        author: tweet.author,
+        ID: tweet.ID,
+        time: tweet.time,
+      });
+      await newTweet.save();
   }
+
+  let tweetData = await Tweet.find({});
+  if (tweetData.length > 50) {
+    for (let i = 0; i < tweetData.length; i++) {
+      if (i > 50) {
+        let currentID = tweetData[i]._id;
+        await Tweet.deleteOne({_id: currentID});
+      }
+    }
+  }
+
   console.log("Success!");
   console.table(allTweetsData);
   await LastAPICallTime.deleteOne({API: "twitter"});

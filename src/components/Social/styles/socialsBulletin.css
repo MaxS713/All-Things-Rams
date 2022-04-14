@@ -1,0 +1,9 @@
+#socials-grid {
+display: flex;
+flex-direction: row;
+justify-content: center;
+width:100%;
+}
+#insta-bulletin{
+width:60vh;
+}

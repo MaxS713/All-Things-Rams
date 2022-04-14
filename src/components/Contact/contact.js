@@ -3,14 +3,13 @@ import React, { useState } from "react";
 
 //Style Imports
 import "./styles/contact.css";
-import RamsStadium from "./styles/RamsStadium.jpg";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState("Submit Feedback");
+  const [status, setStatus] = useState("Send");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("Submitted");
+    setStatus("Thank You!");
 
     const { name, email, subject, message } = e.target.elements;
 
@@ -27,19 +26,20 @@ export default function ContactForm() {
       },
       body: JSON.stringify(details),
     });
-    setStatus("Submit");
+    setStatus("Thank You!");
     let result = await response.json();
     alert(result.status);
   };
   return (
     <>
       <main>
-        <div className="content-container">
+        <div id="mega-wrapper">
+        <div className="form-container">
           <section className="form-wrapper">
             <form className="form" onSubmit={handleSubmit}>
               {/* User inputs their name */}
 
-              <h1>Contact Us!</h1>
+              <h1 id="contact">Contact Us!</h1>
 
               <div>
                 <input type="text" id="name" placeholder="Your Name" required />
@@ -63,6 +63,7 @@ export default function ContactForm() {
               <div>
                 <textarea
                   id="message"
+                  maxLength={550}
                   placeholder="Share your thoughts"
                   required
                 />
@@ -76,9 +77,7 @@ export default function ContactForm() {
               </div>
             </form>
           </section>
-          <div className="form-image">
-            <img src={RamsStadium} alt="Image of Sofi Stadium" id="stadium" />
-          </div>
+        </div>
         </div>
       </main>
     </>

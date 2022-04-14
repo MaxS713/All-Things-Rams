@@ -1,6 +1,12 @@
+//Library Imports
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+//Component Imports
+import PopUp from "../Donation/donateModal"
 
 export default function Navbar() {
+  const [popUp, setPopUp] = useState(false)
   return (
     <div id="nav-style">
       <NavLink to="/news" className="navItem">
@@ -12,9 +18,12 @@ export default function Navbar() {
       <NavLink to="/team" className="navItem">
         Team
       </NavLink>
-      <NavLink to="/donate" id="donate-button" className="navItem">
+      <div id="donate-button" className="navItem">
+      <button onClick={()=>setPopUp(true)}>
         Donate
-      </NavLink>
+        </button>
+      </div>
+      {popUp && <PopUp setPopUp={setPopUp}/>}
     </div>
   );
 }

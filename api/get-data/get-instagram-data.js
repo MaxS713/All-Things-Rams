@@ -1,10 +1,8 @@
-const {InstagramPost, LastAPICallTime} = require ("../models.js");
-const puppeteer = require ("puppeteer")
-
+const {InstagramPost, LastAPICallTime} = require("../models.js");
+const puppeteer = require("puppeteer");
 
 //------------------ Get Instagram Data -----------------//
 module.exports = async function getLatestInstagramPosts() {
-
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -19,7 +17,6 @@ module.exports = async function getLatestInstagramPosts() {
     {fullName: "Morgan Fox", username: "m.d.fox007"},
     {fullName: "Tyler Higbee", username: "higbeedoe"},
     {fullName: "Michael Brockers", username: "mbrockers90"},
-    {fullName: "Kenny Young", username: "young_forever42"},
     {fullName: "Johnny Hekker", username: "jhekk"},
   ];
 
@@ -29,7 +26,9 @@ module.exports = async function getLatestInstagramPosts() {
     await page.goto(`https://imginn.org/${user.username}/`, {
       waitUntil: "domcontentloaded",
     });
-    console.log(`Getting Instagram Data from ${user.fullName}, ${user.username}`)
+    console.log(
+      `Getting Instagram Data from ${user.fullName}, ${user.username}`
+    );
     let latestPosts = await page.evaluate(() => {
       let results = [];
       let latestLinks = document.querySelectorAll(".post-items a");
@@ -52,19 +51,28 @@ module.exports = async function getLatestInstagramPosts() {
           time: time,
         };
       });
-      latestInstagramPosts.push(linkData);
+
+      let storedInstaData = await InstagramPost.find({});
+      let hasDuplicate = false;
+      for (let storedPost of storedInstaData) {
+        if (linkData.path === storedPost.path) {
+          hasDuplicate = true;
+        }
+      }
+      if (hasDuplicate !== true) {
+        latestInstagramPosts.push(linkData);
+      }
     }
   }
-  
-  console.log(`Sorting Data...`)
+
+  console.log(`Sorting Data...`);
   latestInstagramPosts = latestInstagramPosts.sort(
     (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
   );
-  
-  console.log(`Slicing Data...`)
+
+  console.log(`Slicing Data...`);
   latestInstagramPosts = latestInstagramPosts.slice(0, 5);
-  
-  await InstagramPost.deleteMany({});
+
   for (let instagramPost of latestInstagramPosts) {
     let newPost = new InstagramPost({
       path: instagramPost.path,
@@ -73,15 +81,15 @@ module.exports = async function getLatestInstagramPosts() {
     });
     await newPost.save();
   }
-  console.log("Success!")
-  console.table(latestInstagramPosts)
+  console.log("Success!");
+  console.table(latestInstagramPosts);
   await LastAPICallTime.deleteOne({API: "instagram"});
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "instagram",
     time: Date.now(),
   });
   await timeOfApiCallRequest.save();
-}
+};
 
 //function to convert the instagram "time ago" measure of time into a number
 function parseTimeAgo(timeAgo) {

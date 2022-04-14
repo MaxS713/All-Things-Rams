@@ -1,0 +1,13 @@
+#news-grid {
+width: 90%;
+margin-left: auto;
+margin-right:auto;  
+display: grid;
+grid-template-columns: repeat(6, 1fr);
+grid-template-areas: 
+"feat feat feat feat news news"
+"feat feat feat feat news news"
+"googlead googlead googlead googlead googlead googlead"
+"videos videos videos videos videos videos"
+;
+    }

@@ -5,9 +5,9 @@ footer {
   border-top: 1px solid rgba(255, 201, 92, 0.969);
 }
 
-.main-disclaimer{
+#main-disclaimer{
   text-align: center;
-  background-color:rgba(255, 211, 54, 0.64);
+  background-color:   rgb(252, 229, 128);
   color:#040762;
   font-size: 0.9vw;
   padding: 1.75rem;

@@ -1,3 +1,5 @@
+/* Global Styling */
+
 @import url('https://fonts.googleapis.com/css2?family=Graduate');
 
 body {
@@ -5,16 +7,21 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-main {
   background: linear-gradient(
     90deg,
     rgb(255, 214, 92),
     rgb(255, 219, 112),
     rgb(255, 214, 92)
   );
+}
+
+main {
   width: 100%;
   min-height: 100%;
+}
+
+h3{
+font-family: "Graduate", cursive;
+color: rgb(4, 9, 135);
 }
 
