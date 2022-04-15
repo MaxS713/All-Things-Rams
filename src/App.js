@@ -1,24 +1,30 @@
 //Library Imports
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
+
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 //Component Imports
-import LoadingScreen from "./components/Global/loadingScreen";
-import Header from "./components/Global/header";
-import Bulletin from "./components/Global/bulletin";
-import Footer from "./components/Global/footer";
-import PopUp from "./components/Donation/donateModal";
+import HomePage from "./components/Home/homePage";
+import AdminApp from "./components/Admin/frontend/AdminApp";
+import NewsPage from "./components/News/newsPage";
+import SocialsPage from "./components/Social/socialsPage";
+import ContactPage from "./components/Contact/contactPage";
 
 //Style Imports
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
-        <main>
-          <Header />
-          <Bulletin />
-          <Footer />
-        </main>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<HomePage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/socials" element={<SocialsPage />} />
+        <Route path="/admin-login" element={<AdminApp />} />
+        <Route path="/contact" element={<ContactPage />} />
+        {/* <Route path="/about" element={<AboutPage />} /> */}
+        {/* <Route path="/terms-of-use" element={<TermsPage />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

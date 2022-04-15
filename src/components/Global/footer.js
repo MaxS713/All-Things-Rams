@@ -2,11 +2,22 @@
 import "./styles/footer.css";
 
 export default function Footer() {
+
+  function getCopyrightYear(){
+    let startYear = 2022;
+    let currentYear = new Date().getFullYear();
+    if (startYear !== currentYear){
+      return startYear + " - " + currentYear
+    } else {
+      return currentYear
+    }
+  }
+
   return (
     <>
       <footer>
         <p id="main-disclaimer">
-          &copy; {new Date().getFullYear()} - AllThingsFootball.us - All Rights
+          &copy; {getCopyrightYear()} - AllThingsFootball.us - All Rights
           Reserved. The content on this site is for entertainment and
           educational purposes only.
           <br></br> All Things Rams is not affiliated with the L.A. Rams or the
