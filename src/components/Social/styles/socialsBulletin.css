@@ -1,9 +1,23 @@
+/* Structure of page */
 #socials-grid {
-display: flex;
-flex-direction: row;
-justify-content: center;
-width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
 }
-#insta-bulletin{
-width:60vh;
+/* Instagram */
+#insta-bulletin {
+  width: 30vw;
+  margin-right: 1vw;
+}
+/* Twitter */
+#twitter-bulletin {
+  width: 20vw;
+  margin-right: 1vw;
+
+}
+#ad-space {
+  height: 100%;
 }

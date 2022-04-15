@@ -25,20 +25,22 @@ export default function LatestVideos() {
               return (
                 <>
                   <div className="video-item">
-                  <a
-                    href={video.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={video.imgSrc}
-                      alt={"Highlight Video Thumbnail"}
-                      height="200"
-                      className="video-thumbnail"
-                    />
-                    <h3>{video.title}</h3>
-                  </a>
-                  <p className="video-date">{video.time}</p>
+                    <a
+                      href={video.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div>
+                        <img
+                          src={video.imgSrc}
+                          alt={"Highlight Video Thumbnail"}
+                          height="200"
+                          className="video-thumbnail"
+                        />
+                        <h3>{video.title}</h3>
+                      </div>
+                    </a>
+                    <p className="video-date">{video.time}</p>
                   </div>
                 </>
               );

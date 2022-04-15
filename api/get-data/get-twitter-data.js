@@ -1,5 +1,5 @@
-const {Tweet, LastAPICallTime} = require("../models.js");
-const {TwitterApi} = require("twitter-api-v2");
+const { Tweet, LastAPICallTime } = require("../models.js");
+const { TwitterApi } = require("twitter-api-v2");
 
 //------------------ Get Twitter Data -----------------//
 
@@ -12,12 +12,12 @@ module.exports = async function getLatestTweets() {
   });
 
   let listOfTwitterUsers = [
-    {twitterHandle: "@TheRamsWire", userID: "4889534300"}, //@TheRamsWire
-    {twitterHandle: "@LARamsNews", userID: "4722927636"}, //@LARamsNews
-    {twitterHandle: "@DowntownRams", userID: "733295648976572416"}, //@DowntownRams
-    {twitterHandle: "@LindseyThiry", userID: "30142826"}, //@LindseyThiry
-    {twitterHandle: "@JourdanRodrigue", userID: "182176877"}, // @JourdanRodrigue
-    {twitterHandle: "@LATimesklein", userID: "33620284"}, // @LATimesklein
+    { twitterHandle: "@TheRamsWire", userID: "4889534300" }, //@TheRamsWire
+    { twitterHandle: "@LARamsNews", userID: "4722927636" }, //@LARamsNews
+    { twitterHandle: "@DowntownRams", userID: "733295648976572416" }, //@DowntownRams
+    { twitterHandle: "@LindseyThiry", userID: "30142826" }, //@LindseyThiry
+    { twitterHandle: "@JourdanRodrigue", userID: "182176877" }, // @JourdanRodrigue
+    { twitterHandle: "@LATimesklein", userID: "33620284" }, // @LATimesklein
   ];
 
   let allTweetsData = [];
@@ -26,6 +26,7 @@ module.exports = async function getLatestTweets() {
     console.log(`Fetching latest tweets from ${twitterUser.twitterHandle}`);
     let latestTweets = await client.v2.userTimeline(twitterUser.userID, {
       exclude: "replies",
+      max_results: 5,
     });
     for (let tweet of latestTweets.tweets) {
       let storedTweetData = await Tweet.find({});
@@ -35,8 +36,8 @@ module.exports = async function getLatestTweets() {
           hasDuplicate = true;
         }
       }
-      let tweetTime = tweetIDToTime(tweet.id);
       if (hasDuplicate !== true) {
+        let tweetTime = tweetIDToTime(tweet.id);
         allTweetsData.push({
           author: twitterUser.twitterHandle,
           ID: tweet.id,
@@ -50,17 +51,13 @@ module.exports = async function getLatestTweets() {
   console.log(`Sorting Data...`);
   allTweetsData = allTweetsData.sort((a, b) => b.ID - a.ID);
 
-  //Slice out first 10 tweets
-  console.log(`Slicing Data...`);
-  allTweetsData = allTweetsData.slice(0, 10);
-
   for (let tweet of allTweetsData) {
-      let newTweet = new Tweet({
-        author: tweet.author,
-        ID: tweet.ID,
-        time: tweet.time,
-      });
-      await newTweet.save();
+    let newTweet = new Tweet({
+      author: tweet.author,
+      ID: tweet.ID,
+      time: tweet.time,
+    });
+    await newTweet.save();
   }
 
   let tweetData = await Tweet.find({});
@@ -68,14 +65,19 @@ module.exports = async function getLatestTweets() {
     for (let i = 0; i < tweetData.length; i++) {
       if (i > 50) {
         let currentID = tweetData[i]._id;
-        await Tweet.deleteOne({_id: currentID});
+        await Tweet.deleteOne({ _id: currentID });
       }
     }
   }
 
   console.log("Success!");
-  console.table(allTweetsData);
-  await LastAPICallTime.deleteOne({API: "twitter"});
+  if (allTweetsData.length !== 0) {
+    console.table(allTweetsData);
+  } else {
+    console.log("No new tweets found...");
+  }
+
+  await LastAPICallTime.deleteOne({ API: "twitter" });
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "twitter",
     time: Date.now(),

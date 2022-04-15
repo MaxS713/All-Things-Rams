@@ -5,8 +5,8 @@
   width: 85%;
   margin-top: 1rem;
   margin-left: auto;
-  margin-right:auto;
-  gap:1rem;
+  margin-right: auto;
+  gap: 1rem;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
     "feat  feat feat feat news news"
@@ -14,12 +14,8 @@
     "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
     "twitter twitter instagram instagram survey survey"
     "twitter twitter instagram instagram videos videos"
-    "googlead googlead googlead googlead googlead googlead";
-    animation: fadeIn 3s;
-    -webkit-animation: fadeIn 3s;
-    -moz-animation: fadeIn 3s;
-    -o-animation: fadeIn 3s;
-    -ms-animation: fadeIn 3s;
+    "googlead googlead googlead googlead googlead googlead"
+    "podcast podcast . . . .";
 }
 
 /* Media Query for Mobile Device Design */
@@ -59,31 +55,55 @@
   border-right: 2px solid rgb(235, 235, 235);
 }
 
-.hidden{
-  display:none !important;
+.hidden {
+  display: none !important;
+}
+
+.during-popup {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 }
 
 @keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-moz-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-o-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-ms-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,6 +1,11 @@
 
 #instagram-container {
   grid-area: instagram;
+  animation: fadeIn 3s;
+  -webkit-animation: fadeIn 3s;
+  -moz-animation: fadeIn 3s;
+  -o-animation: fadeIn 3s;
+  -ms-animation: fadeIn 3s;
 }
 
 #instagram-wrapper {

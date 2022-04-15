@@ -1,7 +1,12 @@
 .PopUp{
     position: fixed;
-    left: 50%;
-    top: 50%;
+    padding-top: 0%;
+
+    margin:1rem;
+    left: 25%;
+    right:25%;
+    top: 25%;
+    bottom: 25%;
 
     /* width: 30%; */
 
@@ -10,24 +15,95 @@
     /* box-shadow: -2px 5px 5px #E71D36; */
     background-color: #FDFFFC;
 
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
-    align-items: center;
+    /* display: flex;
+    justify-content: center; */
 
     color: #011627;
 }
 .pu-header{
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin:0;
+    padding:0;
+    color: white;
+    background-color:#040762;
+;
+}
+h3.donate{
+    margin: 0;
+    color: white;
+}
+.pu-text {
+    display: flex;
+    justify-content: center;
 
 }
-.popup-content{
+p.pu-text{
+    font-size: 2.5vh;
+    padding:0%;
+    margin:0%;
+    
+
 }
-.popup-content-container{
-    width: 100%;
+.pu-content{
+
+}
+.pu-content-container{
+    /* width: 100%; */
+    padding: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 .popup-x {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+
+    background-color:#040762;
+    ;
+    color: white;
+}
+.donate-portals{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:1.5rem;
+    border: 1px solid black;
+    border-radius: 1.5vh;
+    width:55%;
+
+    margin-top: 0.5rem;
+}
+#slide {
+    /* display: flex;
+    justify-content: center; */
+    position: fixed;
+    left: -100%;
+    width:20%;
+    height: 40%;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 0.5s;
+    animation: slide 0.5s forwards;
+    animation-delay: 0.25s;
+}
+#visa{
+    margin-right:3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
 }

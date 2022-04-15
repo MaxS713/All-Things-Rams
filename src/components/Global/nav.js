@@ -18,6 +18,9 @@ export default function Navbar() {
       <NavLink to="/team" className="navItem">
         Team
       </NavLink>
+      <NavLink to="/contact" className="navItem">
+        Contact
+      </NavLink>
       <div id="donate-button" className="navItem">
       <button onClick={()=>setPopUp(true)}>
         Donate

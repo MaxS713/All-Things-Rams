@@ -7,8 +7,10 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HomePage from "./components/Home/homePage";
 import AdminApp from "./components/Admin/frontend/AdminApp";
 import NewsPage from "./components/News/newsPage";
+import TeamPage from "./components/Team/team";
 import SocialsPage from "./components/Social/socialsPage";
 import ContactPage from "./components/Contact/contactPage";
+import AboutPage from "./components/About/aboutPage";
 
 //Style Imports
 import "./App.css";
@@ -20,9 +22,10 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/socials" element={<SocialsPage />} />
+        <Route path="/team" element={<TeamPage />} />
         <Route path="/admin-login" element={<AdminApp />} />
         <Route path="/contact" element={<ContactPage />} />
-        {/* <Route path="/about" element={<AboutPage />} /> */}
+        <Route path="/about" element={<AboutPage />} />
         {/* <Route path="/terms-of-use" element={<TermsPage />} /> */}
       </Routes>
     </BrowserRouter>

@@ -270,8 +270,12 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of ramsTalkLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, {waitUntil: "networkidle2", timeout: 0});
     let newsData = await page.evaluate(() => {
+      let findPodcast = document.querySelector("embed-audio-player");
+      if (findPodcast !== null) {
+        return;
+      }
       let title = document.querySelector(".post-title").innerText;
       let time = document.querySelector(".post-date time");
       time = time.getAttribute("datetime");
@@ -500,9 +504,6 @@ module.exports = async function getLatestNewsData() {
     (a, b) => Date.parse(b.time) - Date.parse(a.time)
   );
 
-  console.log(`Slicing Data...`);
-  newsArticleArray = newsArticleArray.slice(0, 10);
-
   for (let newsArticle of newsArticleArray) {
     let newPost = new NewsArticle({
       title: newsArticle.title,
@@ -521,13 +522,18 @@ module.exports = async function getLatestNewsData() {
     for (let i = 0; i < newsData.length; i++) {
       if (i > 50) {
         let currentID = newsData[i]._id;
-        await NewsArticle.deleteOne({ _id: currentID });
+        await NewsArticle.deleteOne({_id: currentID});
       }
     }
   }
-  
+
   console.log("Success!");
-  console.log(newsArticleArray);
+  if (newsArticleArray.length !== 0) {
+    console.log(newsArticleArray);
+  } else {
+    console.log("No new article found...");
+  }
+
   await LastAPICallTime.deleteOne({API: "news"});
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "news",

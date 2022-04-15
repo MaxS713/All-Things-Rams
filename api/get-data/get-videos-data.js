@@ -60,7 +60,11 @@ module.exports = async function getVideoData() {
     await newVideo.save();
   }
   console.log("Success!");
-  console.log(videosToAdd);
+  if (videosToAdd.length !== 0) {
+    console.log(videosToAdd);
+  } else {
+    console.log("No new videos found...");
+  }
 
   await LastAPICallTime.deleteOne({API: "videos"});
   let timeOfApiCallRequest = new LastAPICallTime({

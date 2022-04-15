@@ -27,9 +27,8 @@ export default function Footer() {
         <section>
           {/* Links from original concept */}
           <ul id="footer-links">
-            {/* need to add in actual connections */}
             <a className="footer-link" href="/about">
-              <li>About Us</li>
+              <li>About</li>
             </a>
             <li className="separation">|</li>
             <a className="footer-link" href="/contact">

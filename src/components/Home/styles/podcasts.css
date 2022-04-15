@@ -1,25 +1,30 @@
-#news-container {
-  grid-area: news;
+#podcast-container {
+  grid-area: podcast;
+  animation: fadeIn 3s;
+  -webkit-animation: fadeIn 3s;
+  -moz-animation: fadeIn 3s;
+  -o-animation: fadeIn 3s;
+  -ms-animation: fadeIn 3s;
 }
 
-#latest-news {
+#latest-podcast {
   width: 100%;
-  height: 67.5vh;
+  max-height: 58.5vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 
-#latest-news::-webkit-scrollbar {
+#latest-podcast::-webkit-scrollbar {
   width: 20px;
 }
 
-#latest-news::-webkit-scrollbar-track {
+#latest-podcast::-webkit-scrollbar-track {
   border-radius: 100px;
 }
 
-#latest-news::-webkit-scrollbar-thumb {
+#latest-podcast::-webkit-scrollbar-thumb {
   border-radius: 100px;
   border: 5px solid transparent;
   background-clip: content-box;
@@ -28,20 +33,13 @@
 
 a {
   text-decoration: none;
-  display: grid;
+  display: flex;
+  align-items:center;
 }
 
-.logo-container {
-  grid-column: 1;
-  width: 5v
-}
-
-.title-container {
-  grid-column: 2/3;
-}
-
-h3.article-title {
+h3.podcast-title {
   padding-left: 1.5vw;
+  /* padding-top: 1vw; */
   font-family: "Graduate", cursive;
   color: rgb(4, 9, 135);
 }
@@ -57,16 +55,16 @@ p.source {
   border-bottom: 3px solid rgb(4, 9, 135);
 }
 
-.news-logo {
+.podcast-logo {
   margin-top: 1vw;
   transition: 300ms;
 }
 
-.news-logo:hover {
+.podcast-logo:hover {
   opacity: 70%;
   transition: 300ms;
 }
 
-img.news-logo {
+img.podcast-logo {
   padding-left: 1.5vw;
 }

@@ -6,12 +6,14 @@ import "./styles/contact.css";
 
 export default function ContactForm() {
   const [status, setStatus] = useState("Send");
+  const [disable, setDisable] = useState(false);
+  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setStatus("Thank You!");
 
-    const { name, email, subject, message } = e.target.elements;
+    const { name, email, subject, message } = event.target.elements;
 
     let details = {
       name: name.value,
@@ -34,50 +36,59 @@ export default function ContactForm() {
     <>
       <main>
         <div id="mega-wrapper">
-        <div className="form-container">
-          <section className="form-wrapper">
-            <form className="form" onSubmit={handleSubmit}>
-              {/* User inputs their name */}
+          <div className="form-container">
+            <section className="form-wrapper">
+              <form className="form" onSubmit={handleSubmit}>
+                {/* User inputs their name */}
 
-              <h1 id="contact">Contact Us!</h1>
+                <h1 id="contact">Contact Us!</h1>
 
-              <div>
-                <input type="text" id="name" placeholder="Your Name" required />
-              </div>
+                <div>
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder="Your Name"
+                    required
+                  />
+                </div>
 
-              {/* User inputs their email */}
-              <div>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Your Email"
-                  required
-                />
-              </div>
-              {/* User inputs their subject */}
-              <div>
-                <input type="text" id="subject" placeholder="Subject" />
-              </div>
+                {/* User inputs their email */}
+                <div>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Your Email"
+                    required
+                  />
+                </div>
+                {/* User inputs their subject */}
+                <div>
+                  <input type="text" id="subject" placeholder="Subject" />
+                </div>
 
-              {/* User inputs their message */}
-              <div>
-                <textarea
-                  id="message"
-                  maxLength={550}
-                  placeholder="Share your thoughts"
-                  required
-                />
-              </div>
+                {/* User inputs their message */}
+                <div>
+                  <textarea
+                    id="message"
+                    maxLength={550}
+                    placeholder="Share your thoughts"
+                    required
+                  />
+                </div>
 
-              <div className="submit-button">
-                {/* Button to submit message/contact form */}
-                <button id="submit" type="submit">
-                  {status}
-                </button>
-              </div>
-            </form>
-          </section>
-        </div>
+                <div className="submit-button">
+                  {/* Button to submit message/contact form */}
+                  <button
+                    id="submit"
+                    type="submit"
+                   
+                  >
+                    {status}
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
         </div>
       </main>
     </>

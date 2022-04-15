@@ -70,9 +70,6 @@ module.exports = async function getLatestInstagramPosts() {
     (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
   );
 
-  console.log(`Slicing Data...`);
-  latestInstagramPosts = latestInstagramPosts.slice(0, 5);
-
   for (let instagramPost of latestInstagramPosts) {
     let newPost = new InstagramPost({
       path: instagramPost.path,
@@ -81,8 +78,14 @@ module.exports = async function getLatestInstagramPosts() {
     });
     await newPost.save();
   }
+
   console.log("Success!");
-  console.table(latestInstagramPosts);
+  if (latestInstagramPosts.length !== 0) {
+    console.table(latestInstagramPosts);
+  } else {
+    console.log("No new instagram posts found...");
+  }
+
   await LastAPICallTime.deleteOne({API: "instagram"});
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "instagram",
