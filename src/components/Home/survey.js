@@ -1,6 +1,7 @@
 //Library Imports
 import React, { useState, useEffect } from "react";
 import { LeafPoll, Result } from "react-leaf-polls";
+import axios from 'axios'
 import "./styles/leaf-poll.css";
 import "./styles/survey.css";
 
@@ -8,6 +9,7 @@ import "./styles/survey.css";
 
 export default function Survey() {
   const [surveyData, setSurveyData] = useState([]);
+  const [currentUserIP, setCurrentUserIP] = useState('');
 
   async function getSurveyData() {
     let data = await fetch("http://localhost:5000/get-survey-data");
@@ -18,6 +20,14 @@ export default function Survey() {
     getSurveyData();
   }, []);
 
+  async function getUserIP() {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    setCurrentUserIP(res.data.IPv4)
+  }
+  useEffect(() => {
+    getUserIP()
+  }, []);
+
   const customTheme = {
     textColor: "black",
     mainColor: "#B0B3FC",
@@ -26,12 +36,17 @@ export default function Survey() {
   };
 
   async function vote(item: Result, results: Result[]) {
-    console.log(item.text);
-    await fetch("http://localhost:5000/post-survey-vote", {
+    console.log(results)
+    item = {...item, ip: currentUserIP}
+    let postVote = await fetch("http://localhost:5000/post-survey-vote", {
       headers: { "content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(item),
     });
+    let getStatus = await postVote.json();
+    if(getStatus.status==="Already Voted"){
+      alert("Looks like you already voted... Your vote hasn't been recorded");
+    }
   }
 
   if (surveyData[0] === undefined) {

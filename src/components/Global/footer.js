@@ -2,14 +2,13 @@
 import "./styles/footer.css";
 
 export default function Footer() {
-
-  function getCopyrightYear(){
+  function getCopyrightYear() {
     let startYear = 2022;
     let currentYear = new Date().getFullYear();
-    if (startYear !== currentYear){
-      return startYear + " - " + currentYear
+    if (startYear !== currentYear) {
+      return startYear + " - " + currentYear;
     } else {
-      return currentYear
+      return currentYear;
     }
   }
 
@@ -33,6 +32,15 @@ export default function Footer() {
             <li className="separation">|</li>
             <a className="footer-link" href="/contact">
               <li>Contact</li>
+            </a>
+            <li className="separation">|</li>
+            <a className="footer-link" href="/contact">
+              {/* Currently Suggestions goes to the contact page */}
+              <li>Suggestions</li>
+            </a>
+            <li className="separation">|</li>
+            <a className="footer-link" href="/privacy-policy">
+              <li>Privacy Policy</li>
             </a>
             <li className="separation">|</li>
             <a className="footer-link" href="/terms-of-use">

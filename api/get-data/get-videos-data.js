@@ -59,6 +59,21 @@ module.exports = async function getVideoData() {
     });
     await newVideo.save();
   }
+
+  let vidData = await Video.find({});
+  vidData = vidData.sort(
+    (a, b) => Date.parse(b.time) - Date.parse(a.time)
+  );
+  if (vidData.length > 50) {
+    for (let i = 0; i < vidData.length; i++) {
+      if (i > 50) {
+        let currentID = vidData[i]._id;
+        await Video.deleteOne({_id: currentID});
+      }
+    }
+  }
+
+
   console.log("Success!");
   if (videosToAdd.length !== 0) {
     console.log(videosToAdd);

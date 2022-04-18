@@ -4,11 +4,14 @@
 
 #latest-news {
   width: 100%;
-  height: 67.5vh;
+  height:67.5vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  align-self: stretch;
+
+
 }
 
 #latest-news::-webkit-scrollbar {
@@ -33,7 +36,8 @@ a {
 
 .logo-container {
   grid-column: 1;
-  width: 5v
+  display: flex;
+  align-items: center;
 }
 
 .title-container {
@@ -41,8 +45,9 @@ a {
 }
 
 h3.article-title {
-  padding-left: 1.5vw;
-  font-family: "Graduate", cursive;
+  padding-left: 2vw;
+  /* font-size: 2vh; */
+  /* font-family: "Graduate", cursive; */
   color: rgb(4, 9, 135);
 }
 
@@ -70,3 +75,9 @@ p.source {
 img.news-logo {
   padding-left: 1.5vw;
 }
+@media screen and (max-width: 600px) {
+  #latest-news {
+  max-height:27.5vh;
+  }
+}
+

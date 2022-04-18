@@ -1,5 +1,6 @@
 #videos-container {
   grid-area: videos;
+  width:100%;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;
@@ -34,8 +35,8 @@
 }
 
 .video-item h3 {
-  font-family: "Graduate", cursive;
   color: rgb(4, 9, 135);
+  font-size: 2vh;
 }
 
 .video-item{
@@ -44,8 +45,24 @@
 }
 
 .video-item .video-date {
+  font-size: 1.1vh;
   font-style:italic;
   margin:0;
   padding:0;
   border-bottom: 3px solid rgb(4, 9, 135);
+}
+/* Media Query for Mobile Device Design */
+
+@media only screen and (max-width: 600px) {
+  #latest-videos {
+    display: flex;
+    align-items: start;
+  }
+}
+@media only screen and (max-width: 800px) {
+  #latest-videos {
+    display: flex;
+    align-items: start;
+    max-height: 48vh;
+  }
 }

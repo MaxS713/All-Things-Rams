@@ -15,9 +15,17 @@ export default function Navbar() {
       <NavLink to="/socials" className="navItem">
         Socials
       </NavLink>
-      <NavLink to="/team" className="navItem">
+      <div class="dropdown">
+      <NavLink to="/" className="navItem" id='dropbtn'>
         Team
       </NavLink>
+      <div class="dropdown-content">
+        <a href='https://www.therams.com/' target="_blank" rel="noopener noreferrer">Rams</a>
+        <a href='https://www.therams.com/schedule/' target="_blank" rel="noopener noreferrer">Schedule</a>
+        <a href='https://www.therams.com/team/players-roster/' target="_blank" rel="noopener noreferrer">Roster</a>
+        <a href='https://www.espn.com/nfl/injuries' target="_blank" rel="noopener noreferrer">Injury Update</a>
+      </div>
+      </div>
       <NavLink to="/contact" className="navItem">
         Contact
       </NavLink>

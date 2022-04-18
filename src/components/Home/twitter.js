@@ -9,6 +9,10 @@ import "./styles/twitter.css";
 
 export default function Twitter() {
 
+  function tweetIDToTime(tweetId) {
+    return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
+  }
+
   function relativeTime(tweetTime) {
     let diff = Date.now() - tweetTime;
     if (diff < 0) {
@@ -55,6 +59,9 @@ export default function Twitter() {
   async function getServerData() {
     let tweetsData = await fetch(`http://localhost:5000/get-latest-tweets`);
     tweetsData = await tweetsData.json();
+    tweetsData.forEach((tweet) => {
+      tweet.time = tweetIDToTime(parseInt(tweet.ID));
+    });
     setTwitterData(tweetsData);
   }
   useEffect(() => {

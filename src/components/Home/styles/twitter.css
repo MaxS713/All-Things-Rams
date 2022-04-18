@@ -1,5 +1,6 @@
 #tweets-container {
   grid-area: twitter;
+  width:100%;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;
@@ -18,6 +19,7 @@
 
 #tweets-embed{
   margin:0.5rem;
+  width:100%;
 }
 
 #tweets-embed p{
@@ -47,4 +49,13 @@
   border: 5px solid transparent;
   background-clip: content-box;
   background-color: rgb(4, 9, 135);
+}
+/* Media Querys for mobile and small display responsiveness */
+@media screen and (width: 600px) {
+
+}
+@media only screen and (max-width: 800px) {
+  #tweets-wrapper {
+    height: 30vh;
+  }
 }

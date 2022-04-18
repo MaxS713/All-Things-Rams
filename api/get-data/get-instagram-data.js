@@ -51,25 +51,11 @@ module.exports = async function getLatestInstagramPosts() {
           time: time,
         };
       });
-
-      let storedInstaData = await InstagramPost.find({});
-      let hasDuplicate = false;
-      for (let storedPost of storedInstaData) {
-        if (linkData.path === storedPost.path) {
-          hasDuplicate = true;
-        }
-      }
-      if (hasDuplicate !== true) {
-        latestInstagramPosts.push(linkData);
-      }
+      latestInstagramPosts.push(linkData);
     }
   }
 
-  console.log(`Sorting Data...`);
-  latestInstagramPosts = latestInstagramPosts.sort(
-    (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
-  );
-
+  await InstagramPost.deleteMany({});
   for (let instagramPost of latestInstagramPosts) {
     let newPost = new InstagramPost({
       path: instagramPost.path,
@@ -79,12 +65,18 @@ module.exports = async function getLatestInstagramPosts() {
     await newPost.save();
   }
 
-  console.log("Success!");
-  if (latestInstagramPosts.length !== 0) {
-    console.table(latestInstagramPosts);
-  } else {
-    console.log("No new instagram posts found...");
+  let instaData = await InstagramPost.find({});
+  instaData = instaData.sort((a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time));
+  if (instaData.length > 25) {
+    for (let i = 0; i < instaData.length; i++) {
+      if (i > 25) {
+        let currentID = instaData[i]._id;
+        await InstagramPost.deleteOne({_id: currentID});
+      }
+    }
   }
+
+  console.log("Success!");
 
   await LastAPICallTime.deleteOne({API: "instagram"});
   let timeOfApiCallRequest = new LastAPICallTime({

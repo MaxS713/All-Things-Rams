@@ -1,3 +1,5 @@
+// imports to define props&components
+import * as React from "react";
 import {List, Datagrid, TextField, EmailField, UrlField} from "react-admin";
 
 export const UserList = props => (

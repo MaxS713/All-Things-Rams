@@ -7,17 +7,20 @@ import "./styles/contact.css";
 export default function ContactForm() {
   const [status, setStatus] = useState("Send");
   const [disable, setDisable] = useState(false);
-  
+  const [val, setVal] = useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setStatus("Thank You!");
+    setDisable(true);
+    setVal("");
 
     const { name, email, subject, message } = event.target.elements;
 
     let details = {
       name: name.value,
       email: email.value,
+      subject: subject.value,
       message: message.value,
     };
 
@@ -32,6 +35,7 @@ export default function ContactForm() {
     let result = await response.json();
     alert(result.status);
   };
+
   return (
     <>
       <main>
@@ -43,10 +47,17 @@ export default function ContactForm() {
 
                 <h1 id="contact">Contact Us!</h1>
 
+                <p id="suggestions">
+                  We would love to hear from you about suggestions and changes
+                  we can make to improve our site. Feel free to reach out to us
+                  and let us know what you think!{" "}
+                </p>
+
                 <div>
                   <input
                     type="text"
                     id="name"
+                    value={val}
                     placeholder="Your Name"
                     required
                   />
@@ -57,19 +68,26 @@ export default function ContactForm() {
                   <input
                     type="email"
                     id="email"
+                    value={val}
                     placeholder="Your Email"
                     required
                   />
                 </div>
                 {/* User inputs their subject */}
                 <div>
-                  <input type="text" id="subject" placeholder="Subject" />
+                  <input
+                    type="text"
+                    id="subject"
+                    value={val}
+                    placeholder="Subject"
+                  />
                 </div>
 
                 {/* User inputs their message */}
                 <div>
                   <textarea
                     id="message"
+                    value={val}
                     maxLength={550}
                     placeholder="Share your thoughts"
                     required
@@ -81,7 +99,8 @@ export default function ContactForm() {
                   <button
                     id="submit"
                     type="submit"
-                   
+                    disabled={disable}
+                    onSubmit={(handleSubmit, setVal)}
                   >
                     {status}
                   </button>

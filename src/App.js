@@ -1,16 +1,17 @@
 //Library Imports
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Component Imports
 import HomePage from "./components/Home/homePage";
-import AdminApp from "./components/Admin/frontend/AdminApp";
+import AdminIndex from "./components/Admin/index";
 import NewsPage from "./components/News/newsPage";
-import TeamPage from "./components/Team/team";
 import SocialsPage from "./components/Social/socialsPage";
 import ContactPage from "./components/Contact/contactPage";
 import AboutPage from "./components/About/aboutPage";
+import PrivacyPage from "./components/Terms+Privacy/privacyPage";
+import TermsPage from "./components/Terms+Privacy/termsPage";
 
 //Style Imports
 import "./App.css";
@@ -22,11 +23,11 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/socials" element={<SocialsPage />} />
-        <Route path="/team" element={<TeamPage />} />
-        <Route path="/admin-login" element={<AdminApp />} />
+        <Route path="/admin-login" element={<AdminIndex />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
-        {/* <Route path="/terms-of-use" element={<TermsPage />} /> */}
+        <Route path="/terms-of-use" element={<TermsPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPage />} />
       </Routes>
     </BrowserRouter>
   );

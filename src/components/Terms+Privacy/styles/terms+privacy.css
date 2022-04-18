@@ -1,0 +1,30 @@
+/* Changes by element */
+#tp-section {
+  padding-bottom: 1.5vw;
+}
+
+/* Changes by id */
+
+/* Content Container */
+#tp-wrapper {
+  width: 60%;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+/* Privacy Policy / Terms of Use Wrapper  */
+#tp-title-wrapper {
+  font-size: 1vw;
+  color: rgb(4, 9, 135);
+  margin-left: 3vw;
+  padding-top: 1.5vw;
+}
+
+/* Changes by Class */
+
+/* Paragraph content */
+.tp-content {
+  margin: 1.5vw 3vw 1.5vw 3vw;
+}

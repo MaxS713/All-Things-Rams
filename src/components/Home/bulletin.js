@@ -22,7 +22,6 @@ export default function Bulletin(props) {
     <>
       <div className="duringPopUp">
         <div id="grid">
-        
           <FeaturedNewsCarousel />
           <LatestNews />
           <GoogleAdPlaceholder2 />
@@ -30,7 +29,7 @@ export default function Bulletin(props) {
           <Twitter />
           <Instagram />
           <LatestVideos />
-          <LatestPodcasts />
+          {/* <LatestPodcasts /> */}
           <GoogleAdPlaceholder />
         </div>
         </div>

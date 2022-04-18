@@ -1,3 +1,4 @@
+import * as React from "react";
 import {List, Datagrid, TextField, ReferenceField, EditButton, Edit, Create, SimpleForm, ReferenceInput, SelectInput, TextInput} from "react-admin";
 
 const postFilters = [

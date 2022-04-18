@@ -43,10 +43,6 @@ module.exports = async function getPodcastData() {
     }
   }
 
-  //Sorting Podcast Data by Date
-  console.log(`Sorting Data...`);
-  allPodcastData = allPodcastData.sort((a, b) => b.time - a.time);
-
   for (let podcast of allPodcastData) {
     let newPodcast = new Podcast({
       title: podcast.title,
@@ -62,6 +58,7 @@ module.exports = async function getPodcastData() {
   }
 
   let podcastData = await Podcast.find({});
+  podcastData = podcastData.sort((a, b) => b.time - a.time);
   if (podcastData.length > 50) {
     for (let i = 0; i < podcastData.length; i++) {
       if (i > 50) {

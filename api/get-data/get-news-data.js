@@ -272,7 +272,7 @@ module.exports = async function getLatestNewsData() {
     console.log(`Fetching data from ${link}...`);
     await page.goto(link, {waitUntil: "networkidle2", timeout: 0});
     let newsData = await page.evaluate(() => {
-      let findPodcast = document.querySelector("embed-audio-player");
+      let findPodcast = document.querySelector('#content-main iframe');
       if (findPodcast !== null) {
         return;
       }
@@ -300,7 +300,7 @@ module.exports = async function getLatestNewsData() {
         hasDuplicate = true;
       }
     }
-    if (hasDuplicate !== true) {
+    if (newsData && hasDuplicate !== true) {
       newsArticleArray.push(newsData);
     }
   }
@@ -499,10 +499,7 @@ module.exports = async function getLatestNewsData() {
 
   await browser.close();
 
-  console.log(`Sorting Data...`);
-  newsArticleArray = newsArticleArray.sort(
-    (a, b) => Date.parse(b.time) - Date.parse(a.time)
-  );
+  console.log(newsArticleArray)
 
   for (let newsArticle of newsArticleArray) {
     let newPost = new NewsArticle({
@@ -518,6 +515,9 @@ module.exports = async function getLatestNewsData() {
   }
 
   let newsData = await NewsArticle.find({});
+  newsData = newsData.sort(
+    (a, b) => Date.parse(b.time) - Date.parse(a.time)
+  );
   if (newsData.length > 50) {
     for (let i = 0; i < newsData.length; i++) {
       if (i > 50) {

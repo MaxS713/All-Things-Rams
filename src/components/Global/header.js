@@ -18,7 +18,7 @@ export default function Header() {
         <Link to="/">
           <div className="header">
             <div className="headerImg">
-              <img src={logoLink} alt="all-things-rams logo" width="70vw" />
+              <img src={logoLink} alt="all-things-rams logo" width="70vw" id="atr-logo" />
             </div>
             <div className="title-and-disclaimer">
               <h1>ALL THINGS RAMS</h1>

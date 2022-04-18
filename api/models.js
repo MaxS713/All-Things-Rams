@@ -10,11 +10,16 @@ db.on("error", console.error.bind(console, "connection error"));
 const twitterDataSchema = new mongoose.Schema({
   author: String,
   ID: String,
-  time: String,
 });
 
 const instagramDataSchema = new mongoose.Schema({
   path: String,
+  author: String,
+  time: String,
+});
+
+const tikTokSchema = new mongoose.Schema({
+  ID: String,
   author: String,
   time: String,
 });
@@ -63,10 +68,12 @@ const surveyDataSchema = new mongoose.Schema({
   votesAnswer3: { type: Number, default: 0 },
   textAnswer4: String,
   votesAnswer4: { type: Number, default: 0 },
+  ipAdresses: { type: Array, default: [] }
 });
 
 const Tweet = mongoose.model("Tweet", twitterDataSchema);
 const InstagramPost = mongoose.model("InstagramPost", instagramDataSchema);
+const TikTokVideo = mongoose.model("TikTokVideo", tikTokSchema);
 const NewsArticle = mongoose.model("NewsArticle", newsArticleSchema);
 const Podcast = mongoose.model("Podcasts", podcastSchema);
 const Video = mongoose.model("Videos", videosLinkSchema);
@@ -79,6 +86,7 @@ const SurveyData = mongoose.model("SurveyData", surveyDataSchema);
 module.exports = {
   Tweet,
   InstagramPost,
+  TikTokVideo,
   NewsArticle,
   Podcast,
   Video,

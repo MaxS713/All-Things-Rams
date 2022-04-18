@@ -88,7 +88,7 @@ export default function FeaturedNewsCarousel() {
                                 />
                               </div>
                               <div className="carousel-title-container">
-                                <h3>{newsArticle.title}</h3>
+                                <h3 className='featured-headline'>{newsArticle.title}</h3>
                               </div>
                             </div>
                           </a>

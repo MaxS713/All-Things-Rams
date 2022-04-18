@@ -1,12 +1,24 @@
 #news-grid {
   width: 85%;
   margin: 1rem auto 1rem auto;
-  display: grid;
   gap:1rem;
+  
+  
   grid-template-columns: repeat(6, 1fr);
+  display: grid;
+
   grid-template-areas:
     "feat feat feat feat news news"
     "feat feat feat feat news news"
     "googlead googlead googlead googlead googlead googlead"
-    "videos videos videos podcast podcast podcast";
+    "videos videos videos podcast podcast podcast"
+    "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2";
+}
+@media only screen and (max-width: 600px) {
+  #news-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

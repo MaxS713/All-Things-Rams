@@ -1,9 +1,11 @@
 #featured-news-container {
   grid-area: feat;
+  width:100%
+
 }
 
 #carousel-wrapper{
-  padding:2rem 3rem;
+  padding:1.5rem 3rem;
 }
 
 .carousel-item{
@@ -11,8 +13,9 @@
 }
 
 .carousel-img{
-  height: 60vh;
   width:90%;
+  max-height: 67.5vh;
+  min-height: 60vh;
   margin:0 auto;
   padding:0;
 }
@@ -38,6 +41,7 @@
 }
 
 .carousel-logo-and-title h3{
+  font-family: "Graduate", cursive;
   padding:0.2rem;
 }
 
@@ -46,5 +50,22 @@
   text-align:right;
   margin:0;
   margin-right:25px;
-  font-size: 0.75vw;
+  font-size: 1.25vh;
+}
+
+@media only screen and (max-width: 600px){
+  #carousel-wrapper{
+    margin:0;
+    padding: 0;
+  }
+  .carousel-img{
+    width:100%;
+    max-height: 15vh;
+    margin:0 auto;
+    padding:0;
+  }
+  .carousel-article-title{
+  position: relative;
+  font-size:2vh
+  }
 }

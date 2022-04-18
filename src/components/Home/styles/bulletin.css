@@ -2,29 +2,46 @@
 #grid {
   display: grid;
   justify-content: center;
+  align-items: start;
   width: 85%;
   margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
   gap: 1rem;
+  grid-auto-rows:minmax(auto, max-content);
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "feat  feat feat feat news news"
-    "feat  feat feat feat news news"
+    "feat feat feat feat news news"
+    "feat feat feat feat news news"
     "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
     "twitter twitter instagram instagram survey survey"
     "twitter twitter instagram instagram videos videos"
-    "googlead googlead googlead googlead googlead googlead"
-    "podcast podcast . . . .";
+    "googlead googlead googlead googlead googlead googlead";
+    /* "podcast podcast . . . ."; */
 }
 
 /* Media Query for Mobile Device Design */
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   #grid {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 800px) {
+  #grid {
+    grid-template-columns: repeat(6, 1fr);
+
+    grid-template-areas:
+    "feat  feat feat feat news news"
+    "feat  feat feat feat news news"
+    "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
+    "twitter twitter twitter twitter survey survey"
+    "instagram instagram instagram instagram videos videos"
+    "googlead googlead googlead googlead googlead googlead";
+
   }
 }
 
