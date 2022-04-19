@@ -1,10 +1,11 @@
-/* Changes by element */
+/* Changes by element and class */
+p.tp-content{
+  font-size: .9vw;
+}
+/* Changes by id */
 #tp-section {
   padding-bottom: 1.5vw;
 }
-
-/* Changes by id */
-
 /* Content Container */
 #tp-wrapper {
   width: 60%;
@@ -22,9 +23,33 @@
   padding-top: 1.5vw;
 }
 
+/* list for terms page */
+#tp-list{
+  font-size: .90vw;
+  margin-left: 2vw;
+}
+
 /* Changes by Class */
 
 /* Paragraph content */
 .tp-content {
   margin: 1.5vw 3vw 1.5vw 3vw;
+}
+/* Subtitles */
+.tp-subtitle{
+  margin-left: 3vw;
+  font-size: 1vw;
+  
+}
+
+@media screen and (max-width: 800px) {
+  .tp-content {
+    font-size: .75vw;
+  }
+  #tp-list{
+    font-size: .90vw;
+    margin-left: -1.5vw;}
+    #tp-wrapper {
+      width: 75%;
+      min-height: 60vw}
 }

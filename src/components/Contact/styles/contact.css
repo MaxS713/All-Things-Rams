@@ -3,8 +3,8 @@ input {
   border: none;
   border-bottom: black solid 1px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: .75vw;
-  margin: .75vw 3.5vw;
+  font-size: 0.75vw;
+  margin: 0.75vw 3.5vw;
 }
 
 textarea {
@@ -14,9 +14,9 @@ textarea {
   margin-bottom: 1vw;
   margin-top: 1.5vw;
   padding: 7px;
-  border: 2px solid rgba(255, 201, 92);
+  border: 2px solid rgb(255, 201, 92);
   border-radius: 5px;
-  font-size: .75vw;
+  font-size: 0.75vw;
 }
 
 /* Changes by Id */
@@ -29,17 +29,17 @@ textarea {
   padding-top: 2vw;
 }
 
-#suggestions{
+#suggestions {
   font-family: Arial, Helvetica, sans-serif;
-  width: 45%;
+  width: 39%;
   margin-left: 3vw;
-  font-size: .84vw;
+  font-size: 0.84vw;
 }
 
 /* Button */
 #submit {
-  padding: .75vw;
-  font-size: .75vw;
+  padding: 0.75vw;
+  font-size: 0.75vw;
   color: white;
   background-color: rgb(3, 7, 124);
   border: none;
@@ -55,7 +55,7 @@ textarea {
 #submit:hover {
   background-color: rgb(220, 218, 218);
   color: rgb(3, 7, 124);
-  transition: .7s
+  transition: 0.7s;
 }
 
 /* message box */
@@ -65,11 +65,11 @@ textarea {
 }
 
 /* wrapper on entire container */
-#mega-wrapper{
+#mega-wrapper {
   display: flex;
-  justify-content:center;
-  align-items:center;
-  margin:1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
 }
 
 /* CSS Changes by Class Name */
@@ -85,8 +85,32 @@ textarea {
   border-radius: 5px;
 }
 
-button[disabled]{
+button[disabled] {
   background-color: rgb(3, 7, 124);
   opacity: 60%;
   pointer-events: none;
+}
+
+@media screen and (max-width: 800px) {
+  .form-container {
+    background-color: white;
+  }
+  /* text */
+  #suggestions {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 70%;
+    margin-left: 3vw;
+    font-size: 0.84vw;
+  }
+  /* message box */
+  #message {
+    min-width: 70%;
+    height: 180px;
+  }
+  /* button */
+  #submit {
+    padding: 0.75vw;
+    font-size: 0.7vw;
+    margin-bottom: 3vw;
+  }
 }

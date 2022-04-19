@@ -1,6 +1,6 @@
 #tweets-container {
   grid-area: twitter;
-  width:100%;
+  width: 100%;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;
@@ -9,31 +9,31 @@
 }
 
 #tweets-wrapper {
-  height:100vh;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#tweets-embed{
-  margin:0.5rem;
-  width:100%;
+#tweets-embed {
+  margin: 0.5rem;
+  width: 90%;
 }
 
-#tweets-embed p{
-  padding:0;
-  font-style:italic;
-  font-size:0.9vw;
-  padding-bottom:5px;
+#tweets-embed p {
+  padding: 0;
+  font-style: italic;
+  font-size: 0.9vw;
+  padding-bottom: 5px;
 }
 
-#tweets-embed p span{
-  font-size:1.25vw;
-  font-style:normal;
-  font-weight:550;
-  color:rgb(4, 9, 135);
+#tweets-embed p span {
+  font-size: 1vw;
+  font-style: normal;
+  font-weight: 550;
+  color: rgb(4, 9, 135);
 }
 
 #tweets-wrapper::-webkit-scrollbar {
@@ -52,10 +52,15 @@
 }
 /* Media Querys for mobile and small display responsiveness */
 @media screen and (width: 600px) {
-
 }
 @media only screen and (max-width: 800px) {
   #tweets-wrapper {
     height: 30vh;
+  }
+  #tweets-embed p span {
+    font-size: 2vw;
+  }
+  #tweets-embed p {
+    font-size: 1.5vw;
   }
 }

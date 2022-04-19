@@ -1,4 +1,4 @@
-const { TikTokVideo, LastAPICallTime } = require("../models.js");
+const {TikTokVideo, LastAPICallTime} = require("../models.js");
 const puppeteer = require("puppeteer");
 
 //------------------ Get Instagram Data -----------------//
@@ -13,71 +13,83 @@ module.exports = async function getTikTokVideos() {
     "jalen5ramsey",
   ];
 
-  let latestInstagramPosts = [];
+  let latestTikTokPosts = [];
 
-  for (let user of listOfInstagramUsernames) {
+  for (let user of listOfTikTokUsers) {
     await page.goto(`https://urlebird.com/user/${user}/`, {
       waitUntil: "domcontentloaded",
     });
     console.log(`Getting TikTok Data from @${user}`);
     let latestPosts = await page.evaluate(() => {
       let results = [];
-      let latestLinks = document.querySelectorAll(".thumb a");
-      let linksDate = document.querySelectorAll(".thumb .stats .flex span").innerText;
-      // let sorted
-      // latestLinks.forEach((link, index) => {
-      //   results.push(link.href);
-      // });
-      // results = results.slice(0, 6);
-      return linksDate;
-    });
-
-    console.log(latestPosts)
-
-    for (let link of latestPosts) {
-      await page.goto(link, { waitUntil: "domcontentloaded" });
-      let linkData = await page.evaluate(() => {
-        let path = window.location.pathname.replace(/\D/g, "");
-        let time = document.querySelector(".video_html5 h6").innerText.slice(7);
-        let author = document.querySelector(".nickname").innerText;
-        return {
-          vidID: path,
-          author: author,
-          time: time,
-        };
+      let dates = [];
+      let links = document.querySelectorAll(".thumb > a");
+      let datesText = document.querySelectorAll(
+        ".thumb .stats .flex:first-child span"
+      );
+      datesText.forEach((date) => {
+        if (date.innerText[0] === " ") {
+          dates.push(date.innerText.slice(1));
+        } else {
+          dates.push(date.innerText);
+        }
       });
-      latestInstagramPosts.push(linkData);
+      links.forEach((link, index) => {
+        results.push({link: link.href.replace(/\D/g, ""), date: dates[index]});
+      });
+      return results;
+    });
+    latestPosts = await latestPosts.sort(
+      (a, b) => parseTimeAgo(a.date) - parseTimeAgo(b.date)
+    );
+    latestPosts = await latestPosts.slice(0, 6);
+    for (let post of latestPosts) {
+      let storedTikTokData = await TikTokVideo.find({});
+      let hasDuplicate = false;
+      for (let storedPost of storedTikTokData) {
+        if (post.link === storedPost.linkID) {
+          hasDuplicate = true;
+        }
+      }
+      if (hasDuplicate !== true) {
+        post = {...post, author: user};
+        latestTikTokPosts.push(post);
+      }
     }
   }
 
-  await InstagramPost.deleteMany({});
-  for (let instagramPost of latestInstagramPosts) {
-    let newPost = new InstagramPost({
-      path: instagramPost.path,
-      author: instagramPost.author,
-      time: instagramPost.time,
+  for (let post of latestTikTokPosts) {
+    let newPost = new TikTokVideo({
+      author: post.author,
+      linkID: post.link,
+      time: post.date,
     });
     await newPost.save();
   }
 
-  let instaData = await InstagramPost.find({});
-  instaData = instaData.sort(
+  let tiktokData = await TikTokVideo.find({});
+  tiktokData = tiktokData.sort(
     (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
   );
-  if (instaData.length > 25) {
-    for (let i = 0; i < instaData.length; i++) {
+  if (tiktokData.length > 40) {
+    for (let i = 0; i < tiktokData.length; i++) {
       if (i > 25) {
-        let currentID = instaData[i]._id;
-        await InstagramPost.deleteOne({ _id: currentID });
+        let currentID = tiktokData[i]._id;
+        await TikTokVideo.deleteOne({_id: currentID});
       }
     }
   }
 
   console.log("Success!");
+  if (latestTikTokPosts.length !== 0) {
+    console.table(latestTikTokPosts);
+  } else {
+    console.log("No new tiktok posts found...");
+  }
 
-  await LastAPICallTime.deleteOne({ API: "instagram" });
+  await LastAPICallTime.deleteOne({API: "tiktok"});
   let timeOfApiCallRequest = new LastAPICallTime({
-    API: "instagram",
+    API: "tiktok",
     time: Date.now(),
   });
   await timeOfApiCallRequest.save();

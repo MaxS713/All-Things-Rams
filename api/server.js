@@ -23,6 +23,12 @@ const getTikTokVideos = require("./get-data/get-tiktok-data.js");
 const app = express();
 const port = process.env.PORT || 5000;
 
+const twitterRoutes = require("./routes/twitterRoutes");
+const twitterUserRoutes = require("./routes/twitterUserRoutes");
+const instaRoutes = require("./routes/instaRoutes");
+const instaUserRoutes = require("./routes/instaUserRoutes");
+const newsRoutes = require("./routes/newsRoutes");
+
 app.use(cors());
 app.use(express.json());
 
@@ -30,6 +36,7 @@ app.use(express.json());
   let currentTime = Date.now();
   let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
   let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
+  let lastTikTokCall = await LastAPICallTime.findOne({ API: "tiktok" });
   let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
   let lastPodcastCall = await LastAPICallTime.findOne({ API: "podcast" });
   let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
@@ -39,6 +46,9 @@ app.use(express.json());
   }
   if (!lastInstagramCall || currentTime - lastInstagramCall.time > 3600000) {
     await getLatestInstagramPosts();
+  }
+  if (!lastTikTokCall || currentTime - lastTikTokCall.time > 3600000) {
+    await getTikTokVideos();
   }
   if (!lastNewsCall || currentTime - lastNewsCall.time > 3600000) {
     await getLatestNewsData();
@@ -51,8 +61,14 @@ app.use(express.json());
   }
 })();
 
+instaRoutes(app);
+twitterRoutes(app);
+newsRoutes(app);
+instaUserRoutes(app);
+twitterUserRoutes(app);
+
 app.get("/", async (req, res) => {
-  await res.send("Hi Maix");
+  await res.send("All Things Rams");
 });
 
 app.get("/get-latest-tweets", async (req, res) => {
@@ -115,6 +131,49 @@ app.get("/get-instagram-posts", async (req, res) => {
     }
   });
   dataToSend = dataToSend.slice(0, 5);
+  await res.send(dataToSend);
+});
+
+app.get("/get-tiktok-posts", async (req, res) => {
+  //function to convert the instagram "time ago" measure of time into a number
+  function parseTimeAgo(timeAgo) {
+    timeAgo = timeAgo.replace("s", "");
+    timeAgo = timeAgo.split(" ");
+    let numberOf;
+    let multiplier;
+    if (timeAgo[1] === "year") {
+      return "tooLong";
+    }
+    if (timeAgo[0] === "a") {
+      numberOf = 1;
+    } else {
+      numberOf = parseInt(timeAgo[0]);
+    }
+    if (timeAgo[1] === "hour") {
+      multiplier = 1;
+    } else if (timeAgo[1] === "day") {
+      multiplier = 24;
+    } else if (timeAgo[1] === "month") {
+      multiplier = 30 * 24;
+    }
+    return numberOf * multiplier;
+  }
+  let allLatestTikTokPosts = await TikTokVideo.find({});
+  allLatestTikTokPosts = allLatestTikTokPosts.sort(
+    (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
+  );
+  let dataToSend = [allLatestTikTokPosts[0]];
+  allLatestTikTokPosts.forEach((data) => {
+    if (!dataToSend.some((e) => e.author === data.author)) {
+      dataToSend.push(data);
+    }
+  });
+  allLatestInstagramPosts.forEach((data) => {
+    if (dataToSend.includes(data) === false) {
+      dataToSend.push(data);
+    }
+  });
+  dataToSend = dataToSend.slice(0, 8);
   await res.send(dataToSend);
 });
 

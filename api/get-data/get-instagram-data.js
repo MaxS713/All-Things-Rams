@@ -1,4 +1,4 @@
-const {InstagramPost, LastAPICallTime} = require("../models.js");
+const {InstagramPost, InstagramUser, LastAPICallTime} = require("../models.js");
 const puppeteer = require("puppeteer");
 
 //------------------ Get Instagram Data -----------------//
@@ -6,19 +6,11 @@ module.exports = async function getLatestInstagramPosts() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  let listOfInstagramUsernames = [
-    {fullName: "Cam Akers", username: "camakers3"},
-    {fullName: "Jalen Ramsey", username: "jalenramsey"},
-    {fullName: "Cooper Kupp", username: "cooperkupp"},
-    {fullName: "Jordan Fuller", username: "j_fuller4"},
-    {fullName: "Aaron Donald", username: "aarondonald99"},
-    {fullName: "Troy Hill", username: "thill_13"},
-    {fullName: "Robert Woods", username: "robertw10ds"},
-    {fullName: "Morgan Fox", username: "m.d.fox007"},
-    {fullName: "Tyler Higbee", username: "higbeedoe"},
-    {fullName: "Michael Brockers", username: "mbrockers90"},
-    {fullName: "Johnny Hekker", username: "jhekk"},
-  ];
+  let listOfInstagramUsernames = await InstagramUser.find({});
+  // for (let user of listOfInstagramUsernames){
+  //   let newInstaUser = new InstagramUser({fullName: user.fullName, username: user.username})  
+  //   await newInstaUser.save()
+  // }
 
   let latestInstagramPosts = [];
 

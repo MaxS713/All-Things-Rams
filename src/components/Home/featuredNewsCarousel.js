@@ -31,10 +31,11 @@ export default function FeaturedNewsCarousel() {
   function trimTitleLength(string) {
     let trimmedString = string.substr(0, 140);
     if (trimmedString !== string) {
-      trimmedString = trimmedString.substr(
-        0,
-        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
-      ) + "\u2026";
+      trimmedString =
+        trimmedString.substr(
+          0,
+          Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+        ) + "\u2026";
     }
     return trimmedString;
   }
@@ -88,14 +89,17 @@ export default function FeaturedNewsCarousel() {
                                 />
                               </div>
                               <div className="carousel-title-container">
-                                <h3 className='featured-headline'>{newsArticle.title}</h3>
+                                <h3 className="featured-headline">
+                                  {newsArticle.title}
+                                </h3>
                               </div>
                             </div>
                           </a>
                         </div>
                         <div className="carousel-source-date">
                           <p className="carousel-source">
-                            Date: {newsArticle.time} &nbsp;|&nbsp; Source: {newsArticle.source}
+                            Date: {newsArticle.time} &nbsp;|&nbsp; Source:{" "}
+                            {newsArticle.source}
                           </p>
                         </div>
                       </div>

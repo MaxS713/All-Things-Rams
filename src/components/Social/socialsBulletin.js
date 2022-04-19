@@ -11,16 +11,16 @@ export default function SocialsBulletin() {
   return (
     <>
       <div id="socials-grid">
-        <div id="ad-space">
+        <div className="ad-space">
         <GoogleAdPlaceholder2 className='ad' />
         </div>
         <div id="insta-bulletin">
-        <Instagram />
+        <Instagram className="insta-mobile"/>
         </div>
         <div id="twitter-bulletin">
         <Twitter />
         </div>
-        <div id="ad-space">
+        <div className="ad-space">
         <GoogleAdPlaceholder className='ad' />
         </div>
       </div>

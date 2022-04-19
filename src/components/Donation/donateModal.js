@@ -24,17 +24,32 @@ const PopUp = (props) => {
         </div>
         <div className="pu-content-container">
           <div className="donate-portals">
-            <img src={ppLogo} width="50px" height="50px" className="donate-logo" />
+            <img
+              src={ppLogo}
+              width="50px"
+              height="50px"
+              className="donate-logo"
+            />
             Paypal
           </div>
           <div className="donate-portals">
             <div id="visa">
-              <img src={visaLogo} width="50px" height="50px" className="donate-logo"/>
+              <img
+                src={visaLogo}
+                width="50px"
+                height="50px"
+                className="donate-logo"
+              />
               Visa
             </div>
           </div>
           <div className="donate-portals">
-            <img src={venmoLogo} width="50px" height="50px" className="donate-logo" />
+            <img
+              src={venmoLogo}
+              width="50px"
+              height="50px"
+              className="donate-logo"
+            />
             Venmo
           </div>
         </div>

@@ -18,8 +18,18 @@ const instagramDataSchema = new mongoose.Schema({
   time: String,
 });
 
+const instagramUserSchema = new mongoose.Schema({
+  fullName: String,
+  username: String,
+});
+
+const twitterUserSchema = new mongoose.Schema({
+  twitterHandle: String,
+  userID: String,
+});
+
 const tikTokSchema = new mongoose.Schema({
-  ID: String,
+  linkID: String,
   author: String,
   time: String,
 });
@@ -72,7 +82,9 @@ const surveyDataSchema = new mongoose.Schema({
 });
 
 const Tweet = mongoose.model("Tweet", twitterDataSchema);
+const TwitterUser = mongoose.model("TwitterUser", twitterUserSchema);
 const InstagramPost = mongoose.model("InstagramPost", instagramDataSchema);
+const InstagramUser = mongoose.model("InstagramUser", instagramUserSchema);
 const TikTokVideo = mongoose.model("TikTokVideo", tikTokSchema);
 const NewsArticle = mongoose.model("NewsArticle", newsArticleSchema);
 const Podcast = mongoose.model("Podcasts", podcastSchema);
@@ -85,7 +97,9 @@ const SurveyData = mongoose.model("SurveyData", surveyDataSchema);
 
 module.exports = {
   Tweet,
+  TwitterUser,
   InstagramPost,
+  InstagramUser,
   TikTokVideo,
   NewsArticle,
   Podcast,

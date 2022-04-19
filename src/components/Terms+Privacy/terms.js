@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 //Style Imports
-import "./styles/terms+privacy.css"
+import "./styles/terms+privacy.css";
 
 export default function Terms() {
   return (
@@ -13,68 +13,102 @@ export default function Terms() {
         </div>
         <section id="tp-section">
           <p className="tp-content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Facilisis sed odio morbi quis commodo odio aenean sed adipiscing.
-            Fames ac turpis egestas sed tempus urna et pharetra pharetra. Enim
-            facilisis gravida neque convallis a cras semper auctor. Tortor vitae
+            By accessing the website at www.AllThingsRams.com, you are agreeing
+            to be bound by these terms of service, all applicable laws and
+            regulations, and agree that you are responsible for compliance with
+            any applicable local laws. If you do not agree with any of these
+            terms, you are prohibited from using or accessing this site. The
+            materials contained in this website are protected by applicable
+            copyright and trademark law.
           </p>
+          <h3 className="tp-subtitle">Use License</h3>
           <p className="tp-content">
-            Duis tristique sollicitudin nibh sit amet commodo nulla. Amet
-            consectetur adipiscing elit ut aliquam purus. Lobortis scelerisque
-            fermentum dui faucibus in ornare quam viverra orci. In dictum non
-            consectetur a erat nam. At tempor commodo ullamcorper a lacus
-            vestibulum sed arcu non. Id donec ultrices tincidunt arcu. Eros
-            donec ac odio tempor. Duis ut diam quam nulla porttitor massa id.
-            Auctor eu augue ut lectus arcu bibendum at. Ipsum consequat nisl vel
-            pretium lectus quam id. Mi sit amet mauris commodo quis. Est
-            ullamcorper eget nulla facilisi etiam dignissim. Pretium aenean
-            pharetra magna ac placerat vestibulum lectus mauris. Eget aliquet
-            nibh praesent tristique magna sit amet. Pellentesque adipiscing
-            commodo elit at imperdiet dui accumsan. Faucibus in ornare quam
-            viverra. Eget egestas purus viverra accumsan in nisl.
+            Permission is granted to temporarily download one copy of the
+            materials (information or software) on www.AllThingsRams.com for
+            personal, non-commercial transitory viewing only. This is the grant
+            of a license, not a transfer of title, and under this license you
+            may not:
           </p>
+          <ol id="tp-list">
+            <li className="tp-list-item">modify or copy the materials;</li>
+            <li className="tp-list-item">
+              use the materials for any commercial purpose, or for any public
+              display (commercial or non-commercial);{" "}
+            </li>
+            <li className="tp-list-item">
+              attempt to decompile or reverse engineer any software contained on
+              www.AllThingsRams.com;{" "}
+            </li>
+            <li className="tp-list-item">
+              remove any copyright or other proprietary notations from the
+              materials; or{" "}
+            </li>
+            <li className="tp-list-item">
+              transfer the materials to another person or "mirror" the materials
+              on any other server.
+            </li>
+          </ol>
           <p className="tp-content">
-            Enim facilisis gravida neque convallis a cras. Lacus laoreet non
-            curabitur gravida arcu ac tortor dignissim. Dui accumsan sit amet
-            nulla facilisi. Curabitur vitae nunc sed velit dignissim sodales ut.
-            Sed libero enim sed faucibus turpis in. Sit amet commodo nulla
-            facilisi nullam. Et netus et malesuada fames ac turpis egestas sed
-            tempus. Facilisis mauris sit amet massa vitae tortor condimentum. In
-            vitae turpis massa sed elementum tempus egestas. Et molestie ac
-            feugiat sed lectus. Facilisis sed odio morbi quis. Vitae auctor eu
-            augue ut lectus arcu bibendum. Quisque sagittis purus sit amet
-            volutpat consequat.
+            This license shall automatically terminate if you violate any of
+            these restrictions and may be terminated by AllThingsRams at any
+            time. Upon terminating your viewing of these materials or upon the
+            termination of this license, you must destroy any downloaded
+            materials in your possession whether in electronic or printed
+            format.
           </p>
+          <h3 className="tp-subtitle">Disclaimer</h3>
           <p className="tp-content">
-            Nulla aliquet enim tortor at. Quam nulla porttitor massa id neque
-            aliquam vestibulum. Scelerisque viverra mauris in aliquam sem
-            fringilla ut morbi. Tristique et egestas quis ipsum suspendisse
-            ultrices gravida dictum. Nec feugiat in fermentum posuere. Mus
-            mauris vitae ultricies leo integer malesuada. Id neque aliquam
-            vestibulum morbi blandit cursus risus at ultrices. Ut diam quam
-            nulla porttitor massa id neque. A iaculis at erat pellentesque
-            adipiscing commodo elit at imperdiet. Netus et malesuada fames ac
-            turpis egestas. In nisl nisi scelerisque eu ultrices vitae. Nisl
-            nisi scelerisque eu ultrices vitae auctor. Tellus in metus vulputate
-            eu scelerisque felis. Accumsan lacus vel facilisis volutpat est
-            velit egestas dui id. At in tellus integer feugiat scelerisque
-            varius morbi.
+            The materials on www.AllThingsRams.com are provided on an 'as is'
+            basis. AllThingsRams makes no warranties, expressed or implied, and
+            hereby disclaims and negates all other warranties including, without
+            limitation, implied warranties or conditions of merchantability,
+            fitness for a particular purpose, or non-infringement of
+            intellectual property or other violation of rights. Further,
+            AllThingsRams does not warrant or make any representations
+            concerning the accuracy, likely results, or reliability of the use
+            of the materials on its website or otherwise relating to such
+            materials or on any sites linked to this site.
           </p>
+          <h3 className="tp-subtitle">Limitations</h3>
           <p className="tp-content">
-            Id porta nibh venenatis cras sed felis. In vitae turpis massa sed
-            elementum. Id nibh tortor id aliquet lectus. Ac auctor augue mauris
-            augue. Auctor elit sed vulputate mi sit amet mauris commodo.
-            Hendrerit gravida rutrum quisque non tellus. Amet commodo nulla
-            facilisi nullam vehicula. Turpis massa tincidunt dui ut ornare
-            lectus sit amet est. Felis bibendum ut tristique et egestas quis
-            ipsum. Orci nulla pellentesque dignissim enim sit amet venenatis
-            urna. Id aliquet risus feugiat in ante metus dictum. Ultricies
-            integer quis auctor elit sed vulputate mi. Quis commodo odio aenean
-            sed adipiscing diam donec adipiscing tristique. In fermentum posuere
-            urna nec tincidunt praesent semper feugiat. Dui id ornare arcu odio
-            ut sem nulla pharetra diam. Donec et odio pellentesque diam volutpat
-            commodo sed. Sagittis id consectetur purus ut faucibus pulvinar.
+            In no event shall AllThingsRams or its suppliers be liable for any
+            damages (including, without limitation, damages for loss of data or
+            profit, or due to business interruption) arising out of the use or
+            inability to use the materials on www.AllThingsRams.com, even if
+            AllThingsRams or a AllThingsRams authorized representative has been
+            notified orally or in writing of the possibility of such damage.
+            Because some jurisdictions do not allow limitations on implied
+            warranties, or limitations of liability for consequential or
+            incidental damages, these limitations may not apply to you.
+          </p>
+          <h3 className="tp-subtitle">Accuracy of materials</h3>
+          <p className="tp-content">
+            The materials appearing on www.AllThingsRams.com could include
+            technical, typographical, or photographic errors. AllThingsRams does
+            not warrant that any of the materials on its website are accurate,
+            complete or current. AllThingsRams may make changes to the materials
+            contained on its website at any time without notice. However
+            AllThingsRams does not make any commitment to update the materials.
+          </p>
+          <h3 className="tp-subtitle">Links</h3>
+          <p className="tp-content">
+            AllThingsRams Packernet has not reviewed all of the sites linked to
+            its website and is not responsible for the contents of any such
+            linked site. The inclusion of any link does not imply endorsement by
+            AllThingsRams of the site. Use of any such linked website is at the
+            user's own risk.
+          </p>
+          <h3 className="tp-subtitle">Modifications</h3>
+          <p className="tp-content">
+            AllThingsRams may revise these terms of service for its website at
+            any time without notice. By using this website you are agreeing to
+            be bound by the then current version of these terms of service.
+          </p>
+          <h3 className="tp-subtitle">Governing Law</h3>
+          <p className="tp-content">
+            These terms and conditions are governed by and construed in
+            accordance with the laws of Vermont and you irrevocably submit to
+            the exclusive jurisdiction of the courts in that State or location.
           </p>
         </section>
       </div>

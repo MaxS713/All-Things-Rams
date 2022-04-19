@@ -1,4 +1,4 @@
-const { Tweet, LastAPICallTime } = require("../models.js");
+const { Tweet, TwitterUser, LastAPICallTime } = require("../models.js");
 const { TwitterApi } = require("twitter-api-v2");
 
 //------------------ Get Twitter Data -----------------//
@@ -11,15 +11,12 @@ module.exports = async function getLatestTweets() {
     accessSecret: "8c2uLmpd6TolEh0s1axDLYJb7lzBJkAQkcMfsaVCKaOKu",
   });
 
-  let listOfTwitterUsers = [
-    { twitterHandle: "@RamsNFL", userID: "24109979" }, //@RamsNFL
-    { twitterHandle: "@TheRamsWire", userID: "4889534300" }, //@TheRamsWire
-    { twitterHandle: "@LARamsNews", userID: "4722927636" }, //@LARamsNews
-    { twitterHandle: "@DowntownRams", userID: "733295648976572416" }, //@DowntownRams
-    { twitterHandle: "@LindseyThiry", userID: "30142826" }, //@LindseyThiry
-    { twitterHandle: "@JourdanRodrigue", userID: "182176877" }, // @JourdanRodrigue
-    { twitterHandle: "@LATimesklein", userID: "33620284" }, // @LATimesklein
-  ];
+  let listOfTwitterUsers = await TwitterUser.find({})
+
+  //   for (let user of listOfTwitterUsers){
+  //   let newTwitterUser = new TwitterUser({twitterHandle: user.twitterHandle, userID: user.userID})  
+  //   await newTwitterUser.save()
+  // }
 
   let allTweetsData = [];
 
@@ -59,9 +56,7 @@ module.exports = async function getLatestTweets() {
   }
 
   let tweetData = await Tweet.find({});
-  console.log(tweetData)
   tweetData.sort((a, b) => parseInt(b.ID) - parseInt(a.ID));
-  console.log(tweetData)
   if (tweetData.length > 50) {
     for (let i = 0; i < tweetData.length; i++) {
       if (i > 50) {

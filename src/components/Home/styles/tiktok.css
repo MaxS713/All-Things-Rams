@@ -1,5 +1,5 @@
-#instagram-container {
-  grid-area: instagram;
+#tiktok-container {
+  grid-area: tiktok;
   width: 100%;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
@@ -8,39 +8,39 @@
   -ms-animation: fadeIn 3s;
 }
 
-#instagram-wrapper {
+#tiktok-wrapper {
   height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
   padding-left: 20px;
   padding-right: 20px;
 }
-#instagram-embed {
+#tiktok-embed {
   width: 100%;
 }
-#instagram-embed p {
+#tiktok-embed p {
   padding: 0;
   font-style: italic;
   font-size: 1.5vh;
   padding-bottom: 5px;
 }
 
-#instagram-embed p span {
+#tiktok-embed p span {
   font-size: 2vh;
   font-style: normal;
   font-weight: 550;
   color: rgb(4, 9, 135);
 }
 
-#instagram-wrapper::-webkit-scrollbar {
+#tiktok-wrapper::-webkit-scrollbar {
   width: 20px;
 }
 
-#instagram-wrapper::-webkit-scrollbar-track {
+#tiktok-wrapper::-webkit-scrollbar-track {
   border-radius: 100px;
 }
 
-#instagram-wrapper::-webkit-scrollbar-thumb {
+#tiktok-wrapper::-webkit-scrollbar-thumb {
   border-radius: 100px;
   border: 5px solid transparent;
   background-clip: content-box;
@@ -51,4 +51,10 @@ p.source {
   padding-left: 1.5vw;
   border-bottom: 3px solid rgb(4, 9, 135);
   width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+  #tiktok-wrapper {
+    height: 60vh;
+  }
 }

@@ -7,6 +7,7 @@
   background-color: white;
   border-radius: 5px;
   margin-bottom: 1rem;
+  font-size: 0.9vw;
 }
 
 /* Page Title */
@@ -28,6 +29,7 @@
   margin-left: 2vw;
   max-width: 43%;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9vw;
 }
 /* Our Team */
 #about-head h2 {
@@ -37,6 +39,21 @@
   background-color: rgba(3, 7, 124);
   padding: 0.5vw;
   border-radius: 5px;
+  font-size: 1.5vw;
+}
+
+#steve {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#joey {
+  max-width: 100%;
+  max-height: 100%;
+}
+#pierson {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* Changes by class */
@@ -50,10 +67,8 @@
 /* about text */
 .staff-about {
   max-width: 60%;
-  margin-top: 1vw;
-  margin-bottom: 3.25vw;
-  margin-left: 1vw;
-  padding: 0 2vw 0vw 2vw;
+  margin: 1vw 1vw 3.25vw 1vw;
+  padding: 0 2vw 1vw 2vw;
   border: 2px solid rgba(255, 201, 92);
   border-radius: 5px;
 }
@@ -62,4 +77,36 @@
 .staff-img {
   margin: 1vw 1vw 2vw 2vw;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  #about {
+    width: 50vw;
+  }
+  #about-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vw;
+  }
+  .staff {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .staff-about {
+    max-width: 60%;
+  }
+  #steve {
+    max-height: 30vw;
+  }
+  #joey {
+    max-height: 30vw;
+  }
+  #pierson {
+    max-height: 30vw;
+  }
+  #about-head h2 {
+    margin: 2vw 3.5vw 4vw 2vw;
+  }
 }
