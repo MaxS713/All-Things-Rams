@@ -8,7 +8,6 @@ import AdminApp from "./adminApp";
 import "./index.css";
 
 export default function AdminIndex() {
-  console.log("hello" + window.location.origin)
   return (
       <Auth0ProviderWithHistory>
         <AdminApp />

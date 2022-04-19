@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Component Imports
 import HomePage from "./components/Home/homePage";
-import AdminIndex from "./components/Admin/index";
+import AdminApp from "./components/Admin/adminApp";
 import NewsPage from "./components/News/newsPage";
 import SocialsPage from "./components/Social/socialsPage";
 import ContactPage from "./components/Contact/contactPage";
@@ -23,7 +23,7 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/socials" element={<SocialsPage />} />
-        <Route path="/admin-login" element={<AdminIndex />} />
+        <Route path="/admin-login" element={<AdminApp />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/terms-of-use" element={<TermsPage />} />
