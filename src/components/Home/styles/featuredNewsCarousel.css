@@ -1,7 +1,7 @@
 #featured-news-container {
   grid-area: feat;
+  grid-row: 1 / span 2;
   width:100%
-
 }
 
 #carousel-wrapper{
@@ -10,12 +10,13 @@
 
 .carousel-item{
   position: relative;
+  grid-row: 1 /span 2;
+  max-height: 100vh;
 }
 
 .carousel-img{
-  width:90%;
-  max-height: 67.5vh;
-  min-height: 60vh;
+  aspect-ratio:16/9;
+  max-width:90%;
   margin:0 auto;
   padding:0;
 }

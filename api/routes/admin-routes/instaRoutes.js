@@ -1,4 +1,4 @@
-const { InstagramPost } = require("../models.js");
+const { InstagramPost } = require("../../models.js");
 
 module.exports = (app) => {
   app.get("/api/instagramposts", async (req, res) => {
@@ -13,7 +13,6 @@ module.exports = (app) => {
 
   app.get("/api/instagramposts/:id", async (req, res) => {
     const InstagramPostId = req.params.id;
-    const newInstagramPost = new InstagramPost(req.body);
     const InstagramPost = await InstagramPost.findById(InstagramPostId);
     res.send(InstagramPost);
   });

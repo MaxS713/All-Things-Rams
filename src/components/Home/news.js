@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./styles/news.css";
 
-export default function LatestNews() {
+export default function LatestNews(props) {
   const [newsArticleData, setNewsArticleData] = useState([]);
 
   async function getServerData() {
-    let newsArticlesData = await fetch(
-      `http://localhost:5000/get-news-article`
-    );
+    let newsArticlesData
+    if (props.location === "news") {
+      newsArticlesData = await fetch(
+        `http://localhost:5000/get-more-news-article`
+      );
+    } else {
+      newsArticlesData = await fetch(
+        `http://localhost:5000/get-news-article`
+      );
+    }
     newsArticlesData = await newsArticlesData.json();
     newsArticlesData.forEach((article) => {
       article.time = Date.parse(article.time);
@@ -24,10 +31,11 @@ export default function LatestNews() {
   function trimTitleLength(string) {
     let trimmedString = string.substr(0, 140);
     if (trimmedString !== string) {
-      trimmedString = trimmedString.substr(
-        0,
-        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
-      ) + "\u2026";
+      trimmedString =
+        trimmedString.substr(
+          0,
+          Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+        ) + "\u2026";
     }
     return trimmedString;
   }

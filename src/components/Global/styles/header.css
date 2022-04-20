@@ -81,7 +81,8 @@
   transform: translate3d(0, 0, 0);
 }
 
-#donate-button {
+
+/* #donate-button {
   padding: 0.3rem;
   border: 0.2em solid rgb(4, 9, 135);
   border-radius: 3px;
@@ -102,7 +103,7 @@
 
 #donate-button:hover::after{
   all: initial;
-}
+} */
 
 button {
   text-decoration: none;

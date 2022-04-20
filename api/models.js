@@ -9,6 +9,13 @@ db.on("error", console.error.bind(console, "connection error"));
 
 const twitterDataSchema = new mongoose.Schema({
   author: String,
+  text: String,
+  ID: String,
+});
+
+const twitterPickDataSchema = new mongoose.Schema({
+  author: String,
+  text: String,
   ID: String,
 });
 
@@ -63,6 +70,13 @@ const videosLinkSchema = new mongoose.Schema({
   summary: String,
 });
 
+const customArticleSchema = new mongoose.Schema({
+  title: String,
+  author: String,
+  content: String,
+  date: String,
+});
+
 const lastAPICallTimeSchema = new mongoose.Schema({
   API: String,
   time: Number,
@@ -78,10 +92,11 @@ const surveyDataSchema = new mongoose.Schema({
   votesAnswer3: { type: Number, default: 0 },
   textAnswer4: String,
   votesAnswer4: { type: Number, default: 0 },
-  ipAdresses: { type: Array, default: [] }
+  ipAdresses: { type: Array, default: ["1"] }
 });
 
 const Tweet = mongoose.model("Tweet", twitterDataSchema);
+const PickTweet = mongoose.model("PickTweet", twitterPickDataSchema);
 const TwitterUser = mongoose.model("TwitterUser", twitterUserSchema);
 const InstagramPost = mongoose.model("InstagramPost", instagramDataSchema);
 const InstagramUser = mongoose.model("InstagramUser", instagramUserSchema);
@@ -94,9 +109,12 @@ const LastAPICallTime = mongoose.model(
   lastAPICallTimeSchema
 );
 const SurveyData = mongoose.model("SurveyData", surveyDataSchema);
+const CustomArticle = mongoose.model("CustomArticle", customArticleSchema);
 
 module.exports = {
   Tweet,
+  PickTweet,
+  CustomArticle,
   TwitterUser,
   InstagramPost,
   InstagramUser,

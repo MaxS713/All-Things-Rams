@@ -7,8 +7,7 @@ import { TwitterEmbed } from "react-social-media-embed";
 
 import "./styles/twitter.css";
 
-export default function Twitter() {
-
+export default function Twitter(props) {
   function tweetIDToTime(tweetId) {
     return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
   }
@@ -57,7 +56,12 @@ export default function Twitter() {
   const [twitterData, setTwitterData] = useState([]);
 
   async function getServerData() {
-    let tweetsData = await fetch(`http://localhost:5000/get-latest-tweets`);
+    let tweetsData;
+    if (props.location === "socials") {
+      tweetsData = await fetch(`http://localhost:5000/get-more-tweets`);
+    } else {
+      tweetsData = await fetch(`http://localhost:5000/get-latest-tweets`);
+    }
     tweetsData = await tweetsData.json();
     tweetsData.forEach((tweet) => {
       tweet.time = tweetIDToTime(parseInt(tweet.ID));
@@ -79,7 +83,10 @@ export default function Twitter() {
             {twitterData.map((tweet) => {
               return (
                 <div id="tweets-embed">
-                  <p className="source"><span>{tweet.author}</span> tweeted {relativeTime(tweet.time)}</p>
+                  <p className="source">
+                    <span>{tweet.author}</span> tweeted{" "}
+                    {relativeTime(tweet.time)}
+                  </p>
                   <TwitterEmbed
                     url={`https://twitter.com/PixelAndBracket/status/${tweet.ID}`}
                     width="100%"

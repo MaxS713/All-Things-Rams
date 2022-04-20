@@ -1,6 +1,7 @@
 //Scraped Data Imports
 import Instagram from "../Home/instagram";
 import Twitter from "../Home/twitter";
+import Tiktok from "../Home/tiktok"
 import GoogleAdPlaceholder from "../Home/googleAds"
 import GoogleAdPlaceholder2 from "../Home/googleAds2"
 
@@ -15,10 +16,13 @@ export default function SocialsBulletin() {
         <GoogleAdPlaceholder2 className='ad' />
         </div>
         <div id="insta-bulletin">
-        <Instagram className="insta-mobile"/>
+        <Instagram location={"socials"} className="insta-mobile"/>
         </div>
         <div id="twitter-bulletin">
-        <Twitter />
+        <Twitter location={"socials"}/>
+        </div>
+        <div id="tiktok-bulletin">
+        <Tiktok location={"socials"}/>
         </div>
         <div className="ad-space">
         <GoogleAdPlaceholder className='ad' />

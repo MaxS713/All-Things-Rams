@@ -1,9 +1,9 @@
-const { Tweet, TwitterUser, LastAPICallTime } = require("../models.js");
+const { PickTweet, LastAPICallTime } = require("../models.js");
 const { TwitterApi } = require("twitter-api-v2");
 
 //------------------ Get Twitter Data -----------------//
 
-module.exports = async function getLatestTweets() {
+module.exports = async function getLatestPickTweets() {
   const client = new TwitterApi({
     appKey: "Vx3ZSb24vmi5uIT2VUTzNzU7i",
     appSecret: "W89gf4TJsicNjurmSxk9ySO4Xc63WdNpY5jP2TjRYFOMm0r4nb",
@@ -11,12 +11,7 @@ module.exports = async function getLatestTweets() {
     accessSecret: "8c2uLmpd6TolEh0s1axDLYJb7lzBJkAQkcMfsaVCKaOKu",
   });
 
-  let listOfTwitterUsers = await TwitterUser.find({})
-
-  //   for (let user of listOfTwitterUsers){
-  //   let newTwitterUser = new TwitterUser({twitterHandle: user.twitterHandle, userID: user.userID})  
-  //   await newTwitterUser.save()
-  // }
+  let listOfTwitterUsers = [{twitterHandle: "@AllThingsRams_", userID:"1516451940577726473"}, {twitterHandle: "@pbeats_ats", userID:"1516471388416221186"}]
 
   let allTweetsData = [];
 
@@ -27,7 +22,7 @@ module.exports = async function getLatestTweets() {
       max_results: 5,
     });
     for (let tweet of latestTweets.tweets) {
-      let storedTweetData = await Tweet.find({});
+      let storedTweetData = await PickTweet.find({});
       let hasDuplicate = false;
       for (let storedTweet of storedTweetData) {
         if (tweet.id === storedTweet.ID) {
@@ -37,19 +32,15 @@ module.exports = async function getLatestTweets() {
       if (hasDuplicate !== true) {
         allTweetsData.push({
           author: twitterUser.twitterHandle,
-          text: tweet.text.slice(15) + "...",
+          text: tweet.text.slice(20) + "...",
           ID: tweet.id,
         });
       }
     }
   }
 
-  // //Sorting Tweet Data by ID#
-  // console.log(`Sorting Data...`);
-  // allTweetsData = allTweetsData.sort((a, b) => b.ID - a.ID);
-
   for (let tweet of allTweetsData) {
-    let newTweet = new Tweet({
+    let newTweet = new PickTweet({
       author: tweet.author,
       text: tweet.text,
       ID: tweet.ID,
@@ -57,11 +48,11 @@ module.exports = async function getLatestTweets() {
     await newTweet.save();
   }
 
-  let tweetData = await Tweet.find({});
+  let tweetData = await PickTweet.find({});
   tweetData.sort((a, b) => parseInt(b.ID) - parseInt(a.ID));
-  if (tweetData.length > 50) {
+  if (tweetData.length > 25) {
     for (let i = 0; i < tweetData.length; i++) {
-      if (i > 50) {
+      if (i >25) {
         let currentID = tweetData[i]._id;
         await Tweet.deleteOne({ _id: currentID });
       }
@@ -70,14 +61,14 @@ module.exports = async function getLatestTweets() {
 
   console.log("Success!");
   if (allTweetsData.length !== 0) {
-    console.log(allTweetsData);
+    console.table(allTweetsData);
   } else {
     console.log("No new tweets found...");
   }
 
-  await LastAPICallTime.deleteOne({ API: "twitter" });
+  await LastAPICallTime.deleteOne({ API: "picks" });
   let timeOfApiCallRequest = new LastAPICallTime({
-    API: "twitter",
+    API: "picks",
     time: Date.now(),
   });
   await timeOfApiCallRequest.save();

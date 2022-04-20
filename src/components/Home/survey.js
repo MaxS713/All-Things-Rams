@@ -35,8 +35,7 @@ export default function Survey() {
     alignment: "center",
   };
 
-  async function vote(item: Result, results: Result[]) {
-    console.log(results)
+  async function vote(item) {
     item = {...item, ip: currentUserIP}
     let postVote = await fetch("http://localhost:5000/post-survey-vote", {
       headers: { "content-type": "application/json" },
@@ -49,7 +48,7 @@ export default function Survey() {
     }
   }
 
-  if (surveyData[0] === undefined) {
+  if (surveyData.length === 0) {
     return null;
   } else {
     return (
@@ -62,15 +61,15 @@ export default function Survey() {
             <div id="survey-wrapper">
               <LeafPoll
                 type="multiple"
-                question={surveyData[0].surveyQuestion}
+                question={surveyData.surveyQuestion}
                 results={[
                   {
-                    text: surveyData[0].textAnswer1,
-                    votes: surveyData[0].votesAnswer1,
+                    text: surveyData.textAnswer1,
+                    votes: surveyData.votesAnswer1,
                   },
                   {
-                    text: surveyData[0].textAnswer2,
-                    votes: surveyData[0].votesAnswer2,
+                    text: surveyData.textAnswer2,
+                    votes: surveyData.votesAnswer2,
                   },
                 ]}
                 theme={customTheme}

@@ -1,4 +1,4 @@
-const {TikTokVideo, LastAPICallTime} = require("../models.js");
+const { TikTokVideo, LastAPICallTime } = require("../models.js");
 const puppeteer = require("puppeteer");
 
 //------------------ Get Instagram Data -----------------//
@@ -35,14 +35,22 @@ module.exports = async function getTikTokVideos() {
         }
       });
       links.forEach((link, index) => {
-        results.push({link: link.href.replace(/\D/g, ""), date: dates[index]});
+        results.push({
+          link: link.href.replace(/\D/g, ""),
+          date: dates[index],
+        });
       });
       return results;
     });
-    latestPosts = await latestPosts.sort(
+    latestPosts.forEach((post) => {
+      while (post.link.length !== 19) {
+        post.link = post.link.slice(1);
+      }
+    });
+    latestPosts = latestPosts.sort(
       (a, b) => parseTimeAgo(a.date) - parseTimeAgo(b.date)
     );
-    latestPosts = await latestPosts.slice(0, 6);
+    latestPosts = latestPosts.slice(0, 6);
     for (let post of latestPosts) {
       let storedTikTokData = await TikTokVideo.find({});
       let hasDuplicate = false;
@@ -52,7 +60,7 @@ module.exports = async function getTikTokVideos() {
         }
       }
       if (hasDuplicate !== true) {
-        post = {...post, author: user};
+        post = { ...post, author: user };
         latestTikTokPosts.push(post);
       }
     }
@@ -73,9 +81,9 @@ module.exports = async function getTikTokVideos() {
   );
   if (tiktokData.length > 40) {
     for (let i = 0; i < tiktokData.length; i++) {
-      if (i > 25) {
+      if (i > 40) {
         let currentID = tiktokData[i]._id;
-        await TikTokVideo.deleteOne({_id: currentID});
+        await TikTokVideo.deleteOne({ _id: currentID });
       }
     }
   }
@@ -87,7 +95,7 @@ module.exports = async function getTikTokVideos() {
     console.log("No new tiktok posts found...");
   }
 
-  await LastAPICallTime.deleteOne({API: "tiktok"});
+  await LastAPICallTime.deleteOne({ API: "tiktok" });
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "tiktok",
     time: Date.now(),

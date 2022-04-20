@@ -1,6 +1,5 @@
 #tiktok-container {
   grid-area: tiktok;
-  width: 100%;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;

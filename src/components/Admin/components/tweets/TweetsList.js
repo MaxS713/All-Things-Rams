@@ -13,6 +13,7 @@ const TweetsList = (props) => {
       <Datagrid>
         <TextField label="Tweet ID" source="ID" />
         <TextField source="author" />
+        <TextField source="text" />
         <DeleteButton label="Delete" basePath="/tweets" />
       </Datagrid>
     </List>

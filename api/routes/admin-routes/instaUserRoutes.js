@@ -1,24 +1,23 @@
-const { InstagramUser } = require("../models.js");
+const { InstagramUser } = require("../../models.js");
 
 module.exports = (app) => {
-  app.get("/api/instagramUsers", async (req, res) => {
+  app.get("/api/instagramusers", async (req, res) => {
     let instagramUsers = await InstagramUser.find({});
     await res.send(instagramUsers);
   });
 
-  app.post("/api/instagramUsers", async (req, res) => {
+  app.post("/api/instagramusers", async (req, res) => {
     const newInstagramUser = new InstagramUser(req.body);
     await newInstagramUser.save();
   });
 
-  app.get("/api/instagramUsers/:id", async (req, res) => {
+  app.get("/api/instagramusers/:id", async (req, res) => {
     const InstagramUserId = req.params.id;
-    const newInstagramUser = new InstagramUser(req.body);
     const InstagramUser = await InstagramUser.findById(InstagramUserId);
     res.send(InstagramUser);
   });
 
-  app.put("/api/instagramUsers/:id", async (req, res) => {
+  app.put("/api/instagramusers/:id", async (req, res) => {
     const InstagramUserId = req.params.id;
     const updates = req.body;
     await InstagramUser.findByIdAndUpdate(InstagramUserId, updates);
@@ -26,7 +25,7 @@ module.exports = (app) => {
     res.send({ data: InstagramUserToUpdate });
   });
 
-  app.delete("/api/instagramUsers/:id", async (req, res) => {
+  app.delete("/api/instagramusers/:id", async (req, res) => {
     const InstagramUserId = req.params.id;
     const InstagramUserToDelete = await InstagramUser.findById(InstagramUserId);
     await InstagramUser.findByIdAndDelete(InstagramUserId);

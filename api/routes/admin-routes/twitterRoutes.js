@@ -1,4 +1,4 @@
-const { Tweet } = require("../models.js");
+const { Tweet } = require("../../models.js");
 
 module.exports = (app) => {
   app.get("/api/tweets", async (req, res) => {
@@ -13,7 +13,6 @@ module.exports = (app) => {
 
   app.get("/api/tweets/:id", async (req, res) => {
     const tweetId = req.params.id;
-    const newTweet = new Tweet(req.body);
     const tweet = await Tweet.findById(tweetId);
     res.send(tweet);
   });

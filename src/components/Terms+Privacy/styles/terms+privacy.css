@@ -1,6 +1,6 @@
 /* Changes by element and class */
-p.tp-content{
-  font-size: .9vw;
+p.tp-content {
+  font-size: 0.9vw;
 }
 /* Changes by id */
 #tp-section {
@@ -24,32 +24,52 @@ p.tp-content{
 }
 
 /* list for terms page */
-#tp-list{
-  font-size: .90vw;
+#tp-list {
+  font-size: 0.9vw;
   margin-left: 2vw;
+}
+#terms-date {
+  padding-top: 1.5vw;
 }
 
 /* Changes by Class */
 
 /* Paragraph content */
 .tp-content {
-  margin: 1.5vw 3vw 1.5vw 3vw;
+  margin: 2vw 3vw 1.5vw 3vw;
 }
 /* Subtitles */
-.tp-subtitle{
+.tp-subtitle {
   margin-left: 3vw;
   font-size: 1vw;
-  
 }
+
+/* Contact details contianer */
+.terms-contact {
+  font-size: 0.75vw;
+  margin-top: 2vw;
+  margin-bottom: -1vw;
+}
+
+/* Contact details content */
+.tp-contact{
+  margin-left: 5vw;
+  font-size: .9vw;
+  margin-top: -.75vw;
+}
+
+
 
 @media screen and (max-width: 800px) {
   .tp-content {
-    font-size: .75vw;
+    font-size: 0.75vw;
   }
-  #tp-list{
-    font-size: .90vw;
-    margin-left: -1.5vw;}
-    #tp-wrapper {
-      width: 75%;
-      min-height: 60vw}
+  #tp-list {
+    font-size: 0.9vw;
+    margin-left: -1.5vw;
+  }
+  #tp-wrapper {
+    width: 75%;
+    min-height: 60vw;
+  }
 }

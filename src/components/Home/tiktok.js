@@ -3,15 +3,18 @@ import React, { useState, useEffect } from "react";
 import { TikTokEmbed } from 'react-social-media-embed';
 import "./styles/tiktok.css";
 
-export default function Tiktok() {
+export default function Tiktok(props) {
   const [tiktokData, setTiktokData] = useState([]);
 
   async function getServerData() {
-    let tiktokPostsData = await fetch(
-      `http://localhost:5000/get-tiktok-posts`
-    );
+    let tiktokPostsData;
+    if (props.location === "socials") {
+      tiktokPostsData = await fetch(`http://localhost:5000/get-more-tiktok-posts`);
+    } else {
+      tiktokPostsData = await fetch(`http://localhost:5000/get-tiktok-posts`);
+    }
     tiktokPostsData = await tiktokPostsData.json();
-    settiktokData(tiktokPostsData);
+    setTiktokData(tiktokPostsData);
   }
   useEffect(() => {
     getServerData();

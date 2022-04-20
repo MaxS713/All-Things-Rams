@@ -1,112 +1,105 @@
-/* Changes by Id */
-
-/* container for staff about info */
+/* Page Container */
 #about {
   margin: auto;
-  width: 60vw;
+  width: 70vw;
   background-color: white;
   border-radius: 5px;
   margin-bottom: 1rem;
-  font-size: 0.9vw;
+  margin-top: 1rem;
+  padding-bottom: 2vw;
 }
-
-/* Page Title */
+/* About Content Container - both columns */
+#about-wrapper {
+  display: flex;
+}
+/* About All Things Rams */
 #about-title {
   font-family: "Graduate", cursive;
   font-size: 2vw;
   color: rgb(4, 9, 135);
-  padding-left: 2vw;
-  padding-top: 2vw;
+  padding-top: .75vw;
 }
-
-/* About all things rams head container */
-#about-head {
-  margin-left: 1vw;
-}
-
 /* About Paragraph */
 #about-head p {
-  margin-left: 2vw;
-  max-width: 43%;
+  max-width: 90%;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9vw;
+  text-align: justify;
 }
+#about-head {
+  margin-left: 2vw;
+}
+/* ---------------------------------------------------------- */
+
 /* Our Team */
-#about-head h2 {
-  margin: 2vw 3.5vw 4vw 2vw;
+#team-wrapper h2 {
   font-family: "Graduate", cursive;
   color: white;
   background-color: rgba(3, 7, 124);
   padding: 0.5vw;
   border-radius: 5px;
   font-size: 1.5vw;
+  margin-top: 7vw;
+  margin-right: 2vw;
+  
 }
 
-#steve {
-  max-width: 100%;
-  max-height: 100%;
+/* Team member about paragraph */
+.staff-about p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9vw;
+  text-align: justify;
+  width: 25vw;
+  padding-left: 1vw;
+  padding-right: 4vw;
 }
 
-#joey {
-  max-width: 100%;
-  max-height: 100%;
-}
-#pierson {
-  max-width: 100%;
-  max-height: 100%;
+/* Team member name */
+.staff-about h3 {
+  margin-left: 1vw;
+  font-size: 1.1vw;
 }
 
-/* Changes by class */
-
-/* container for staff information and image */
+/* Right column container for image and text */
 .staff {
   display: flex;
-  margin-top: -2vw;
 }
 
-/* about text */
-.staff-about {
-  max-width: 60%;
-  margin: 1vw 1vw 3.25vw 1vw;
-  padding: 0 2vw 1vw 2vw;
-  border: 2px solid rgba(255, 201, 92);
-  border-radius: 5px;
+/* Photograph of team member */
+.about-photo{
+    max-width: 12.25vw;
+    margin: 1vw;
+    border: 3px solid rgba(255, 201, 92);
+    border-radius: 10px;
 }
 
-/* about image */
-.staff-img {
-  margin: 1vw 1vw 2vw 2vw;
-  border-radius: 5px;
-}
+/* ---------- Media Query --------- */
 
-@media screen and (max-width: 800px) {
-  #about {
-    width: 50vw;
-  }
+@media screen and (max-width: 800px){
   #about-wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 2vw;
+  }#team-wrapper h2 {
+    font-family: "Graduate", cursive;
+    color: white;
+    background-color: rgba(3, 7, 124);
+    padding: 0.5vw;
+    border-radius: 5px;
+    font-size: 1.5vw;
+    margin-top: 3vw;
+    margin-right: 2vw;
+    margin-left: 2vw;
   }
-  .staff {
-    display: flex;
-    flex-direction: column;
+  #about-head p{
+    max-width: 100%;
+    margin-right:2vw;
+  }
+  .staff{
     justify-content: center;
-    align-items: center;
+    
   }
-  .staff-about {
-    max-width: 60%;
+  .staff-about p{
+    width: 45vw;
   }
-  #steve {
-    max-height: 30vw;
-  }
-  #joey {
-    max-height: 30vw;
-  }
-  #pierson {
-    max-height: 30vw;
-  }
-  #about-head h2 {
-    margin: 2vw 3.5vw 4vw 2vw;
-  }
+
 }

@@ -15,7 +15,7 @@ export default function NewsBulletin() {
     <>
       <div id="news-grid">
         <FeaturedNewsCarousel id='carousel'/>
-        <LatestNews location={"news-page"} id='news' />
+        <LatestNews location={"news"} id='news' />
         <GoogleAdPlaceholder className="ad" />
         {/* <FeaturedVideo /> */}
         <LatestPodcasts />

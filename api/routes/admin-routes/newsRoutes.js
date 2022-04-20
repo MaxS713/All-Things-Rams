@@ -1,4 +1,4 @@
-const { NewsArticle } = require("../models.js");
+const { NewsArticle } = require("../../models.js");
 
 module.exports = (app) => {
   app.get("/api/newsarticles", async (req, res) => {
@@ -13,7 +13,6 @@ module.exports = (app) => {
 
   app.get("/api/newsarticles/:id", async (req, res) => {
     const NewsArticleId = req.params.id;
-    const newNewsArticle = new NewsArticle(req.body);
     const NewsArticle = await NewsArticle.findById(NewsArticleId);
     res.send(NewsArticle);
   });

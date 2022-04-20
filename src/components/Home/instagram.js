@@ -3,13 +3,16 @@ import React, { useState, useEffect } from "react";
 import { InstagramEmbed } from "react-social-media-embed";
 import "./styles/instagram.css";
 
-export default function Instagram() {
+export default function Instagram(props) {
   const [instagramData, setInstagramData] = useState([]);
 
   async function getServerData() {
-    let instagramPostsData = await fetch(
-      `http://localhost:5000/get-instagram-posts`
-    );
+    let instagramPostsData
+    if (props.location === "socials") {
+      instagramPostsData = await fetch(`http://localhost:5000/get-more-instagram-posts`);
+    } else {
+      instagramPostsData = await fetch(`http://localhost:5000/get-instagram-posts`);
+    }
     instagramPostsData = await instagramPostsData.json();
     setInstagramData(instagramPostsData);
   }
