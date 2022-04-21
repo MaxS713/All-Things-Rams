@@ -73,7 +73,11 @@ const videosLinkSchema = new mongoose.Schema({
 const customArticleSchema = new mongoose.Schema({
   title: String,
   author: String,
-  content: String,
+  paragraph1: String,
+  paragraph2: String,
+  paragraph3: String,
+  paragraph4: String,
+  paragraph5: String,
   date: String,
 });
 

@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import Navbar from "./nav";
 
 //Assets Import
-import logoLink from "../../images/placeholder-logo.jpg";
+// 4-21-22 MOST RECENT LOGO PLACEHOLDER
+// import logoLink from "../../images/placeholder-logo.jpg";
 // import logoLink from "https://javelin.neocities.org/EXT/ALL_THINGS_RAMS/ATR.jpg";
+import Logo from "./logo.js"
 
 //Style Imports
-import "./styles/header.css";
+import "./styles/header.scss";
 
 export default function Header() {
   return (
@@ -18,7 +20,8 @@ export default function Header() {
         <Link to="/">
           <div className="header">
             <div className="headerImg">
-              <img src={logoLink} alt="all-things-rams logo" width="70vw" id="atr-logo" />
+              {/* <img src={logoLink} alt="all-things-rams logo" width="70vw" id="atr-logo" /> */}
+              <Logo />
             </div>
             <div className="title-and-disclaimer">
               <h1>ALL THINGS RAMS</h1>

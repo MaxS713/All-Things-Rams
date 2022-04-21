@@ -29,11 +29,24 @@ textarea {
   padding-top: 2vw;
 }
 
+/* paragraph text */
 #suggestions {
   font-family: Arial, Helvetica, sans-serif;
-  width: 39%;
+  width: 34%;
   margin-left: 3vw;
-  font-size: 0.84vw;
+  font-size: 0.9vw;
+  text-align: justify;
+}
+
+#suggest-tag{
+  font-family: Arial, Helvetica, sans-serif;
+  width: 34%;
+  margin-left: 3vw;
+  font-size: 0.9vw;
+  /* text-align: justify; */
+  color:rgb(3, 7, 124);
+  font-style: italic;
+  
 }
 
 /* Button */
@@ -43,7 +56,7 @@ textarea {
   color: white;
   background-color: rgb(3, 7, 124);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   font-family: "Graduate", cursive;
   box-shadow: 2px 5px 5px 1px rgb(132, 132, 132);
   margin-left: 4vw;
@@ -97,6 +110,12 @@ button[disabled] {
   }
   /* text */
   #suggestions {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 70%;
+    margin-left: 3vw;
+    font-size: 0.84vw;
+  }
+  #suggest-tag{
     font-family: Arial, Helvetica, sans-serif;
     width: 70%;
     margin-left: 3vw;

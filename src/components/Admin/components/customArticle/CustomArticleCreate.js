@@ -8,7 +8,11 @@ const CustomArticleCreate = (props) => {
         <TextInput source="title" required />
         <TextInput source="author" required />
         <TextInput source="date" required />
-        <TextInput source="content" required />
+        <TextInput source="paragraph1" required />
+        <TextInput source="paragraph2" />
+        <TextInput source="paragraph3" />
+        <TextInput source="paragraph4" />
+        <TextInput source="paragraph5" />
       </SimpleForm>
     </Create>
   );

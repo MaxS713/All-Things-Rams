@@ -75,11 +75,11 @@ export default function Picks() {
         </div>
         <div className="container-content">
           <div id="picks-wrapper">
-            {twitterData.map((tweet) => {
+            {twitterData.map((tweet, index) => {
               return (
-                <div id="picks-embed">
-                  <p className="source">
-                    <span>{tweet.author}</span> tweeted{" "}
+                <div key={index} id="picks-embed">
+                  <p key={index+1} className="source">
+                    <span key={index+2}>{tweet.author}</span> tweeted{" "}
                     {relativeTime(tweet.time)}
                   </p>
                   <TwitterEmbed

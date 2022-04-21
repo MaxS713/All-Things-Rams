@@ -64,23 +64,24 @@ export default function FeaturedNewsCarousel() {
           <div id="carousel-wrapper">
             <div id="carousel">
               <Slider {...carouselSettings}>
-                {newsArticleData.map((newsArticle) => {
+                {newsArticleData.map((newsArticle, index) => {
                   return (
-                    <div className="carousel-item">
+                    <div key={index} className="carousel-item">
                       <img
+                      key={index+1}
                         src={newsArticle.imgSrc}
                         className="carousel-img"
                         alt="news article main illustration"
                       />
-                      <div className="carousel-article-title">
-                        <div className="carousel-news-header">
-                          <a
+                      <div key={index+2} className="carousel-article-title">
+                        <div key={index+3} className="carousel-news-header">
+                          <a key={index+4}
                             href={newsArticle.link}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <div className="carousel-logo-and-title">
-                              <div className="carousel-logo-container">
+                            <div key={index+5} className="carousel-logo-and-title">
+                              <div key={index+6} className="carousel-logo-container">
                                 <img
                                   src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
                                   alt={`${newsArticle.source}'s logo`}
@@ -88,8 +89,8 @@ export default function FeaturedNewsCarousel() {
                                   className="carousel-news-logo"
                                 />
                               </div>
-                              <div className="carousel-title-container">
-                                <h3 className="featured-headline">
+                              <div key={index+7} className="carousel-title-container">
+                                <h3 key={index+8} className="featured-headline">
                                   {newsArticle.title}
                                 </h3>
                               </div>

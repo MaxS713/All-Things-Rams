@@ -12,26 +12,33 @@ export default function CustomNews() {
   useEffect(() => {
     getServerData();
   }, []);
-
-  console.log(articleData);
   return (
     <>
       <div id="custom-news">
-          <div className="container-header">
-            <h2>Custom Article</h2>
-          </div>
-          <div className="container-content">
+        <div id="original-header" className="container-header">
+          <h2>Original Article</h2>
+          <a id="review-button" href="/submit">
+            Submit an article for publication
+          </a>
+        </div>
+        <div className="container-content">
           <div id="custom-news-content">
             <div className="title-container">
-              <h3 className="article-title">{articleData.title}</h3>
+              <h3 id="original-title" className="article-title">{articleData.title}</h3>
             </div>
 
             <div className="source-date">
-              <p className="source">
+              <p id="article-source" className="source">
                 Written-by: {articleData.author} on {articleData.date}
               </p>
             </div>
-            <div className="custom-article-content">{articleData.content}</div>
+            <div className="custom-article-content">
+              <p>{articleData.paragraph1}</p>
+              <p>{articleData.paragraph2}</p>
+              <p>{articleData.paragraph3}</p>
+              <p>{articleData.paragraph4}</p>
+              <p>{articleData.paragraph5}</p>
+            </div>
           </div>
         </div>
       </div>

@@ -13,8 +13,8 @@ const InstaUserList = (props) => {
       <Datagrid>
         <TextField source="fullName" />
         <TextField source="username" />
-        <EditButton label="Edit" basePath="/instagramusers" />
-        <DeleteButton label="Delete" basePath="/instagramusers" />
+        <EditButton label="Edit" basepath="/instagramusers" />
+        <DeleteButton label="Delete" basepath="/instagramusers" />
       </Datagrid>
     </List>
   );

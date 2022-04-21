@@ -50,11 +50,6 @@ export default function Footer() {
             <a className="footer-link" href="/admin-login">
               <li>Admin Login</li>
             </a>
-            {/* testing purposes */}
-            <li className="separation">|</li>
-            <a className="footer-link" href="/submit">
-              <li>Submit</li>
-            </a>
           </ul>
         </section>
       </footer>

@@ -29,10 +29,10 @@ export default function Instagram(props) {
 
         <div className="container-content">
           <div id="instagram-wrapper">
-            {instagramData.map((instagramPost) => {
+            {instagramData.map((instagramPost, index) => {
               return (
-                <div id="instagram-embed">
-                  <p className="source"><span>{instagramPost.author}</span> posted {instagramPost.time}</p>
+                <div key={index} id="instagram-embed">
+                  <p key={index+1} className="source"><span>{instagramPost.author}</span> posted {instagramPost.time}</p>
                   <InstagramEmbed
                     url={`https://www.instagram.com${instagramPost.path}`}
                     width="100%"

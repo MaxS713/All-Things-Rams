@@ -29,10 +29,10 @@ export default function Tiktok(props) {
 
         <div className="container-content">
           <div id="tiktok-wrapper">
-            {tiktokData.map((tiktokPost) => {
+            {tiktokData.map((tiktokPost, index) => {
               return (
-                <div id="tiktok-embed">
-                  <p className="source"><span>{tiktokPost.author}</span> posted {tiktokPost.time}</p>
+                <div key={index} id="tiktok-embed">
+                  <p key={index+1} className="source"><span key={index+2}>{tiktokPost.author}</span> posted {tiktokPost.time}</p>
                   <TikTokEmbed
                     url={`https://www.tiktok.com/@${tiktokPost.author}/video/${tiktokPost.linkID}`}
                     width="100%"

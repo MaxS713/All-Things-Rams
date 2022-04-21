@@ -291,16 +291,17 @@ export default function Terms() {
             ATR welcomes your questions or comments regarding the Terms:
           </p>
           <div className="terms-contact">
+          <p className="tp-contact"><b>Address:</b></p>
             <p className="tp-contact">All Things Rams</p>
             <p className="tp-contact">494 Olde Orchard Ln</p>
             <p className="tp-contact">Shelburne, Vermont 05482</p>
           </div>
           <div className="terms-contact">
-            <p className="tp-contact">Email Address:</p>
+            <p className="tp-contact"><b>Email Address:</b></p>
             <p className="tp-contact">allthingsrams.official@gmail.com</p>
           </div>
           <div className="terms-contact">
-            <p className="tp-contact">Telephone number:</p>
+            <p className="tp-contact"><b>Telephone number:</b></p>
             <p className="tp-contact">802-497-3161</p>
           </div>
           <p className="tp-content" id="terms-date">

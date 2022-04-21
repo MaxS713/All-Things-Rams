@@ -46,7 +46,7 @@ const AdminApp = () => {
   return (
     <div id="app" className="d-flex flex-column h-100">
       {/* dataProvider PROP that contains REST API info. */}
-      <Admin basename="/admin-login" dataProvider={dataProvider}>
+      <Admin basename="/admin-login" dashboard={Dashboard} dataProvider={dataProvider}>
         {/* Inside the Admin component add Resource child components to use CRUD operations; list, create, edit, and show.*/}
         <Resource name="tweets" list={TweetsList} />
         <Resource name="instagramposts" list={InstaList} />

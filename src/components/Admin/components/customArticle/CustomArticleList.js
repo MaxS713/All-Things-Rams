@@ -14,9 +14,8 @@ const CustomArticleList = (props) => {
         <TextField source="title" required />
         <TextField source="author" required />
         <TextField source="date" required />
-        <TextField source="content" required />
-        <EditButton label="Edit" basePath="/customarticles" />
-        <DeleteButton label="Delete" basePath="/customarticles" />
+        <EditButton label="Edit" basepath="/customarticles" />
+        <DeleteButton label="Delete" basepath="/customarticles" />
       </Datagrid>
     </List>
   );

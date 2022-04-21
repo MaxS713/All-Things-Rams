@@ -1,6 +1,5 @@
 #news-container {
   grid-area: news;
-  grid-row:1 / span 2;
     animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;
@@ -9,7 +8,8 @@
 }
 
 #latest-news {
-  max-height:57.5vh;
+  min-height: 30vh;
+  max-height:49vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
@@ -81,6 +81,11 @@ img.news-logo {
 @media screen and (max-width: 600px) {
   #latest-news {
   max-height:27.5vh;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #latest-news {
+  max-height:22.5vh;
   }
 }
 

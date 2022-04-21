@@ -3,7 +3,6 @@ import {
   List,
   Datagrid,
   TextField,
-  EditButton,
   DeleteButton,
 } from 'react-admin';
 
@@ -14,7 +13,7 @@ const TweetsList = (props) => {
         <TextField label="Post path" source="path" />
         <TextField source="author" />
         <TextField source="time" />
-        <DeleteButton label="Delete" basePath="/instagramposts" />
+        <DeleteButton label="Delete" basepath="/instagramposts" />
       </Datagrid>
     </List>
   );

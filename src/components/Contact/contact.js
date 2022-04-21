@@ -50,7 +50,12 @@ export default function ContactForm() {
                 <p id="suggestions">
                   We would love to hear from you about suggestions and changes
                   we can make to improve our site. Feel free to reach out to us
-                  and let us know what you think!{" "}
+                  and let us know what you think!
+                </p>
+                <p id="suggest-tag">
+                  {" "}
+                  Suggest a Website, Blog, Podcast or Social Media Account that
+                  you would like us to link to.
                 </p>
 
                 <div>

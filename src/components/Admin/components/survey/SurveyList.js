@@ -12,8 +12,8 @@ const SurveyList = (props) => {
     <List {...props}>
       <Datagrid>
         <TextField required source="surveyQuestion" />
-        <EditButton label="Edit" basePath="/surveydatas" />
-        <DeleteButton label="Delete" basePath="/surveydatas" />
+        <EditButton label="Edit" basepath="/surveydatas" />
+        <DeleteButton label="Delete" basepath="/surveydatas" />
       </Datagrid>
     </List>
   );

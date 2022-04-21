@@ -8,7 +8,7 @@
 }
 
 #custom-news-content {
-  max-height:30vh;
+  max-height: 50vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
@@ -37,12 +37,15 @@ a {
 }
 
 h3.article-title {
-  padding-left: 2vw;
+  padding-left: 1.75vw;
   /* font-size: 2vh; */
   /* font-family: "Graduate", cursive; */
   color: rgb(4, 9, 135);
 }
 
+#original-title {
+  font-size: 1.5vw;
+}
 .source {
   padding-bottom: 1vw;
   display: grid;
@@ -50,7 +53,42 @@ h3.article-title {
 
 p.source {
   width: 100%;
-  font-size: 0.75rem;
+  font-size: 0.9vw;
   border-bottom: 3px solid rgb(4, 9, 135);
+}
+
+/* Link/button to submissions page */
+#review-button {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 0.25vw;
+  margin-left: 0.15vw;
+  max-width: 15.5vw;
+  padding: 0.15vw 0.15vw 0.15vw 0.3vw;
+  font-size: 0.9vw;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  background-color: rgb(220, 218, 218);
+  color: rgb(3, 7, 124);
+}
+
+#review-button:hover {
+  background-color: rgb(255, 201, 92);
+  color: rgb(3, 7, 124);
+  transition: 0.7s;
+ 
+}
+
+.custom-article-content {
+  padding: 0vw 1.5vw 0vw 1.5vw;
+  text-align: justify;
+  font-size: 0.9vw;
+  text-indent: 2.5vw;
+}
+
+#article-source {
+  border-bottom: 3px solid rgb(255, 201, 92);
+  margin-top: -.5vw;
+
+
 }
 

@@ -1,0 +1,119 @@
+/* Global Styling */
+@import url('https://fonts.googleapis.com/css2?family=Graduate');
+
+.wrapper {
+    height:70vmin;
+    width:70vmin;
+}
+
+.circle {
+    height: 100px;
+    width: 100px;
+    border-radius:50%;
+    position: relative;
+}
+
+#logoText {
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: 14.25vmin;
+    margin-left: 3.5vmin;
+    height: 15vmin;
+    width: 23vmin;
+    border: 5px solid transparent;
+    border-radius:75%;
+    color: #040987;
+    font-family: "Graduate";
+    font-size: 5rem;
+}
+
+#logoText:hover {
+    color: #FFA300;
+}
+
+#circle1 {
+    z-index: 1;
+    justify-content: center;
+    align-items: start;
+    position: absolute;
+    margin-top: 15vmin;
+    border: 4px solid #FFA300;
+    height:30vmin;
+    width:30vmin;
+}
+
+#rectangle1 {
+    z-index: 3;
+    position: absolute;
+    margin-top: 32vmin;
+    height: 15vmin;
+    width: 31vmin;
+    background-color: white;
+}
+
+#circle1:before {
+    content: "";
+    position: absolute;
+    /* transparent */
+    border-top: 15vmin solid transparent;
+    /* white */
+    border-left: 7vmin solid white;
+    /* background: #8a0354; */
+    bottom: 100px;
+    left: -8px;
+}
+
+#rectangle1:before {
+    content: "";
+    position: absolute;
+    top:-153px;
+    right:-1px;
+    /* transparent */
+    border-bottom:15vmin solid transparent;
+    /* white */
+    border-right: 8vmin solid white;
+}
+
+#circle2 {
+    z-index: 2;
+    position: absolute;
+    border: 4px solid #040987;
+    height:30vmin;
+    width:30vmin;
+}
+
+#circle2:after {
+    content: "";
+    position: absolute;
+    top:125px;
+    right:-10px;
+    /* white */
+    border-bottom:15vmin solid white;
+    /* transparent */
+    border-right: 7vmin solid transparent;
+    transform: scaleX(-1);
+}
+
+#rectangle2 {
+    z-index: 3;
+    position: absolute;
+    height: 15vmin;
+    width: 32vmin;
+    /* background-color: rgba(224, 19, 224, 0.326); */
+    background-color: white;
+}
+
+#rectangle2:after {
+    content: "";
+    position: absolute;
+    bottom: -110px;
+    left: -12px;
+    /* transparent */
+    border-bottom:15vmin solid transparent;
+    /* white */
+    border-right: 8vmin solid white;
+    transform: scaleX(-1);
+}

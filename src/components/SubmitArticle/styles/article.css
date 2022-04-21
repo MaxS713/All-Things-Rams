@@ -12,19 +12,20 @@ input {
   font-family: "Graduate", cursive;
   font-size: 2vw;
   color: rgb(4, 9, 135);
+  margin-left: 1vw;
 }
 
 /* submit button */
 #article-submit {
-  padding: 0.75vw;
+  padding: 0.5vw;
   font-size: 0.75vw;
   color: white;
   background-color: rgb(3, 7, 124);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   font-family: "Graduate", cursive;
   box-shadow: 2px 5px 5px 1px rgb(132, 132, 132);
-  margin-left: 4vw;
+  margin-left: 3.5vw;
   margin-bottom: 1.5vw;
   transition-duration: 0.5s;
 }
@@ -39,6 +40,7 @@ input {
 /* Upload/attach doc input */
 #attachment{
     border-bottom: none;
+    
   }
 
 /* Wrap entire contents */
@@ -55,15 +57,48 @@ input {
   margin: auto;
   max-width: 50%;
   min-width: 50%;
-  border-radius: 5px;
-
-  
+  border-radius: 5px;  
 }
 
+/* contains text and form */
 .article-wrapper{
     background-color: white;
     padding: 2vw;
     border-radius: 5px;
-    display: flex
+    display: flex;
 }
 
+/* submission text */
+#submission-instructions p{
+  font-size: 0.9vw;
+  text-align: justify;
+  margin-left: 1vw;
+}
+
+.article{
+  margin-top: 9vw;
+}
+
+input[type=file]::file-selector-button {
+  border: none;
+  margin-bottom: 1vw;
+  margin-top: 1vw;
+  padding: 0.5vw;
+  font-size: 0.75vw;
+  border-radius:  0.25rem;
+  font-family: "Graduate", cursive;
+  box-shadow: 2px 5px 5px 2px rgb(132, 132, 132);
+  background-color: rgb(255, 201, 92);
+  transition: .5s;
+  color: rgb(3, 7, 124);
+}
+
+input[type='file'] {
+  color: transparent;
+}
+
+input[disabled] {
+  background-color: rgb(3, 7, 124);
+  opacity: 60%;
+  pointer-events: none;
+}

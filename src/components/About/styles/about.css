@@ -49,7 +49,7 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9vw;
   text-align: justify;
-  width: 25vw;
+  width: 28vw;
   padding-left: 1vw;
   padding-right: 4vw;
 }
@@ -71,6 +71,7 @@
     margin: 1vw;
     border: 3px solid rgba(255, 201, 92);
     border-radius: 10px;
+    margin-top: 1.25vw;
 }
 
 /* ---------- Media Query --------- */

@@ -5,15 +5,13 @@ export default function LatestNews(props) {
   const [newsArticleData, setNewsArticleData] = useState([]);
 
   async function getServerData() {
-    let newsArticlesData
+    let newsArticlesData;
     if (props.location === "news") {
       newsArticlesData = await fetch(
         `http://localhost:5000/get-more-news-article`
       );
     } else {
-      newsArticlesData = await fetch(
-        `http://localhost:5000/get-news-article`
-      );
+      newsArticlesData = await fetch(`http://localhost:5000/get-news-article`);
     }
     newsArticlesData = await newsArticlesData.json();
     newsArticlesData.forEach((article) => {
@@ -48,36 +46,40 @@ export default function LatestNews(props) {
         </div>
         <div className="container-content">
           <div id="latest-news">
-            {newsArticleData.map((newsArticle) => {
+            {newsArticleData.map((newsArticle, index) => {
               return (
-                <>
-                  <div className="news-header">
+                <div key={index}>
+                  <div key={index + 1} className="news-header">
                     <a
+                      key={index + 2}
                       href={newsArticle.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <div className="logo-container">
+                      <div key={index + 3} className="logo-container">
                         <img
+                          key={index + 4}
                           src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
                           alt={`${newsArticle.source}'s logo`}
                           height="50"
                           className="news-logo"
                         />
                       </div>
-                      <div className="title-container">
-                        <h3 className="article-title">{newsArticle.title}</h3>
+                      <div key={index + 5} className="title-container">
+                        <h3 key={index + 6} className="article-title">
+                          {newsArticle.title}
+                        </h3>
                       </div>
                     </a>
                   </div>
 
-                  <div className="source-date">
-                    <p className="source">
+                  <div key={index + 7} className="source-date">
+                    <p key={index + 8} className="source">
                       Date: {newsArticle.time} &nbsp;|&nbsp; Source:
                       {newsArticle.source}
                     </p>
                   </div>
-                </>
+                </div>
               );
             })}
           </div>

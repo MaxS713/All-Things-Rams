@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import "./styles/article.css";
 
 export default function SubmitForm() {
-  const [status, setStatus] = useState("Send");
+  const [status, setStatus] = useState("Submit");
   const [disable, setDisable] = useState(false);
   const [val, setVal] = useState();
 
@@ -15,10 +15,11 @@ export default function SubmitForm() {
     setDisable(true);
     setVal("");
 
-    const { name, email, attachment } = event.target.elements;
+    const { name, email, attachment, phone } = event.target.elements;
 
     let details = {
       name: name.value,
+      phone: phone.value,
       email: email.value,
       attachment: attachment.value,
     };
@@ -40,18 +41,36 @@ export default function SubmitForm() {
       <main>
         <div id="outside-article-wrapper">
           <div className="article-container">
-            <h1 id="article-title">Submit an Article for Review!</h1>
             <section className="article-wrapper">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-
+              <div id="submission-instructions">
+                <h1 id="article-title">Submit an Article for Publication!</h1>
+                <p>
+                  All Things Rams encourages new submissions from all Rams fans.
+                  Maybe you are an aspiring journalist looking to get published
+                  and begin your sports communication career. Maybe you are
+                  student who wrote an excellent paper on the L.A. Rams or an
+                  L.A. Rams player or coach for a class that you took. Maybe you
+                  just have a good idea or something to say about the L.A. Rams
+                  and you looking for the right forum to do so.
+                </p>
+                <p>
+                  We invite new submissions of original work that we will
+                  review, and if accepted, we will publish that article on our
+                  website. To start this process, we ask you to do the
+                  following. Put your article in a WORD doc and a PDF. Using the
+                  form below, send both the WORD doc and the PDF to us. We will
+                  review your submission. Upon review, we will inform you of the
+                  following (1) either we are not able to publish your article;
+                  (2) we might ask you if you are willing to revise and resubmit
+                  your article given our comments on it; or (3) we will ask you
+                  if we could publish it. If we ask you that we can publish it,
+                  we will likely seek more information from you just to verify
+                  that the article is your original contribution and properly
+                  cited if needed. All of our contact will be done by email.
+                  That’s it! We welcome all submissions. Send us article to
+                  review using form below!
+                </p>
+              </div>
               <form className="article" onSubmit={handleSubmit}>
                 {/* User inputs their name */}
 
@@ -61,6 +80,17 @@ export default function SubmitForm() {
                     id="name"
                     value={val}
                     placeholder="Your Name"
+                    required
+                  />
+                </div>
+
+                {/* User inputs their phone */}
+                <div>
+                  <input
+                    type="text"
+                    id="phone"
+                    value={val}
+                    placeholder="Phone Number"
                     required
                   />
                 </div>
@@ -76,12 +106,14 @@ export default function SubmitForm() {
                   />
                 </div>
 
+                {/* User attaches their document */}
                 <div>
                   <input
                     type="file"
                     id="attachment"
-                    value={val}
-                    placeholder="Your Attachment"
+                    accept=".doc, .dox, .pdf"
+                    disabled={disable}
+                    onSubmit={(handleSubmit, setVal)}
                     required
                   />
                 </div>

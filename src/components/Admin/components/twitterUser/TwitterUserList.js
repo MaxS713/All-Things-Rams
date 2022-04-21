@@ -13,8 +13,8 @@ const TwitterUserList = (props) => {
       <Datagrid>
         <TextField source="twitterHandle" />
         <TextField source="userID" />
-        <EditButton label="Edit" basePath="/twitterusers" />
-        <DeleteButton label="Delete" basePath="/twitterusers" />
+        <EditButton label="Edit" basepath="/twitterusers" />
+        <DeleteButton label="Delete" basepath="/twitterusers" />
       </Datagrid>
     </List>
   );

@@ -23,26 +23,28 @@ export default function LatestVideos() {
           <div id="latest-videos">
             {videosData.map((video, index) => {
               return (
-                <>
-                  <div className="video-item">
-                    <a
-                      href={video.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <div>
-                        <img
-                          src={video.imgSrc}
-                          alt={"Highlight Video Thumbnail"}
-                          height="200"
-                          className="video-thumbnail"
-                        />
-                        <h3>{video.title}</h3>
-                      </div>
-                    </a>
-                    <p className="video-date">{video.time}</p>
-                  </div>
-                </>
+                <div key={index} className="video-item">
+                  <a
+                    key={index + 1}
+                    href={video.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div key={index + 2}>
+                      <img
+                        key={index + 3}
+                        src={video.imgSrc}
+                        alt={"Highlight Video Thumbnail"}
+                        height="200"
+                        className="video-thumbnail"
+                      />
+                      <h3 key={index + 4}>{video.title}</h3>
+                    </div>
+                  </a>
+                  <p key={index + 5} className="video-date">
+                    {video.time}
+                  </p>
+                </div>
               );
             })}
           </div>

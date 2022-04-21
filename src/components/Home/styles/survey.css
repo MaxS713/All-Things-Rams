@@ -9,12 +9,20 @@
 }
 
 #survey-wrapper {
-  min-height:25vh;
+  min-height:30vh;
   padding: 0.5rem;
+}
+
+#voted-survey-wrapper{
+  min-height:30vh;
+  padding: 0.5rem;
+}
+
+#voted-survey-wrapper span{
+  visibility:hidden;
 }
 
 h1 {
   font-size: 1.2rem;
   padding-bottom: 1vw;
-
 }

@@ -9,23 +9,23 @@ import "./styles/survey.css";
 
 export default function Survey() {
   const [surveyData, setSurveyData] = useState([]);
+  const [hasVoted, setHasVoted] =useState(false);
   const [currentUserIP, setCurrentUserIP] = useState('');
+  const [wrapperClass, setWrapperClass] = useState("survey-wrapper");
 
   async function getSurveyData() {
     let data = await fetch("http://localhost:5000/get-survey-data");
+    let res = await axios.get('https://geolocation-db.com/json/')
     data = await data.json();
-    setSurveyData(data);
+    setSurveyData(data)
+    setCurrentUserIP(res.data.IPv4)
+    if (data.ipAdresses.includes(res.data.IPv4)){
+      setHasVoted(true)
+      setWrapperClass("voted-survey-wrapper")
+    }
   }
   useEffect(() => {
     getSurveyData();
-  }, []);
-
-  async function getUserIP() {
-    const res = await axios.get('https://geolocation-db.com/json/')
-    setCurrentUserIP(res.data.IPv4)
-  }
-  useEffect(() => {
-    getUserIP()
   }, []);
 
   const customTheme = {
@@ -35,17 +35,13 @@ export default function Survey() {
     alignment: "center",
   };
 
-  async function vote(item) {
+  async function vote(item: Result, results: Result[]) {
     item = {...item, ip: currentUserIP}
-    let postVote = await fetch("http://localhost:5000/post-survey-vote", {
+    await fetch("http://localhost:5000/post-survey-vote", {
       headers: { "content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(item),
     });
-    let getStatus = await postVote.json();
-    if(getStatus.status==="Already Voted"){
-      alert("Looks like you already voted... Your vote hasn't been recorded");
-    }
   }
 
   if (surveyData.length === 0) {
@@ -58,22 +54,25 @@ export default function Survey() {
             <h2>Survey</h2>
           </div>
           <div className="container-content">
-            <div id="survey-wrapper">
+            <div id={wrapperClass}>
               <LeafPoll
                 type="multiple"
                 question={surveyData.surveyQuestion}
                 results={[
                   {
+                    id: 0,
                     text: surveyData.textAnswer1,
                     votes: surveyData.votesAnswer1,
                   },
                   {
+                    id: 1,
                     text: surveyData.textAnswer2,
                     votes: surveyData.votesAnswer2,
                   },
                 ]}
-                theme={customTheme}
                 onVote={vote}
+                isVoted={hasVoted}
+                theme={customTheme}
               />
             </div>
           </div>

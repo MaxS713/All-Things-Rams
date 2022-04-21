@@ -2,23 +2,21 @@
 #grid {
   display: grid;
   justify-content: center;
-  align-items: stretch;
   width: 85%;
   margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
   gap: 1rem;
-  grid-template-rows:repeat(1, 1fr);
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "feat feat feat feat news news"
-    "feat feat feat feat news news"
-    "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
+    "feat feat feat feat  news news"
+    "customnews customnews customnews customnews  googlead2 googlead2"
     "twitter twitter instagram instagram tiktok tiktok"
     "twitter twitter instagram instagram tiktok tiktok"
     "googlead googlead googlead googlead googlead googlead"
     "jppicks jppicks jppicks podcast podcast survey"
-    "customnews customnews customnews podcast podcast videos";
+    ". . . podcast podcast videos";
+
     
     /* "podcast podcast . . . ."; Joey+Pierson's picks, article*/
 }
@@ -33,19 +31,19 @@
     align-items: center;
   }
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   #grid {
     grid-template-columns: repeat(6, 1fr);
-
+    grid-template-rows:1fr 1fr;
     grid-template-areas:
-    "feat  feat feat feat news news"
-    "feat  feat feat feat news news"
+    "feat feat feat feat feat feat"
+    "news news news news news news"
     "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
-    "twitter twitter twitter twitter survey survey"
-    "instagram instagram instagram instagram videos videos"
+    "tiktok tiktok tiktok tiktok twitter twitter"
+    "instagram instagram instagram instagram twitter twitter"
     "googlead googlead googlead googlead googlead googlead"
-    "jppicks jppicks jppicks podcast customnews customnews"
-    "survey survey survey podcast videos videos";
+    "jppicks jppicks jppicks podcast survey survey"
+    "customnews customnews customnews podcast videos videos";
   }
 }
 
@@ -75,6 +73,7 @@
   border-bottom: 2px solid rgb(235, 235, 235);
   border-left: 2px solid rgb(235, 235, 235);
   border-right: 2px solid rgb(235, 235, 235);
+  align-items: stretch;
 }
 
 .hidden {

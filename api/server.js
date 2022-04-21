@@ -394,11 +394,7 @@ app.get("/get-custom-article", async (req, res) => {
 
 app.post("/post-survey-vote", async (req, res) => {
   let surveyData = await SurveyData.findOne({});
-  if (surveyData.ipAdresses.includes(req.body.ip)) {
-    return res.json({ status: "Already Voted" });
-  } else {
-    surveyData.ipAdresses.push(req.body.ip);
-  }
+  surveyData.ipAdresses.push(req.body.ip);
   if (req.body.text === surveyData.textAnswer1) {
     surveyData.votesAnswer1++;
     await surveyData.save();

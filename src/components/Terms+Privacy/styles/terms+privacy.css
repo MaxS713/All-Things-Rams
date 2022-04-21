@@ -1,6 +1,7 @@
 /* Changes by element and class */
 p.tp-content {
   font-size: 0.9vw;
+  text-align: justify;
 }
 /* Changes by id */
 #tp-section {

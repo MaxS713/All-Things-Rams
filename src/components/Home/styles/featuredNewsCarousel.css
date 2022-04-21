@@ -1,7 +1,6 @@
 #featured-news-container {
   grid-area: feat;
-  grid-row: 1 / span 2;
-  width:100%
+  width:100%;
 }
 
 #carousel-wrapper{
@@ -10,7 +9,6 @@
 
 .carousel-item{
   position: relative;
-  grid-row: 1 /span 2;
   max-height: 100vh;
 }
 
@@ -22,6 +20,7 @@
 }
 
 .carousel-article-title{
+  font-size:1vw;
   padding: 0.5vw;
   position: absolute;
   bottom: 0;
@@ -51,7 +50,7 @@
   text-align:right;
   margin:0;
   margin-right:25px;
-  font-size: 1.25vh;
+  font-size: 0.3vw;
 }
 
 @media only screen and (max-width: 600px){
@@ -69,6 +68,6 @@
   }
   .carousel-article-title{
   position: relative;
-  font-size:2vh
+  font-size:1vw
   }
 }

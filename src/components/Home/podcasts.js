@@ -36,33 +36,37 @@ export default function LatestPodcasts() {
         </div>
         <div className="container-content">
           <div id="latest-podcast">
-            {podcastData.map((podcast) => {
+            {podcastData.map((podcast, index) => {
               return (
-                <>
-                  <div className="podcast-header">
+                <div key={index}>
+                  <div key={index + 1} className="podcast-header">
                     <a
+                      key={index + 2}
                       href={podcast.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <div className="podcast-logo-container">
+                      <div key={index + 3} className="podcast-logo-container">
                         <img
+                          key={index + 4}
                           src={require(`../../images/podcast-logo/${podcast.sourceLogoRef}.png`)}
                           alt={`${podcast.author}'s logo`}
                           height="50"
                           className="podcast-logo"
                         />
                       </div>
-                      <div className="podcast-title-container">
-                        <h3 className="podcast-title">{podcast.title}</h3>
+                      <div key={index + 5} className="podcast-title-container">
+                        <h3 key={index + 6} className="podcast-title">
+                          {podcast.title}
+                        </h3>
                       </div>
                     </a>
                   </div>
 
-                  <div className="source-date">
+                  <div key={index + 7} className="source-date">
                     <p className="source">Date: {podcast.timeString}</p>
                   </div>
-                </>
+                </div>
               );
             })}
           </div>
