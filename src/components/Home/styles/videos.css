@@ -9,8 +9,7 @@
 }
 
 #latest-videos {
-  width: 100%;
-  max-height: 20vh;
+  max-height: 60vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;

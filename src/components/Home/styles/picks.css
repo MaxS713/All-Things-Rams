@@ -5,10 +5,12 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
+  width:100%;
 }
 
 #picks-wrapper {
-  height: 30vh;
+
+  height: 32.5vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
@@ -18,7 +20,7 @@
 
 #picks-embed {
   margin: 0.5rem;
-  width: 90%;
+  width: 80%;
 }
 
 #picks-embed p {
@@ -54,7 +56,7 @@
 }
 @media only screen and (max-width: 800px) {
   #picks-wrapper {
-    height: 30vh;
+    height: 40vh;
   }
   #picks-embed p span {
     font-size: 2vw;

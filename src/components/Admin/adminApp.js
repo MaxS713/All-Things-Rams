@@ -1,4 +1,3 @@
-
 import { Admin, Resource } from "react-admin";
 //reads the REST API JSON data
 // authentication security library
@@ -8,17 +7,18 @@ import DataProvider from "./dataProvider";
 import { fetchJson as httpClient } from "./httpClient";
 // LOCAL IMPORTS
 // auth0 - made components
-import {Footer, Loading } from "./components";
+import { Footer, Loading } from "./components";
 
 // admin - made components
 // import the dashboard for a homepage
 import Dashboard from "./components/Dashboard";
 // import custom ListGuesser component for posts
 
-
 import TweetsList from "./components/tweets/TweetsList";
 import InstaList from "./components/instagram/InstaList";
+
 import NewsList from "./components/news/NewsList";
+import NewsEdit from "./components/news/NewsEdit";
 
 import SurveyList from "./components/survey/SurveyList";
 import SurveyCreate from "./components/survey/SurveyCreate";
@@ -46,11 +46,15 @@ const AdminApp = () => {
   return (
     <div id="app" className="d-flex flex-column h-100">
       {/* dataProvider PROP that contains REST API info. */}
-      <Admin basename="/admin-login" dashboard={Dashboard} dataProvider={dataProvider}>
+      <Admin
+        basename="/admin-login"
+        dashboard={Dashboard}
+        dataProvider={dataProvider}
+      >
         {/* Inside the Admin component add Resource child components to use CRUD operations; list, create, edit, and show.*/}
         <Resource name="tweets" list={TweetsList} />
         <Resource name="instagramposts" list={InstaList} />
-        <Resource name="newsarticles" list={NewsList} />
+        <Resource name="newsarticles" list={NewsList} edit={NewsEdit} />
         <Resource
           name="instagramusers"
           list={InstaUserList}

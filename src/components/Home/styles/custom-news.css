@@ -8,7 +8,7 @@
 }
 
 #custom-news-content {
-  max-height: 50vh;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
@@ -44,7 +44,8 @@ h3.article-title {
 }
 
 #original-title {
-  font-size: 1.5vw;
+  font-size: 2.5vh;
+  margin-left: -.25vw;
 }
 .source {
   padding-bottom: 1vw;
@@ -53,12 +54,13 @@ h3.article-title {
 
 p.source {
   width: 100%;
-  font-size: 0.9vw;
+  font-size: 1vw;
   border-bottom: 3px solid rgb(4, 9, 135);
 }
 
 /* Link/button to submissions page */
 #review-button {
+  text-align:center;
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 0.25vw;
   margin-left: 0.15vw;
@@ -75,20 +77,30 @@ p.source {
   background-color: rgb(255, 201, 92);
   color: rgb(3, 7, 124);
   transition: 0.7s;
- 
 }
-
 .custom-article-content {
   padding: 0vw 1.5vw 0vw 1.5vw;
   text-align: justify;
-  font-size: 0.9vw;
+  font-size: 1.1vw;
   text-indent: 2.5vw;
+  line-height: 1.5vw;
 }
-
+@media only screen and (max-width: 800px) {
+  .custom-article-content {
+    font-size: 1.75vw;
+  }
+  #custom-news-content {
+    max-height: 40vw;
+  }
+  p.source {
+    font-size: 1.5vw;
+  }
+  #review-button {
+    font-size: 0.9vh;
+    max-width: 15vw;
+  }
+}
 #article-source {
   border-bottom: 3px solid rgb(255, 201, 92);
-  margin-top: -.5vw;
-
-
+  margin-top: -0.5vw;
 }
-

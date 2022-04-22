@@ -1,7 +1,8 @@
 /* Changes by element and class */
 p.tp-content {
-  font-size: 0.9vw;
+  font-size: 1vw;
   text-align: justify;
+  line-height: 1.75vw;
 }
 /* Changes by id */
 #tp-section {
@@ -42,7 +43,7 @@ p.tp-content {
 /* Subtitles */
 .tp-subtitle {
   margin-left: 3vw;
-  font-size: 1vw;
+  font-size: 1.1vw;
 }
 
 /* Contact details contianer */
@@ -63,10 +64,11 @@ p.tp-content {
 
 @media screen and (max-width: 800px) {
   .tp-content {
-    font-size: 0.75vw;
+    font-size: 2vw;
+
   }
   #tp-list {
-    font-size: 0.9vw;
+    font-size: 3vw;
     margin-left: -1.5vw;
   }
   #tp-wrapper {

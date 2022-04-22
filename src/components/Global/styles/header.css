@@ -11,8 +11,10 @@
   color: rgb(4, 9, 135);
   height: 20vh;
 }
-.headerImg{
-  margin-top: 8vw;
+
+.atr-logo {
+  width: 12vw;
+  margin-left: -1vw;
 }
 
 .header {
@@ -20,27 +22,31 @@
   justify-content: center;
   align-items: center;
   gap: 2vw;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .title-and-disclaimer {
   display: flex;
   flex-direction: column;
+  
 }
 
 .title-and-disclaimer h1 {
   font-family: "Graduate", cursive;
   color: rgb(4, 9, 135);
-  font-size: 4vw;
+  font-size: calc(1.5rem + 2vw);
   margin: 0;
-  padding:0;
+  margin-left: -1.5vw;
+  padding: 0;
 }
 
 #disclaimer {
-  padding:0;
+  color:black;
+  padding: 0;
   margin: 0;
-  font-size: 0.7vw;
-  font-style:italic;
+  font-size: calc(0.1rem + 0.7vw);
+  font-style: italic;
+  margin-left: -1.5vw;
 }
 
 /* nav css */
@@ -53,13 +59,13 @@
 
 /* style for links */
 .navItem {
-  font-size: 1.1vw;
+  font-size: calc(0.5rem + 0.5vw);
   color: rgb(4, 9, 135);
   font-family: "Graduate";
   text-decoration: none;
   display: block;
-	position: relative;
-	padding: 0.5em 0;
+  position: relative;
+  padding: 0.5em 0;
   overflow: hidden;
 }
 
@@ -67,25 +73,26 @@
  animation */
 
 .navItem::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 0.2em;
-	background-color: rgb(255, 223, 83);
-	transition: opacity 300ms, transform 300ms;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.2em;
+  background-color: rgb(255, 223, 83);
+  transition: opacity 300ms, transform 300ms;
   opacity: 1;
-	transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
 }
 
-.navItem:hover::after, .navItem:focus::after {
+.navItem:hover::after,
+.navItem:focus::after {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
 /* MOBILE MENU RENDERING */
 
-/* DONATION BUTTON STYLING */
+/* ---------- DONATION BUTTON STYLING ----------  */
 /* #donate-button {
   padding: 0.3rem;
   border: 0.2em solid rgb(4, 9, 135);
@@ -108,6 +115,8 @@
 #donate-button:hover::after{
   all: initial;
 } */
+
+/* ---------- DONATION BUTTON STYLING ----------  */
 
 button {
   text-decoration: none;
@@ -148,14 +157,16 @@ button {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 /* style for dropdown links */
 .dropdown-content a {
   font-size: 0.9vw;
   color: rgba(4, 8, 135, 0.527);
   text-decoration: none;
-	position: relative;
-	padding: 0.5em 0;
+  position: relative;
+  padding: 0.5em 0;
   overflow: hidden;
 }
 
@@ -163,28 +174,31 @@ button {
  animation */
 
 .dropdown-content a::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 0.3em;
-	background-color: rgb(4, 9, 135);
-	transition: opacity 800ms, transform .75s;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.3em;
+  background-color: rgb(4, 9, 135);
+  transition: opacity 800ms, transform 0.75s;
   opacity: 1;
-	transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
 }
 
-.dropdown-content a:hover::after, .dropdown-content:focus::after {
+.dropdown-content a:hover::after,
+.dropdown-content:focus::after {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-// .dropdown:hover .dropbtn {}
+.dropdown:hover .dropbtn {}
 
 /* Media Query --- need to condense nav bar to make usable */
 
@@ -211,7 +225,7 @@ button {
 }
 
 #menu-toggle {
-  display:none;
+  display: none;
 }
 
 .menu-button,
@@ -227,12 +241,12 @@ button {
 }
 
 .menu-button::before {
-  content: '';
+  content: "";
   margin-top: -8px;
 }
 
 .menu-button::after {
-  content: '';
+  content: "";
   margin-top: 8px;
 }
 
@@ -241,11 +255,18 @@ button {
   transform: rotate(405deg);
 }
 
-#menu-toggle:checked + .menu-button-container .menu-button {
+#menu-toggle:checked {
+background: rgba(255, 255, 255, 0);  
+}
+ .menu-button-container .menu-button {
   background: rgba(255, 255, 255, 0);
 }
 
-#menu-toggle:checked + .menu-button-container .menu-button::after {
+#menu-toggle:checked {
+  margin-top: 0px;
+  transform: rotate(-405deg);
+}
+ .menu-button-container .menu-button::after {
   margin-top: 0px;
   transform: rotate(-405deg);
 }
@@ -291,4 +312,3 @@ button {
     border-bottom: 1px solid #444;
   }
 }
-

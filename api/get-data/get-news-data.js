@@ -1,4 +1,4 @@
-const {NewsArticle, LastAPICallTime} = require("../models.js");
+const { NewsArticle, LastAPICallTime } = require("../models.js");
 const puppeteer = require("puppeteer");
 
 //------------------ News Data -----------------//
@@ -26,7 +26,7 @@ module.exports = async function getLatestNewsData() {
 
   for (let link of ramblinLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".article-header h1").innerText;
       let time = document.querySelector("time");
@@ -46,7 +46,7 @@ module.exports = async function getLatestNewsData() {
       };
     });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -67,7 +67,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of ramsWireLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "networkidle2", timeout: 0});
+    await page.goto(link, { waitUntil: "networkidle2", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".entry__title__wrapper h1").innerText;
       let time = document.querySelector('[itemprop="datePublished"]');
@@ -89,7 +89,7 @@ module.exports = async function getLatestNewsData() {
       };
     });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -110,7 +110,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of turfLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".c-page-title").innerText;
       let time = document.querySelector('[data-ui="timestamp"]');
@@ -130,7 +130,7 @@ module.exports = async function getLatestNewsData() {
       };
     });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -151,7 +151,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of downtownRamsLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".post-title").innerText;
       let time = document.querySelector(".entry-date");
@@ -171,14 +171,14 @@ module.exports = async function getLatestNewsData() {
       };
     });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
   //https://profootballtalk.nbcsports.com/
   await page.goto(
     "https://profootballtalk.nbcsports.com/category/teams/nfc/los-angeles-rams/",
-    {waitUntil: "domcontentloaded", timeout: 0}
+    { waitUntil: "domcontentloaded", timeout: 0 }
   );
   let proFootballTalkLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".entry-header .entry-title a");
@@ -192,7 +192,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of proFootballTalkLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".entry-title").innerText;
       let time = document.querySelector(".entry-date").innerText;
@@ -211,7 +211,7 @@ module.exports = async function getLatestNewsData() {
       };
     });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -234,9 +234,9 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of ramsTalkLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "networkidle2", timeout: 0});
+    await page.goto(link, { waitUntil: "networkidle2", timeout: 0 });
     let newsData = await page.evaluate(() => {
-      let findPodcast = document.querySelector('#content-main iframe');
+      let findPodcast = document.querySelector("#content-main iframe");
       if (findPodcast !== null) {
         return;
       }
@@ -278,7 +278,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of fanSidedLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".article-header h1").innerText;
       let time = document.querySelector(".byline time");
@@ -296,7 +296,7 @@ module.exports = async function getLatestNewsData() {
       };
     });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -317,14 +317,17 @@ module.exports = async function getLatestNewsData() {
     let articleLinksList = [];
     posts.forEach((link, index) => {
       let postURL = link.href;
-      articleLinksList.push({postURL: postURL, imageLink: imgLinks[index]});
+      articleLinksList.push({ postURL: postURL, imageLink: imgLinks[index] });
     });
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
   for (let link of espnLinks) {
     console.log(`Fetching data from ${link.postURL}...`);
-    await page.goto(link.postURL, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link.postURL, {
+      waitUntil: "domcontentloaded",
+      timeout: 0,
+    });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".article-header h1").innerText;
       let time = document.querySelector(".article-meta .timestamp");
@@ -340,8 +343,9 @@ module.exports = async function getLatestNewsData() {
         newsSource: "ESPN",
       };
     });
+    newsData = {...newsData, imageLink: link.imageLink};
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -361,7 +365,7 @@ module.exports = async function getLatestNewsData() {
   });
   for (let link of laTimesLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(".headline").innerText;
       let time = document.querySelector(".byline time");
@@ -379,7 +383,7 @@ module.exports = async function getLatestNewsData() {
       };
     });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -401,7 +405,7 @@ module.exports = async function getLatestNewsData() {
 
   for (let link of dailyNewsLinks) {
     console.log(`Fetching data from ${link}...`);
-    await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
+    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
     let newsData = await page.evaluate(() => {
       let title = document.querySelector(
         ".headline-area .entry-title"
@@ -419,9 +423,9 @@ module.exports = async function getLatestNewsData() {
         imageLink: imageLink,
         newsSource: "LA Daily News",
       };
-    });  
+    });
     if (Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
+    newsArticleArray.push(newsData);
     }
   }
 
@@ -436,6 +440,7 @@ module.exports = async function getLatestNewsData() {
       summary: newsArticle.summary,
       source: newsArticle.newsSource,
       sourceLogoRef: newsArticle.newsSource.replace(/\s/g, ""),
+      isFeatured: false,
     });
     await newPost.save();
   }
@@ -448,7 +453,7 @@ module.exports = async function getLatestNewsData() {
     for (let i = 0; i < allNewsData.length; i++) {
       if (i > 50) {
         let currentID = allNewsData[i]._id;
-        await NewsArticle.deleteOne({_id: currentID});
+        await NewsArticle.deleteOne({ _id: currentID });
       }
     }
   }
@@ -460,7 +465,7 @@ module.exports = async function getLatestNewsData() {
     console.log("No new article found...");
   }
 
-  await LastAPICallTime.deleteOne({API: "news"});
+  await LastAPICallTime.deleteOne({ API: "news" });
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "news",
     time: Date.now(),

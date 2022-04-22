@@ -44,9 +44,9 @@ module.exports = async function getLatestInstagramPosts() {
         };
       });
       linkData.time = await parseTimeAgo(linkData.time)
-      // if (linkData.time > lastInstagramCall.time) {
+      if (linkData.time > lastInstagramCall.time) {
         latestInstagramPosts.push(linkData);
-      // }
+      }
     }
   }
 
@@ -61,7 +61,7 @@ module.exports = async function getLatestInstagramPosts() {
 
   let instaData = await InstagramPost.find({});
   instaData = instaData.sort(
-    (a, b) => a.time - b.time
+    (a, b) => b.time - a.time
   );
   if (instaData.length > 25) {
     for (let i = 0; i < instaData.length; i++) {

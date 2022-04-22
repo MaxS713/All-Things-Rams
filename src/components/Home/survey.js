@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { LeafPoll, Result } from "react-leaf-polls";
 import axios from 'axios'
-import "./styles/leaf-poll.css";
+import 'react-leaf-polls/dist/index.css'
 import "./styles/survey.css";
 
 //Persistent data array (typically fetched from the server)
@@ -74,6 +74,12 @@ export default function Survey() {
                 isVoted={hasVoted}
                 theme={customTheme}
               />
+              <div className="results">
+              <p className="result">Results:</p>
+              <p>{surveyData.textAnswer1} : {Math.round((surveyData.votesAnswer1/(surveyData.votesAnswer1 + surveyData.votesAnswer2))*100)}%</p>
+              <p>{surveyData.textAnswer2} : {Math.round((surveyData.votesAnswer2/(surveyData.votesAnswer1 + surveyData.votesAnswer2))*100)}%</p>
+              <p>Total votes: {surveyData.votesAnswer1 + surveyData.votesAnswer2}</p>
+              </div>
             </div>
           </div>
         </div>

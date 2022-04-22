@@ -37,8 +37,6 @@ app.use(cors());
 app.use(express.json());
 
 (async function checkTimeOfLatestAPICall() {
-  await getLatestInstagramPosts();
-  await getTikTokVideos();
   let currentTime = Date.now();
   let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
   let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
@@ -77,7 +75,7 @@ newsRoutes(app);
 instaUserRoutes(app);
 twitterUserRoutes(app);
 surveyRoutes(app);
-customArticleRoutes(app)
+customArticleRoutes(app);
 
 app.get("/", async (req, res) => {
   res.send("All Things Rams");
@@ -139,10 +137,9 @@ app.get("/get-more-tweets", async (req, res) => {
 });
 
 app.get("/get-instagram-posts", async (req, res) => {
- 
   let allLatestInstagramPosts = await InstagramPost.find({});
   allLatestInstagramPosts = allLatestInstagramPosts.sort(
-    (a, b) => a.time - b.time
+    (a, b) => b.time - a.time
   );
   let dataToSend = [allLatestInstagramPosts[0]];
   allLatestInstagramPosts.forEach((data) => {
@@ -162,7 +159,7 @@ app.get("/get-instagram-posts", async (req, res) => {
 app.get("/get-more-instagram-posts", async (req, res) => {
   let allLatestInstagramPosts = await InstagramPost.find({});
   allLatestInstagramPosts = allLatestInstagramPosts.sort(
-    (a, b) => a.time - b.time
+    (a, b) => b.time - a.time
   );
   let dataToSend = [allLatestInstagramPosts[0]];
   allLatestInstagramPosts.forEach((data) => {
@@ -181,9 +178,7 @@ app.get("/get-more-instagram-posts", async (req, res) => {
 
 app.get("/get-tiktok-posts", async (req, res) => {
   let allLatestTikTokPosts = await TikTokVideo.find({});
-  allLatestTikTokPosts = allLatestTikTokPosts.sort(
-    (a, b) => a.time - b.time
-  );
+  allLatestTikTokPosts = allLatestTikTokPosts.sort((a, b) => b.time - a.time);
   let dataToSend = [allLatestTikTokPosts[0]];
   allLatestTikTokPosts.forEach((data) => {
     if (!dataToSend.some((e) => e.author === data.author)) {
@@ -201,9 +196,7 @@ app.get("/get-tiktok-posts", async (req, res) => {
 
 app.get("/get-more-tiktok-posts", async (req, res) => {
   let allLatestTikTokPosts = await TikTokVideo.find({});
-  allLatestTikTokPosts = allLatestTikTokPosts.sort(
-    (a, b) => a.time - b.time
-  );
+  allLatestTikTokPosts = allLatestTikTokPosts.sort((a, b) => b.time - a.time);
   let dataToSend = [allLatestTikTokPosts[0]];
   allLatestTikTokPosts.forEach((data) => {
     if (!dataToSend.some((e) => e.author === data.author)) {
@@ -220,23 +213,29 @@ app.get("/get-more-tiktok-posts", async (req, res) => {
 });
 
 app.get("/get-featured-news", async (req, res) => {
-  let allLatestNewsArticle = await NewsArticle.find({});
-  allLatestNewsArticle = allLatestNewsArticle.sort(
-    (a, b) => Date.parse(b.time) - Date.parse(a.time)
-  );
-  let dataToSend = [allLatestNewsArticle[0]];
-  allLatestNewsArticle.forEach((data) => {
-    if (!dataToSend.some((e) => e.source === data.source)) {
-      dataToSend.push(data);
-    }
-  });
-  allLatestNewsArticle.forEach((data) => {
-    if (dataToSend.includes(data) === false) {
-      dataToSend.push(data);
-    }
-  });
-  dataToSend = dataToSend.slice(0, 3);
-  res.send(dataToSend);
+  let allFeaturedArticles = await NewsArticle.find({ isFeatured: true });
+  if (allFeaturedArticles.length === 0) {
+    let allLatestNewsArticle = await NewsArticle.find({});
+    allLatestNewsArticle = allLatestNewsArticle.sort(
+      (a, b) => Date.parse(b.time) - Date.parse(a.time)
+    );
+    let dataToSend = [allLatestNewsArticle[0]];
+    allLatestNewsArticle.forEach((data) => {
+      if (!dataToSend.some((e) => e.source === data.source)) {
+        dataToSend.push(data);
+      }
+    });
+    allLatestNewsArticle.forEach((data) => {
+      if (dataToSend.includes(data) === false) {
+        dataToSend.push(data);
+      }
+    });
+    dataToSend = dataToSend.slice(0, 3);
+    res.send(dataToSend);
+  } else {
+    allFeaturedArticles = allFeaturedArticles.slice(0, 6);
+    res.send(allFeaturedArticles);
+  }
 });
 
 app.get("/get-news-article", async (req, res) => {
@@ -255,7 +254,7 @@ app.get("/get-news-article", async (req, res) => {
       dataToSend.push(data);
     }
   });
-  dataToSend = dataToSend.slice(3, 10);
+  dataToSend = dataToSend.slice(0, 8);
   res.send(dataToSend);
 });
 
@@ -264,7 +263,7 @@ app.get("/get-more-news-article", async (req, res) => {
   dataToSend = dataToSend.sort(
     (a, b) => Date.parse(b.time) - Date.parse(a.time)
   );
-  dataToSend = dataToSend.slice(3, 20);
+  dataToSend = dataToSend.slice(0, 20);
   res.send(dataToSend);
 });
 
@@ -319,12 +318,12 @@ app.post("/post-survey-vote", async (req, res) => {
 
 //Needs better authorization
 let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "smtp-relay.sendinblue.com",
   port: 587,
   secure: false,
   auth: {
-    user: "allthingsramstest1234@gmail.com",
-    pass: "ATR54321",
+    user: "allthingsrams.official@gmail.com",
+    pass: "tqVfBDMnGN7vWKrc",
   },
 });
 
@@ -359,25 +358,6 @@ app.post("/contact", async (req, res) => {
 });
 
 //-------- Submit -------- //
-
-// Needs better authorization
-let transporter2 = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: "allthingsramstest1234@gmail.com",
-    pass: "ATR54321",
-  },
-});
-
-transporter2.verify((error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Ready to Send");
-  }
-});
 
 app.post("/submit", async (req, res) => {
   const name = req.body.name;

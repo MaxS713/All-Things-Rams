@@ -49,14 +49,14 @@ module.exports = async function getTikTokVideos() {
       post.date = parseTimeAgo(post.date)
     });
     latestPosts = latestPosts.sort(
-      (a, b) => a.date - b.date
+      (a, b) => b.date - a.date
     );
     latestPosts = latestPosts.slice(0, 6);
     for (let post of latestPosts) {
-      // if (post.date > lastTikTokCall.time) {
+      if (post.date > lastTikTokCall.time) {
         post = {...post, author: user};
         latestTikTokPosts.push(post);
-      // }
+      }
     }
   }
 
@@ -71,7 +71,7 @@ module.exports = async function getTikTokVideos() {
 
   let tiktokData = await TikTokVideo.find({});
   tiktokData = tiktokData.sort(
-    (a, b) => a.time - b.time
+    (a, b) => b.time - a.time
   );
   if (tiktokData.length > 40) {
     for (let i = 0; i < tiktokData.length; i++) {

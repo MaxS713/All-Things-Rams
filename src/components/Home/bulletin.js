@@ -20,20 +20,24 @@ import "./styles/bulletin.css";
 export default function Bulletin(props) {
   return (
     <>
+      <section>
         <div id="grid">
           <FeaturedNewsCarousel />
           <LatestNews />
           <GoogleAdPlaceholder2 />
+          <Picks />
           <CustomNews />
+          <LatestVideos />
+          <LatestPodcasts />
+          <Survey />
+          <GoogleAdPlaceholder />
+          <div id="socials-wrapper">
           <Twitter />
           <Tiktok />
           <Instagram />
-          <LatestVideos />
-          <LatestPodcasts />
-          <GoogleAdPlaceholder />
-          <Survey />
-          <Picks />
+          </div>
         </div>
+      </section>
     </>
   );
 }

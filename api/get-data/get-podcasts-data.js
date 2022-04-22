@@ -2,8 +2,8 @@ const {Podcast, LastAPICallTime} = require("../models.js");
 
 module.exports = async function getPodcastData() {
   const api = require("podcast-index-api")(
-    "DRNMQCLKYSADBZAKENL8",
-    "ySkMu3dLh27VxnU^kHTgztPx^fcHTWhfnS##2E5P"
+    "7HE9JCMFVURJN6GYVKGC",
+    "$GafgxCXw#P8kJ4Xe$aVTqQjtB6DX8546Uw4bvDs"
   );
 
   let listOfPodcasts = [

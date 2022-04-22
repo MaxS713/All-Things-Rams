@@ -13,8 +13,8 @@ module.exports = (app) => {
 
   app.get("/api/customarticles/:id", async (req, res) => {
     const CustomArticleId = req.params.id;
-    const customArticle = await CustomArticle.findById(CustomArticleId);
-    res.send(customArticle);
+    const customArticles = await CustomArticle.findById(CustomArticleId);
+    res.send(customArticles);
   });
 
   app.put("/api/customarticles/:id", async (req, res) => {

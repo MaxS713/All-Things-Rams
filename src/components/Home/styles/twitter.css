@@ -1,6 +1,5 @@
 #tweets-container {
   grid-area: twitter;
-  width: 100%;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;
@@ -18,8 +17,7 @@
 }
 
 #tweets-embed {
-  margin: 0.5rem;
-  width: 90%;
+  padding:1rem;
 }
 
 #tweets-embed p {

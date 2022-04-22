@@ -73,7 +73,6 @@ export default function SubmitForm() {
               </div>
               <form className="article" onSubmit={handleSubmit}>
                 {/* User inputs their name */}
-
                 <div>
                   <input
                     type="text"
@@ -94,7 +93,6 @@ export default function SubmitForm() {
                     required
                   />
                 </div>
-
                 {/* User inputs their email */}
                 <div>
                   <input

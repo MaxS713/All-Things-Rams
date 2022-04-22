@@ -6,14 +6,6 @@
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
 }
-@media only screen and (max-width: 800px) {
-  #instagram-wrapper {
-    width:90%;
-    height:67.5vh;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-} 
 
 #instagram-wrapper {
   height: 100vh;
@@ -21,10 +13,6 @@
   overflow-y: scroll;
   padding-left: 20px;
   padding-right: 20px;
-}
-
-#instagram-embed {
-  width: 100%;
 }
 
 #instagram-embed p {

@@ -1,0 +1,25 @@
+.dashboard-container{
+    margin: 2vw;
+}
+
+.admin-h1{
+    font-size: 2vw;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+/* container of row */
+.datagrid{
+    
+}
+/* source text in row*/
+.text-field{
+}
+
+/* Edit Button */
+.edit-button{
+}
+
+/* Delete button */
+.delete-button{
+}

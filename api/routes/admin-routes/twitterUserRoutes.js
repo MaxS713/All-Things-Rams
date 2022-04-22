@@ -13,8 +13,8 @@ module.exports = (app) => {
 
   app.get("/api/twitterusers/:id", async (req, res) => {
     const TwitterUserId = req.params.id;
-    const TwitterUser = await TwitterUser.findById(TwitterUserId);
-    res.send(TwitterUser);
+    const TwitterUsers = await TwitterUser.findById(TwitterUserId);
+    res.send(TwitterUsers);
   });
 
   app.put("/api/twitterusers/:id", async (req, res) => {

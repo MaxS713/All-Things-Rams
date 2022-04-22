@@ -13,6 +13,9 @@ const CustomArticleCreate = (props) => {
         <TextInput source="paragraph3" />
         <TextInput source="paragraph4" />
         <TextInput source="paragraph5" />
+        <TextInput source="paragraph6" />
+        <TextInput source="paragraph7" />
+        <TextInput source="paragraph8" />
       </SimpleForm>
     </Create>
   );

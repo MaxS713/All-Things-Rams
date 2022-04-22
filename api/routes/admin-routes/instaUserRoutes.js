@@ -13,8 +13,8 @@ module.exports = (app) => {
 
   app.get("/api/instagramusers/:id", async (req, res) => {
     const InstagramUserId = req.params.id;
-    const InstagramUser = await InstagramUser.findById(InstagramUserId);
-    res.send(InstagramUser);
+    const InstagramUsers = await InstagramUser.findById(InstagramUserId);
+    res.send(InstagramUsers);
   });
 
   app.put("/api/instagramusers/:id", async (req, res) => {

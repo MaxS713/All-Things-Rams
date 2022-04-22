@@ -2,36 +2,59 @@
 #grid {
   display: grid;
   justify-content: center;
-  width: 85%;
+  flex-grow: 1;
+
+  max-height: 100%;  
+  max-width: 80%;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
   gap: 1rem;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "feat feat feat feat  news news"
-    "customnews customnews customnews customnews  googlead2 googlead2"
-    "twitter twitter instagram instagram tiktok tiktok"
-    "twitter twitter instagram instagram tiktok tiktok"
+    "feat feat feat feat feat news"
+    "googlead2 googlead2 googlead2 googlead2  googlead2 googlead2"
+    "survey survey customnews customnews customnews jppicks "
+    "podcast podcast customnews customnews customnews videos"
+    "podcast podcast customnews customnews customnews videos"
     "googlead googlead googlead googlead googlead googlead"
-    "jppicks jppicks jppicks podcast podcast survey"
-    ". . . podcast podcast videos";
+    "socials socials socials socials socials socials"
+    "socials socials socials socials socials socials";
 
     
     /* "podcast podcast . . . ."; Joey+Pierson's picks, article*/
 }
 
+
+#socials-wrapper{
+  grid-area: socials;
+  display:flex;
+  width:100%;
+  gap:1vw;
+  
+}
+
+
 /* Media Query for Mobile Device Design */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   #grid {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  #socials-wrapper{
+    grid-area: socials;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    gap:2vw;
+    width:100%;
+  }
 }
-@media only screen and (max-width: 1000px) {
+/* @media only screen and (max-width: 1000px) {
   #grid {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows:1fr 1fr;
@@ -45,7 +68,7 @@
     "jppicks jppicks jppicks podcast survey survey"
     "customnews customnews customnews podcast videos videos";
   }
-}
+} */
 
 
 /* default container styling */
@@ -73,7 +96,6 @@
   border-bottom: 2px solid rgb(235, 235, 235);
   border-left: 2px solid rgb(235, 235, 235);
   border-right: 2px solid rgb(235, 235, 235);
-  align-items: stretch;
 }
 
 .hidden {

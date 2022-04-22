@@ -13,8 +13,8 @@ module.exports = (app) => {
 
   app.get("/api/instagramposts/:id", async (req, res) => {
     const InstagramPostId = req.params.id;
-    const InstagramPost = await InstagramPost.findById(InstagramPostId);
-    res.send(InstagramPost);
+    const InstagramPosts = await InstagramPost.findById(InstagramPostId);
+    res.send(InstagramPosts);
   });
 
   app.put("/api/instagramposts/:id", async (req, res) => {

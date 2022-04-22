@@ -2,11 +2,12 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://MaxS713:nwcc4cJr0mTYpju4@cluster0.bgmkx.mongodb.net/all-things-rams"
+  "mongodb+srv://allthingsramsofficial:eOb6pAo0Yq4KJ10w@cluster0.jyqgg.mongodb.net/all-things-rams"
 );
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
-
+// allthingsramsofficial
+// eOb6pAo0Yq4KJ10w
 const twitterDataSchema = new mongoose.Schema({
   author: String,
   text: String,
@@ -49,6 +50,7 @@ const newsArticleSchema = new mongoose.Schema({
   summary: String,
   source: String,
   sourceLogoRef: String,
+  isFeatured: Boolean,
 });
 
 const podcastSchema = new mongoose.Schema({
@@ -78,6 +80,9 @@ const customArticleSchema = new mongoose.Schema({
   paragraph3: String,
   paragraph4: String,
   paragraph5: String,
+  paragraph6: String,
+  paragraph7: String,
+  paragraph8: String,
   date: String,
 });
 

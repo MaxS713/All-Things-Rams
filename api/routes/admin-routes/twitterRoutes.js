@@ -13,8 +13,8 @@ module.exports = (app) => {
 
   app.get("/api/tweets/:id", async (req, res) => {
     const tweetId = req.params.id;
-    const tweet = await Tweet.findById(tweetId);
-    res.send(tweet);
+    const tweets = await Tweet.findById(tweetId);
+    res.send(tweets);
   });
 
   app.put("/api/tweets/:id", async (req, res) => {

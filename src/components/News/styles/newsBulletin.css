@@ -14,7 +14,7 @@
     "videos videos videos podcast podcast podcast"
     "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2";
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   #news-grid {
     display: flex;
     flex-direction: column;

@@ -22,7 +22,28 @@
   visibility:hidden;
 }
 
+#survey-wrapper .results{
+  display: none;
+}
+
+#voted-survey-wrapper .results{
+  display:flex;
+  flex-direction: column;
+
+}
+#voted-survey-wrapper .result{
+  color: rgb(4, 9, 135);
+  font-weight:600;
+}
+
+#voted-survey-wrapper .results p{
+  margin: 0.2rem;
+}
+
+
 h1 {
   font-size: 1.2rem;
   padding-bottom: 1vw;
 }
+
+
