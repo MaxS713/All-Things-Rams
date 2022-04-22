@@ -4,7 +4,7 @@ import { Admin, Resource } from "react-admin";
 // authentication security library
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 // import dataProvider from './dataProvider';
-import myDataProvider from "./myDataProvider";
+import DataProvider from "./dataProvider";
 import { fetchJson as httpClient } from "./httpClient";
 // LOCAL IMPORTS
 // auth0 - made components
@@ -39,7 +39,7 @@ import CustomArticleEdit from "./components/customArticle/CustomArticleEdit";
 // STYLE IMPORTS
 import "./app.css";
 
-const dataProvider = myDataProvider("http://localhost:5000/api", httpClient);
+const dataProvider = DataProvider("http://localhost:5000/api", httpClient);
 
 // APP FUNCTION
 const AdminApp = () => {

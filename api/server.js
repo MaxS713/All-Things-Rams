@@ -19,7 +19,7 @@ const getLatestInstagramPosts = require("./get-data/get-instagram-data.js");
 const getLatestNewsData = require("./get-data/get-news-data.js");
 const getVideoData = require("./get-data/get-videos-data.js");
 const getPodcastData = require("./get-data/get-podcasts-data.js");
-const getTeamData = require("./get-data/get-team-info.js");
+// const getTeamData = require("./get-data/get-team-info.js");
 const getTikTokVideos = require("./get-data/get-tiktok-data.js");
 const getLatestPickTweets = require("./get-data/get-picks-twitter-data.js");
 
@@ -403,20 +403,6 @@ app.post("/post-survey-vote", async (req, res) => {
     await surveyData.save();
   }
 });
-
-async function createNewSurvey() {
-  let question = "What do you prefer?";
-  let answer1 = "Instagram";
-  let answer2 = "Twitter";
-  let newQuestion = new SurveyData({
-    surveyQuestion: question,
-    textAnswer1: answer1,
-    // votesAnswer1: Number,
-    textAnswer2: answer2,
-    // votesAnswer2: Number,
-  });
-  await newQuestion.save();
-}
 
 //-------- Contact -------- //
 

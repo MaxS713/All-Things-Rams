@@ -2,12 +2,12 @@
 import FeaturedNewsCarousel from "../Home/featuredNewsCarousel";
 import LatestNews from "../Home/news";
 import LatestVideos from "../Home/videos";
-import FeaturedVideo from "../Home/featuredVideo";
+// import FeaturedVideo from "../Home/featuredVideo";
 import LatestPodcasts from "../Home/podcasts";
 import GoogleAdPlaceholder from "../Home/googleAds";
 import GoogleAdPlaceholder2 from "../Home/googleAds2"
 
-//Stylin Imports
+//Styling Imports
 import "./styles/newsBulletin.css";
 
 export default function NewsBulletin() {

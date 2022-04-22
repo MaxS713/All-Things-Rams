@@ -1,6 +1,3 @@
-//Library Imports
-import React, { useState } from "react";
-
 //Style Imports
 import "./styles/terms+privacy.css";
 
@@ -39,13 +36,13 @@ export default function Privacy() {
           </p>
           <p className="tp-content">
             We only retain collected information for as long as necessary to
-            provide you with your requested service. What data we store, we’ll
+            provide you with your requested service. What data we store, we'll
             protect within commercially acceptable means to prevent loss and
             theft, as well as unauthorized access, disclosure, copying, use or
             modification.
           </p>
           <p className="tp-content">
-            We don’t share any personally identifying information publicly,
+            We don't share any personally identifying information publicly,
             except when required to by law.
           </p>
           <p className="tp-content">

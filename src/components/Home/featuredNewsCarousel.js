@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Slider from "react-slick";
 
 import "./styles/react-slick-carousel/slick.css";
@@ -26,7 +26,7 @@ export default function FeaturedNewsCarousel() {
   }
   useEffect(() => {
     getServerData();
-  }, []);
+  });
 
   function trimTitleLength(string) {
     let trimmedString = string.substr(0, 140);
@@ -68,20 +68,27 @@ export default function FeaturedNewsCarousel() {
                   return (
                     <div key={index} className="carousel-item">
                       <img
-                      key={index+1}
+                        key={index + 1}
                         src={newsArticle.imgSrc}
                         className="carousel-img"
                         alt="news article main illustration"
                       />
-                      <div key={index+2} className="carousel-article-title">
-                        <div key={index+3} className="carousel-news-header">
-                          <a key={index+4}
+                      <div key={index + 2} className="carousel-article-title">
+                        <div key={index + 3} className="carousel-news-header">
+                          <a
+                            key={index + 4}
                             href={newsArticle.link}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <div key={index+5} className="carousel-logo-and-title">
-                              <div key={index+6} className="carousel-logo-container">
+                            <div
+                              key={index + 5}
+                              className="carousel-logo-and-title"
+                            >
+                              <div
+                                key={index + 6}
+                                className="carousel-logo-container"
+                              >
                                 <img
                                   src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
                                   alt={`${newsArticle.source}'s logo`}
@@ -89,8 +96,14 @@ export default function FeaturedNewsCarousel() {
                                   className="carousel-news-logo"
                                 />
                               </div>
-                              <div key={index+7} className="carousel-title-container">
-                                <h3 key={index+8} className="featured-headline">
+                              <div
+                                key={index + 7}
+                                className="carousel-title-container"
+                              >
+                                <h3
+                                  key={index + 8}
+                                  className="featured-headline"
+                                >
                                   {newsArticle.title}
                                 </h3>
                               </div>

@@ -18,7 +18,7 @@ export default function Tiktok(props) {
   }
   useEffect(() => {
     getServerData();
-  }, []);
+  });
 
   return (
     <>
