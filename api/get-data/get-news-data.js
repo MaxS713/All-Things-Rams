@@ -6,6 +6,7 @@ module.exports = async function getLatestNewsData() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   let newsArticleArray = [];
+  let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
 
   //https://ramblinfan.com
   await page.goto("https://ramblinfan.com/", {
@@ -44,14 +45,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Ramblin Fan",
       };
     });
-    let storedNewsData = await NewsArticle.find({source: "Ramblin Fan"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -94,16 +88,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Ramswire - USA Today",
       };
     });
-    let storedNewsData = await NewsArticle.find({
-      source: "Ramswire - USA Today",
-    });
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -144,14 +129,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Turf Show Times",
       };
     });
-    let storedNewsData = await NewsArticle.find({source: "Turf Show Times"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -192,14 +170,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Downtown Rams",
       };
     });
-    let storedNewsData = await NewsArticle.find({source: "Downtown Rams"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -239,14 +210,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "NBC Sports",
       };
     });
-    let storedNewsData = await NewsArticle.find({source: "NBC Sports"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -293,14 +257,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Rams Talk",
       };
     });
-    let storedNewsData = await NewsArticle.find({source: "Rams Talk"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (newsData && hasDuplicate !== true) {
+    if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -338,14 +295,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "Fansided",
       };
     });
-    let storedNewsData = await NewsArticle.find({source: "Fansided"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -390,16 +340,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "ESPN",
       };
     });
-
-    let storedNewsData = await NewsArticle.find({source: "ESPN"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
-      newsData = {...newsData, imageLink: link.imageLink};
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -437,14 +378,7 @@ module.exports = async function getLatestNewsData() {
         newsSource: "LA Times",
       };
     });
-    let storedNewsData = await NewsArticle.find({source: "LA Times"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
@@ -464,6 +398,7 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
+
   for (let link of dailyNewsLinks) {
     console.log(`Fetching data from ${link}...`);
     await page.goto(link, {waitUntil: "domcontentloaded", timeout: 0});
@@ -484,22 +419,13 @@ module.exports = async function getLatestNewsData() {
         imageLink: imageLink,
         newsSource: "LA Daily News",
       };
-    });
-    let storedNewsData = await NewsArticle.find({source: "LA Daily News"});
-    let hasDuplicate = false;
-    for (let storedNews of storedNewsData) {
-      if (newsData.title === storedNews.title) {
-        hasDuplicate = true;
-      }
-    }
-    if (hasDuplicate !== true) {
+    });  
+    if (Date.parse(newsData.time) > lastNewsCall.time) {
       newsArticleArray.push(newsData);
     }
   }
 
   await browser.close();
-
-  console.log(newsArticleArray)
 
   for (let newsArticle of newsArticleArray) {
     let newPost = new NewsArticle({
@@ -514,14 +440,14 @@ module.exports = async function getLatestNewsData() {
     await newPost.save();
   }
 
-  let newsData = await NewsArticle.find({});
-  newsData = newsData.sort(
+  let allNewsData = await NewsArticle.find({});
+  allNewsData = allNewsData.sort(
     (a, b) => Date.parse(b.time) - Date.parse(a.time)
   );
-  if (newsData.length > 50) {
-    for (let i = 0; i < newsData.length; i++) {
+  if (allNewsData.length > 50) {
+    for (let i = 0; i < allNewsData.length; i++) {
       if (i > 50) {
-        let currentID = newsData[i]._id;
+        let currentID = allNewsData[i]._id;
         await NewsArticle.deleteOne({_id: currentID});
       }
     }

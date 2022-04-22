@@ -22,14 +22,8 @@ module.exports = async function getPodcastData() {
     let latestPodcasts = await api.episodesByFeedId(`${podcast.searchID}`);
     latestPodcasts = latestPodcasts.items;
     for (let i = 0; i < 3; i++) {
-      let storedPodcastData = await Podcast.find({});
-      let hasDuplicate = false;
-      for (let storedPodcast of storedPodcastData) {
-        if (latestPodcasts[i].title === storedPodcast.title) {
-          hasDuplicate = true;
-        }
-      }
-      if (hasDuplicate !== true) {
+      let lastPodcastCall = await LastAPICallTime.findOne({ API: "podcast" });
+      if (latestPodcasts[i].datePublished*1000 > lastPodcastCall.time) {
         allPodcastData.push({
           title: latestPodcasts[i].title,
           link: latestPodcasts[i].enclosureUrl,

@@ -1,4 +1,4 @@
-const { TikTokVideo, LastAPICallTime } = require("../models.js");
+const {TikTokVideo, LastAPICallTime} = require("../models.js");
 const puppeteer = require("puppeteer");
 
 //------------------ Get Instagram Data -----------------//
@@ -14,7 +14,7 @@ module.exports = async function getTikTokVideos() {
   ];
 
   let latestTikTokPosts = [];
-
+  let lastTikTokCall = await LastAPICallTime.findOne({API: "tiktok"});
   for (let user of listOfTikTokUsers) {
     await page.goto(`https://urlebird.com/user/${user}/`, {
       waitUntil: "domcontentloaded",
@@ -46,23 +46,17 @@ module.exports = async function getTikTokVideos() {
       while (post.link.length !== 19) {
         post.link = post.link.slice(1);
       }
+      post.date = parseTimeAgo(post.date)
     });
     latestPosts = latestPosts.sort(
-      (a, b) => parseTimeAgo(a.date) - parseTimeAgo(b.date)
+      (a, b) => a.date - b.date
     );
     latestPosts = latestPosts.slice(0, 6);
     for (let post of latestPosts) {
-      let storedTikTokData = await TikTokVideo.find({});
-      let hasDuplicate = false;
-      for (let storedPost of storedTikTokData) {
-        if (post.link === storedPost.linkID) {
-          hasDuplicate = true;
-        }
-      }
-      if (hasDuplicate !== true) {
-        post = { ...post, author: user };
+      // if (post.date > lastTikTokCall.time) {
+        post = {...post, author: user};
         latestTikTokPosts.push(post);
-      }
+      // }
     }
   }
 
@@ -77,13 +71,13 @@ module.exports = async function getTikTokVideos() {
 
   let tiktokData = await TikTokVideo.find({});
   tiktokData = tiktokData.sort(
-    (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
+    (a, b) => a.time - b.time
   );
   if (tiktokData.length > 40) {
     for (let i = 0; i < tiktokData.length; i++) {
       if (i > 40) {
         let currentID = tiktokData[i]._id;
-        await TikTokVideo.deleteOne({ _id: currentID });
+        await TikTokVideo.deleteOne({_id: currentID});
       }
     }
   }
@@ -95,7 +89,7 @@ module.exports = async function getTikTokVideos() {
     console.log("No new tiktok posts found...");
   }
 
-  await LastAPICallTime.deleteOne({ API: "tiktok" });
+  await LastAPICallTime.deleteOne({API: "tiktok"});
   let timeOfApiCallRequest = new LastAPICallTime({
     API: "tiktok",
     time: Date.now(),
@@ -103,21 +97,29 @@ module.exports = async function getTikTokVideos() {
   await timeOfApiCallRequest.save();
 };
 
-//function to convert the instagram "time ago" measure of time into a number
+//function to convert "time ago" measure of time into time in ms
 function parseTimeAgo(timeAgo) {
   timeAgo = timeAgo.replace("s", "");
   timeAgo = timeAgo.split(" ");
   let numberOf;
   let multiplier;
-  numberOf = parseInt(timeAgo[0]);
-  if (timeAgo[1] === "hour") {
-    multiplier = 1;
-  } else if (timeAgo[1] === "day") {
-    multiplier = 24;
-  } else if (timeAgo[1] === "month") {
-    multiplier = 30 * 24;
-  } else if (timeAgo[1] === "year") {
-    multiplier = 12 * 30 * 24;
+  if (timeAgo[0] === "a") {
+    numberOf = 1;
+  } else {
+    numberOf = parseInt(timeAgo[0]);
   }
-  return numberOf * multiplier;
+  if (timeAgo[1] === "hour") {
+    multiplier = 3600000;
+  } else if (timeAgo[1] === "minute") {
+    multiplier = 60000;
+  } else if (timeAgo[1] === "day") {
+    multiplier = 86400000;
+  } else if (timeAgo[1] === "week") {
+    multiplier = 604800000;
+  } else if (timeAgo[1] === "month") {
+    multiplier = 2629746000;
+  } else if (timeAgo[1] === "year") {
+    multiplier = 31557600000;
+  }
+  return Date.now() - numberOf * multiplier;
 }

@@ -8,7 +8,7 @@ module.exports = async function getLatestInstagramPosts() {
 
   let listOfInstagramUsernames = await InstagramUser.find({});
   // for (let user of listOfInstagramUsernames){
-  //   let newInstaUser = new InstagramUser({fullName: user.fullName, username: user.username})  
+  //   let newInstaUser = new InstagramUser({fullName: user.fullName, username: user.username})
   //   await newInstaUser.save()
   // }
 
@@ -30,7 +30,7 @@ module.exports = async function getLatestInstagramPosts() {
       results = results.slice(0, 3);
       return results;
     });
-
+    let lastInstagramCall = await LastAPICallTime.findOne({API: "instagram"});
     for (let link of latestPosts) {
       await page.goto(link, {waitUntil: "domcontentloaded"});
       let linkData = await page.evaluate(() => {
@@ -43,11 +43,13 @@ module.exports = async function getLatestInstagramPosts() {
           time: time,
         };
       });
-      latestInstagramPosts.push(linkData);
+      linkData.time = await parseTimeAgo(linkData.time)
+      // if (linkData.time > lastInstagramCall.time) {
+        latestInstagramPosts.push(linkData);
+      // }
     }
   }
 
-  await InstagramPost.deleteMany({});
   for (let instagramPost of latestInstagramPosts) {
     let newPost = new InstagramPost({
       path: instagramPost.path,
@@ -58,7 +60,9 @@ module.exports = async function getLatestInstagramPosts() {
   }
 
   let instaData = await InstagramPost.find({});
-  instaData = instaData.sort((a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time));
+  instaData = instaData.sort(
+    (a, b) => a.time - b.time
+  );
   if (instaData.length > 25) {
     for (let i = 0; i < instaData.length; i++) {
       if (i > 25) {
@@ -69,6 +73,11 @@ module.exports = async function getLatestInstagramPosts() {
   }
 
   console.log("Success!");
+  if (latestInstagramPosts.length !== 0) {
+    console.table(latestInstagramPosts);
+  } else {
+    console.log("No new instagram posts found...");
+  }
 
   await LastAPICallTime.deleteOne({API: "instagram"});
   let timeOfApiCallRequest = new LastAPICallTime({
@@ -78,26 +87,29 @@ module.exports = async function getLatestInstagramPosts() {
   await timeOfApiCallRequest.save();
 };
 
-//function to convert the instagram "time ago" measure of time into a number
+//function to convert "time ago" measure of time into time in ms
 function parseTimeAgo(timeAgo) {
   timeAgo = timeAgo.replace("s", "");
   timeAgo = timeAgo.split(" ");
   let numberOf;
   let multiplier;
-  if (timeAgo[1] === "year") {
-    return "tooLong";
-  }
   if (timeAgo[0] === "a") {
     numberOf = 1;
   } else {
     numberOf = parseInt(timeAgo[0]);
   }
   if (timeAgo[1] === "hour") {
-    multiplier = 1;
+    multiplier = 3600000;
+  } else if (timeAgo[1] === "minute") {
+    multiplier = 60000;
   } else if (timeAgo[1] === "day") {
-    multiplier = 24;
+    multiplier = 86400000;
+  } else if (timeAgo[1] === "week") {
+    multiplier = 604800000;
   } else if (timeAgo[1] === "month") {
-    multiplier = 30 * 24;
+    multiplier = 2629746000;
+  } else if (timeAgo[1] === "year") {
+    multiplier = 31557600000;
   }
-  return numberOf * multiplier;
+  return Date.now() - numberOf * multiplier;
 }

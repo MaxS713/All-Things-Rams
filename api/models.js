@@ -22,7 +22,7 @@ const twitterPickDataSchema = new mongoose.Schema({
 const instagramDataSchema = new mongoose.Schema({
   path: String,
   author: String,
-  time: String,
+  time: Number,
 });
 
 const instagramUserSchema = new mongoose.Schema({
@@ -38,7 +38,7 @@ const twitterUserSchema = new mongoose.Schema({
 const tikTokSchema = new mongoose.Schema({
   linkID: String,
   author: String,
-  time: String,
+  time: Number,
 });
 
 const newsArticleSchema = new mongoose.Schema({

@@ -14,7 +14,7 @@ const {
   PickTweet,
   SurveyData,
 } = require("./models.js");
-const getLatestPicksTweets = require("./get-data/get-twitter-data.js");
+const getLatestTweets = require("./get-data/get-twitter-data.js");
 const getLatestInstagramPosts = require("./get-data/get-instagram-data.js");
 const getLatestNewsData = require("./get-data/get-news-data.js");
 const getVideoData = require("./get-data/get-videos-data.js");
@@ -37,6 +37,8 @@ app.use(cors());
 app.use(express.json());
 
 (async function checkTimeOfLatestAPICall() {
+  await getLatestInstagramPosts();
+  await getTikTokVideos();
   let currentTime = Date.now();
   let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
   let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
@@ -46,17 +48,17 @@ app.use(express.json());
   let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
   let lastPicksCall = await LastAPICallTime.findOne({ API: "picks" });
 
+  if (!lastNewsCall || currentTime - lastNewsCall.time > 3600000) {
+    await getLatestNewsData();
+  }
   if (!lastTwitterCall || currentTime - lastTwitterCall.time > 3600000) {
-    await getLatestPicksTweets();
+    await getLatestTweets();
   }
   if (!lastInstagramCall || currentTime - lastInstagramCall.time > 43200000) {
     await getLatestInstagramPosts();
   }
   if (!lastTikTokCall || currentTime - lastTikTokCall.time > 21600000) {
     await getTikTokVideos();
-  }
-  if (!lastNewsCall || currentTime - lastNewsCall.time > 3600000) {
-    await getLatestNewsData();
   }
   if (!lastPodcastCall || currentTime - lastPodcastCall.time > 21600000) {
     await getPodcastData();
@@ -137,34 +139,10 @@ app.get("/get-more-tweets", async (req, res) => {
 });
 
 app.get("/get-instagram-posts", async (req, res) => {
-  //function to convert the instagram "time ago" measure of time into a number
-  function parseTimeAgo(timeAgo) {
-    timeAgo = timeAgo.replace("s", "");
-    timeAgo = timeAgo.split(" ");
-    let numberOf;
-    let multiplier;
-    if (timeAgo[1] === "year") {
-      return "tooLong";
-    }
-    if (timeAgo[0] === "a") {
-      numberOf = 1;
-    } else {
-      numberOf = parseInt(timeAgo[0]);
-    }
-    if (timeAgo[1] === "hour") {
-      multiplier = 1;
-    } else if (timeAgo[1] === "day") {
-      multiplier = 24;
-    } else if (timeAgo[1] === "week") {
-      multiplier = 24 * 7;
-    } else if (timeAgo[1] === "month") {
-      multiplier = 30 * 24;
-    }
-    return numberOf * multiplier;
-  }
+ 
   let allLatestInstagramPosts = await InstagramPost.find({});
   allLatestInstagramPosts = allLatestInstagramPosts.sort(
-    (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
+    (a, b) => a.time - b.time
   );
   let dataToSend = [allLatestInstagramPosts[0]];
   allLatestInstagramPosts.forEach((data) => {
@@ -182,34 +160,9 @@ app.get("/get-instagram-posts", async (req, res) => {
 });
 
 app.get("/get-more-instagram-posts", async (req, res) => {
-  //function to convert the instagram "time ago" measure of time into a number
-  function parseTimeAgo(timeAgo) {
-    timeAgo = timeAgo.replace("s", "");
-    timeAgo = timeAgo.split(" ");
-    let numberOf;
-    let multiplier;
-    if (timeAgo[1] === "year") {
-      return "tooLong";
-    }
-    if (timeAgo[0] === "a") {
-      numberOf = 1;
-    } else {
-      numberOf = parseInt(timeAgo[0]);
-    }
-    if (timeAgo[1] === "hour") {
-      multiplier = 1;
-    } else if (timeAgo[1] === "day") {
-      multiplier = 24;
-    } else if (timeAgo[1] === "week") {
-      multiplier = 24 * 7;
-    } else if (timeAgo[1] === "month") {
-      multiplier = 30 * 24;
-    }
-    return numberOf * multiplier;
-  }
   let allLatestInstagramPosts = await InstagramPost.find({});
   allLatestInstagramPosts = allLatestInstagramPosts.sort(
-    (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
+    (a, b) => a.time - b.time
   );
   let dataToSend = [allLatestInstagramPosts[0]];
   allLatestInstagramPosts.forEach((data) => {
@@ -227,30 +180,9 @@ app.get("/get-more-instagram-posts", async (req, res) => {
 });
 
 app.get("/get-tiktok-posts", async (req, res) => {
-  //function to convert the instagram "time ago" measure of time into a number
-  function parseTimeAgo(timeAgo) {
-    timeAgo = timeAgo.replace("s", "");
-    timeAgo = timeAgo.split(" ");
-    let numberOf;
-    let multiplier;
-    if (timeAgo[1] === "year") {
-      return "tooLong";
-    }
-    numberOf = parseInt(timeAgo[0]);
-    if (timeAgo[1] === "hour") {
-      multiplier = 1;
-    } else if (timeAgo[1] === "day") {
-      multiplier = 24;
-    } else if (timeAgo[1] === "week") {
-      multiplier = 24 * 7;
-    } else if (timeAgo[1] === "month") {
-      multiplier = 30 * 24;
-    }
-    return numberOf * multiplier;
-  }
   let allLatestTikTokPosts = await TikTokVideo.find({});
   allLatestTikTokPosts = allLatestTikTokPosts.sort(
-    (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
+    (a, b) => a.time - b.time
   );
   let dataToSend = [allLatestTikTokPosts[0]];
   allLatestTikTokPosts.forEach((data) => {
@@ -268,30 +200,9 @@ app.get("/get-tiktok-posts", async (req, res) => {
 });
 
 app.get("/get-more-tiktok-posts", async (req, res) => {
-  //function to convert the instagram "time ago" measure of time into a number
-  function parseTimeAgo(timeAgo) {
-    timeAgo = timeAgo.replace("s", "");
-    timeAgo = timeAgo.split(" ");
-    let numberOf;
-    let multiplier;
-    if (timeAgo[1] === "year") {
-      return "tooLong";
-    }
-    numberOf = parseInt(timeAgo[0]);
-    if (timeAgo[1] === "hour") {
-      multiplier = 1;
-    } else if (timeAgo[1] === "day") {
-      multiplier = 24;
-    } else if (timeAgo[1] === "week") {
-      multiplier = 24 * 7;
-    } else if (timeAgo[1] === "month") {
-      multiplier = 30 * 24;
-    }
-    return numberOf * multiplier;
-  }
   let allLatestTikTokPosts = await TikTokVideo.find({});
   allLatestTikTokPosts = allLatestTikTokPosts.sort(
-    (a, b) => parseTimeAgo(a.time) - parseTimeAgo(b.time)
+    (a, b) => a.time - b.time
   );
   let dataToSend = [allLatestTikTokPosts[0]];
   allLatestTikTokPosts.forEach((data) => {

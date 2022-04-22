@@ -27,14 +27,8 @@ module.exports = async function getLatestTweets() {
       max_results: 5,
     });
     for (let tweet of latestTweets.tweets) {
-      let storedTweetData = await Tweet.find({});
-      let hasDuplicate = false;
-      for (let storedTweet of storedTweetData) {
-        if (tweet.id === storedTweet.ID) {
-          hasDuplicate = true;
-        }
-      }
-      if (hasDuplicate !== true) {
+      let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
+      if (tweetIDToTime(tweet.id)>lastTwitterCall.time) {
         allTweetsData.push({
           author: twitterUser.twitterHandle,
           text: tweet.text.slice(15) + "...",
@@ -43,10 +37,6 @@ module.exports = async function getLatestTweets() {
       }
     }
   }
-
-  // //Sorting Tweet Data by ID#
-  // console.log(`Sorting Data...`);
-  // allTweetsData = allTweetsData.sort((a, b) => b.ID - a.ID);
 
   for (let tweet of allTweetsData) {
     let newTweet = new Tweet({
@@ -82,3 +72,7 @@ module.exports = async function getLatestTweets() {
   });
   await timeOfApiCallRequest.save();
 };
+
+function tweetIDToTime(tweetId) {
+  return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
+}
