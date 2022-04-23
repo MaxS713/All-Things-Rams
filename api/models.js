@@ -6,8 +6,7 @@ mongoose.connect(
 );
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
-// allthingsramsofficial
-// eOb6pAo0Yq4KJ10w
+
 const twitterDataSchema = new mongoose.Schema({
   author: String,
   text: String,
@@ -36,6 +35,10 @@ const twitterUserSchema = new mongoose.Schema({
   userID: String,
 });
 
+const tiktokUserSchema = new mongoose.Schema({
+  username: String,
+});
+
 const tikTokSchema = new mongoose.Schema({
   linkID: String,
   author: String,
@@ -62,6 +65,11 @@ const podcastSchema = new mongoose.Schema({
   timeString: String,
   image: String,
   sourceLogoRef: String,
+});
+
+const podcastUserSchema = new mongoose.Schema({
+  podcastName: String,
+  searchID: Number,
 });
 
 const videosLinkSchema = new mongoose.Schema({
@@ -94,14 +102,14 @@ const lastAPICallTimeSchema = new mongoose.Schema({
 const surveyDataSchema = new mongoose.Schema({
   surveyQuestion: String,
   textAnswer1: String,
-  votesAnswer1: { type: Number, default: 0 },
+  votesAnswer1: {type: Number, default: 0},
   textAnswer2: String,
-  votesAnswer2: { type: Number, default: 0 },
+  votesAnswer2: {type: Number, default: 0},
   textAnswer3: String,
-  votesAnswer3: { type: Number, default: 0 },
+  votesAnswer3: {type: Number, default: 0},
   textAnswer4: String,
-  votesAnswer4: { type: Number, default: 0 },
-  ipAdresses: { type: Array, default: ["1"] }
+  votesAnswer4: {type: Number, default: 0},
+  ipAddresses: {type: Array, default: ["1"]},
 });
 
 const Tweet = mongoose.model("Tweet", twitterDataSchema);
@@ -110,8 +118,10 @@ const TwitterUser = mongoose.model("TwitterUser", twitterUserSchema);
 const InstagramPost = mongoose.model("InstagramPost", instagramDataSchema);
 const InstagramUser = mongoose.model("InstagramUser", instagramUserSchema);
 const TikTokVideo = mongoose.model("TikTokVideo", tikTokSchema);
+const TikTokUser = mongoose.model("TikTokUser", tiktokUserSchema);
 const NewsArticle = mongoose.model("NewsArticle", newsArticleSchema);
 const Podcast = mongoose.model("Podcasts", podcastSchema);
+const PodcastUser = mongoose.model("PodcastUser", podcastUserSchema);
 const Video = mongoose.model("Videos", videosLinkSchema);
 const LastAPICallTime = mongoose.model(
   "LastAPICallTime",
@@ -127,9 +137,11 @@ module.exports = {
   TwitterUser,
   InstagramPost,
   InstagramUser,
+  TikTokUser,
   TikTokVideo,
   NewsArticle,
   Podcast,
+  PodcastUser,
   Video,
   LastAPICallTime,
   SurveyData,

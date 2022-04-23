@@ -58,9 +58,9 @@ export default function Twitter(props) {
   async function getServerData() {
     let tweetsData;
     if (props.location === "socials") {
-      tweetsData = await fetch(`http://localhost:5000/get-more-tweets`);
+      tweetsData = await fetch("api/get-more-tweets");
     } else {
-      tweetsData = await fetch(`http://localhost:5000/get-latest-tweets`);
+      tweetsData = await fetch("api/get-latest-tweets");
     }
     tweetsData = await tweetsData.json();
     tweetsData.forEach((tweet) => {

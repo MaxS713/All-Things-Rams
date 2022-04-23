@@ -51,9 +51,9 @@ export default function Instagram(props) {
   async function getServerData() {
     let instagramPostsData
     if (props.location === "socials") {
-      instagramPostsData = await fetch(`http://localhost:5000/get-more-instagram-posts`);
+      instagramPostsData = await fetch("api/get-more-instagram-posts");
     } else {
-      instagramPostsData = await fetch(`http://localhost:5000/get-instagram-posts`);
+      instagramPostsData = await fetch("api/get-instagram-posts");
     }
     instagramPostsData = await instagramPostsData.json();
     setInstagramData(instagramPostsData);

@@ -24,7 +24,7 @@ export default function SubmitForm() {
       attachment: attachment.value,
     };
 
-    let response = await fetch("http://localhost:5000/submit", {
+    let response = await fetch("api/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

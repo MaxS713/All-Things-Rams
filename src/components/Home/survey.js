@@ -14,12 +14,12 @@ export default function Survey() {
   const [wrapperClass, setWrapperClass] = useState("survey-wrapper");
 
   async function getSurveyData() {
-    let data = await fetch("http://localhost:5000/get-survey-data");
+    let data = await fetch("api/get-survey-data");
     let res = await axios.get('https://geolocation-db.com/json/')
     data = await data.json();
     setSurveyData(data)
     setCurrentUserIP(res.data.IPv4)
-    if (data.ipAdresses.includes(res.data.IPv4)){
+    if (data.ipAddresses.includes(res.data.IPv4)){
       setHasVoted(true)
       setWrapperClass("voted-survey-wrapper")
     }
@@ -37,7 +37,7 @@ export default function Survey() {
 
   async function vote(item: Result, results: Result[]) {
     item = {...item, ip: currentUserIP}
-    await fetch("http://localhost:5000/post-survey-vote", {
+    await fetch("api/post-survey-vote", {
       headers: { "content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(item),

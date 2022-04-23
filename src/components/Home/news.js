@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import "./styles/news.css";
 
 export default function LatestNews(props) {
@@ -7,11 +7,9 @@ export default function LatestNews(props) {
   async function getServerData() {
     let newsArticlesData;
     if (props.location === "news") {
-      newsArticlesData = await fetch(
-        `http://localhost:5000/get-more-news-article`
-      );
+      newsArticlesData = await fetch("api/get-more-news-article");
     } else {
-      newsArticlesData = await fetch(`http://localhost:5000/get-news-article`);
+      newsArticlesData = await fetch("api/get-news-article");
     }
     newsArticlesData = await newsArticlesData.json();
     newsArticlesData.forEach((article) => {

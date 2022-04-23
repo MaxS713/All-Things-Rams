@@ -1,4 +1,4 @@
-const {TikTokVideo, LastAPICallTime} = require("../models.js");
+const {TikTokVideo, TikTokUser, LastAPICallTime} = require("../models.js");
 const puppeteer = require("puppeteer");
 
 //------------------ Get Instagram Data -----------------//
@@ -6,20 +6,15 @@ module.exports = async function getTikTokVideos() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  let listOfTikTokUsers = [
-    "offical.aaron.donald",
-    "cooperkupp",
-    "rams",
-    "jalen5ramsey",
-  ];
+  let listOfTikTokUsers = await TikTokUser.find({})
 
   let latestTikTokPosts = [];
   let lastTikTokCall = await LastAPICallTime.findOne({API: "tiktok"});
   for (let user of listOfTikTokUsers) {
-    await page.goto(`https://urlebird.com/user/${user}/`, {
+    await page.goto(`https://urlebird.com/user/${user.username}/`, {
       waitUntil: "domcontentloaded",
     });
-    console.log(`Getting TikTok Data from @${user}`);
+    console.log(`Getting TikTok Data from @${user.username}`);
     let latestPosts = await page.evaluate(() => {
       let results = [];
       let dates = [];
@@ -54,7 +49,7 @@ module.exports = async function getTikTokVideos() {
     latestPosts = latestPosts.slice(0, 6);
     for (let post of latestPosts) {
       if (post.date > lastTikTokCall.time) {
-        post = {...post, author: user};
+        post = {...post, author: user.username};
         latestTikTokPosts.push(post);
       }
     }

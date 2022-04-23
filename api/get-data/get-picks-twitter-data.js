@@ -54,7 +54,7 @@ module.exports = async function getLatestPickTweets() {
     for (let i = 0; i < tweetData.length; i++) {
       if (i >25) {
         let currentID = tweetData[i]._id;
-        await Tweet.deleteOne({ _id: currentID });
+        await PickTweet.deleteOne({ _id: currentID });
       }
     }
   }

@@ -15,6 +15,7 @@ class HttpError extends Error {
 }
 
 export const fetchJson = (url, options) => {
+    console.log(HttpError)
     const requestHeaders =
         options.headers ||
         new Headers({
