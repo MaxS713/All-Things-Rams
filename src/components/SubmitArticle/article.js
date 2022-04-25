@@ -28,7 +28,7 @@ export default function SubmitForm() {
     data.append("email", email.value);
     data.append("file", file);
     console.log(...data);
-    let response = await fetch("api/submit", {
+    let response = await fetch("https://all-thing-rams-server.herokuapp.com/api/submit", {
       method: "POST",
       body: data,
     });

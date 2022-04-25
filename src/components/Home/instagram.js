@@ -51,9 +51,9 @@ export default function Instagram(props) {
   async function getServerData() {
     let instagramPostsData
     if (props.location === "socials") {
-      instagramPostsData = await fetch("api/get-more-instagram-posts");
+      instagramPostsData = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-more-instagram-posts");
     } else {
-      instagramPostsData = await fetch("api/get-instagram-posts");
+      instagramPostsData = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-instagram-posts");
     }
     instagramPostsData = await instagramPostsData.json();
     setInstagramData(instagramPostsData);

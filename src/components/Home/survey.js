@@ -15,7 +15,7 @@ export default function Survey() {
   const [surveyResults, setSurveyResults] = useState([]);
 
   async function getSurveyData() {
-    let data = await fetch("api/get-survey-data");
+    let data = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-survey-data");
     let res = await axios.get("https://geolocation-db.com/json/");
     data = await data.json();
     setSurveyData(data);
@@ -68,7 +68,7 @@ export default function Survey() {
 
   async function vote(item: Result, results: Result[]) {
     item = { ...item, ip: currentUserIP };
-    await fetch("api/post-survey-vote", {
+    await fetch("https://all-thing-rams-server.herokuapp.com/api/post-survey-vote", {
       headers: { "content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(item),

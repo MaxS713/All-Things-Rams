@@ -12,7 +12,7 @@ export default function FeaturedNewsCarousel() {
   const [newsArticleData, setNewsArticleData] = useState([]);
 
   async function getServerData() {
-    let newsArticlesData = await fetch("api/get-featured-news");
+    let newsArticlesData = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-featured-news");
     newsArticlesData = await newsArticlesData.json();
     newsArticlesData.forEach((article) => {
       article.time = Date.parse(article.time);
