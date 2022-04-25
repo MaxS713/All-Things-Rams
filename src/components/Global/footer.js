@@ -29,24 +29,24 @@ export default function Footer() {
             <a className="footer-link" href="/about">
               <li>About</li>
             </a>
-            <li className="separation">|</li>
+            <li className="separation">&nbsp;|&nbsp;</li>
             <a className="footer-link" href="/contact">
               <li>Contact</li>
             </a>
-            <li className="separation">|</li>
+            <li className="separation">&nbsp;&nbsp;|&nbsp;&nbsp;</li>
             <a className="footer-link" href="/contact">
               {/* Currently Suggestions goes to the contact page */}
               <li>Suggestions</li>
             </a>
-            <li className="separation">|</li>
+            <li className="separation">&nbsp;&nbsp;|&nbsp;&nbsp;</li>
             <a className="footer-link" href="/privacy-policy">
               <li>Privacy Policy</li>
             </a>
-            <li className="separation">|</li>
+            <li className="separation">&nbsp;&nbsp;|&nbsp;&nbsp;</li>
             <a className="footer-link" href="/terms-of-use">
               <li>Terms of Use</li>
             </a>
-            <li className="separation">|</li>
+            <li className="separation">&nbsp;&nbsp;|&nbsp;&nbsp;</li>
             <a className="footer-link" href="/admin-login">
               <li>Admin Login</li>
             </a>

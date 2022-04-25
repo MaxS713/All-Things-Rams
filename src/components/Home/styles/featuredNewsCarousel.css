@@ -14,7 +14,6 @@
 
 .carousel-img{
   object-fit: cover;
-  min-height:50vh;
   max-width: 100%;
   /* max-height: 100%; */
   margin:0 auto;
@@ -63,9 +62,13 @@
     padding: 0;
     width:100%;
   }
-  .carousel-img{
-  object-fit: cover;
+  #featured-news-container {
+    width:100%;
+  }
 
+  .carousel-img{
+  width: 100;
+  max-height:50vh;
   margin:0 auto;
   margin-top: 3vw;
   padding:0;

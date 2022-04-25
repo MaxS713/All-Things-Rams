@@ -65,7 +65,7 @@ export default function About() {
               <h2>Our Team</h2>
 
               {/* ------------------- Joey -------------------  */}
-              <h3>Joey Viner</h3>
+              <h3 className="team-name">Joey Viner</h3>
               <div className="staff">
                 <div className="staff-img">
                   <img
@@ -94,7 +94,7 @@ export default function About() {
               </div>
 
               {/* ------------------- Catherine -------------------  */}
-              <h3>Catherine Viner</h3>
+              <h3 className="team-name">Catherine Viner</h3>
               <div className="staff">
                 <div className="staff-img">
                   <img
@@ -121,7 +121,7 @@ export default function About() {
               </div>
 
               {/* ------------------- Pierson -------------------  */}
-              <h3>Pierson Beatty</h3>
+              <h3 className="team-name">Pierson Beatty</h3>
               <div className="staff">
                 <div className="staff-img">
                   <img

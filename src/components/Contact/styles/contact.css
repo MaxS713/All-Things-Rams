@@ -3,10 +3,9 @@ input {
   border: none;
   border-bottom: black solid 1px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1vw;
+  font-size: 1.25vw;
   margin: 0.75vw 3.5vw;
 }
-
 textarea {
   resize: none;
   font-family: Arial, Helvetica, sans-serif;
@@ -16,9 +15,8 @@ textarea {
   padding: 7px;
   border: 2px solid #ffc95c;
   border-radius: 5px;
-  font-size: 1vw;
+  font-size: 1.25vw;
 }
-
 /* Changes by Id */
 /* Title of Page */
 #contact {
@@ -28,56 +26,50 @@ textarea {
   margin-left: 3vw;
   padding-top: 2vw;
 }
-
 /* paragraph text */
 #suggestions {
   font-family: Arial, Helvetica, sans-serif;
-  width: 34%;
+  width: 46%;
   margin-left: 3vw;
-  font-size: 1vw;
+  font-size: 1.25vw;
   text-align: justify;
-  line-height: 1.5vw;
+  line-height: 2vw;
 }
-
 #suggest-tag {
   font-family: Arial, Helvetica, sans-serif;
-  width: 34%;
+  width: 46%;
   margin-left: 3vw;
-  font-size: 1vw;
+  font-size: 1.25vw;
   /* text-align: justify; */
   color: rgb(3, 7, 124);
   font-style: italic;
-  line-height: 1.5vw;
+  line-height: 2vw;
 }
-
 /* Button */
 #submit {
-  padding: .6vw;
-  font-size: 1vw;
+  padding: 0.75vw;
+  font-size: 1.25vw;
   color: white;
   background-color: rgb(3, 7, 124);
   border: none;
   border-radius: 0.25rem;
-  font-family: "Graduate", cursive;
+  font-family: Arial, Helvetica, sans-serif;
   box-shadow: 2px 5px 5px 1px rgb(132, 132, 132);
   margin-left: 4vw;
   margin-bottom: 1.5vw;
   transition-duration: 0.5s;
 }
-
 /* Button on Hover */
 #submit:hover {
   background-color: rgb(220, 218, 218);
   color: rgb(3, 7, 124);
   transition: 0.7s;
 }
-
 /* message box */
 #message {
   min-width: 36%;
   height: 180px;
 }
-
 /* wrapper on entire container */
 #mega-wrapper {
   display: flex;
@@ -85,7 +77,6 @@ textarea {
   align-items: center;
   margin: 1rem;
 }
-
 /* CSS Changes by Class Name */
 /* Outer Container for form */
 .form-container {
@@ -98,7 +89,6 @@ textarea {
   background-color: white;
   border-radius: 5px;
 }
-
 button[disabled] {
   background-color: rgb(3, 7, 124);
   opacity: 60%;
@@ -114,19 +104,19 @@ button[disabled] {
     font-family: Arial, Helvetica, sans-serif;
     width: 75%;
     margin-left: 3vw;
-    font-size: 2.15vw;
-    line-height: 3.5vw;
+    font-size: 2vw;
+    line-height: 3vw;
   }
   #suggest-tag {
     font-family: Arial, Helvetica, sans-serif;
     width: 75%;
     margin-left: 3vw;
-    font-size: 2.15vw;
-    line-height: 3.5vw;
+    font-size: 2vw;
+    line-height: 3vw;
   }
   /* message box */
   #message {
-    min-width: 75%;
+    min-width: 55%;
     height: 180px;
     margin-top: 3vw;
   }
@@ -136,14 +126,14 @@ button[disabled] {
     line-height: 3.5vw;
   }
   #submit {
-    min-width: 10vw;
+    padding: 1vw;
     font-size: 2vw;
-    padding: 1.5vw;
     margin-bottom: 3vw;
   }
   input {
     min-width: 20vw;
     font-size: 2vw;
+    margin-top: 2vw;
   }
   textarea {
     font-size: 2vw;
@@ -158,22 +148,22 @@ button[disabled] {
   /* text */
   #suggestions {
     font-family: Arial, Helvetica, sans-serif;
-    width: 80%;
+    width: 90%;
     margin-left: 3vw;
-    font-size: 3.25vw;
-    line-height: 4.75vw;
+    font-size: 3vw;
+    line-height: 4vw;
   }
   #suggest-tag {
     font-family: Arial, Helvetica, sans-serif;
-    width: 80%;
+    width: 90%;
     margin-left: 3vw;
-    font-size: 3.25vw;
-    line-height: 4.75vw;
+    font-size: 3vw;
+    line-height: 4vw;
   }
 
   /* message box */
   #message {
-    min-width: 75%;
+    min-width: 80%;
     height: 180px;
   }
   /* button */
@@ -182,18 +172,17 @@ button[disabled] {
     line-height: 3.5vw;
   }
   #submit {
-    min-width: 10vw;
     font-size: 3vw;
     padding: 2vw;
     margin-bottom: 3vw;
   }
   input {
     min-width: 20vw;
-    font-size: 3vw;
+    font-size: 3.25vw;
     margin-top: 3vw;
+    margin-bottom: 1vw;
   }
   textarea {
-    margin-top: 6vw;
-    font-size: 3vw;
+    font-size: 3.25vw;
   }
 }
