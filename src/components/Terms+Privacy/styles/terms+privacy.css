@@ -90,8 +90,8 @@ p.tp-content {
 /* Iphone */
 @media screen and (max-width: 600px) {
   p.tp-content {
-    font-size: 3vw;
     text-align: justify;
+    font-size: 3vw;
     line-height: 4vw;
   }
   #tp-list {
@@ -103,10 +103,10 @@ p.tp-content {
     min-height: 60vw;
   }
   #tp-title {
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
   .tp-subtitle{
-    font-size: 3vw;
+    font-size: 3.5vw;
   }
   .terms-contact {
     margin-top: 6vw;

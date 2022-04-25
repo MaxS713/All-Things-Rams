@@ -12,8 +12,7 @@
 }
 
 #latest-news {
-  min-height:100%;
-  max-height: 50vh;
+  max-height: clamp(46vh, 1.5rem, 25vh);
 
   width:100%;
   position: relative;
