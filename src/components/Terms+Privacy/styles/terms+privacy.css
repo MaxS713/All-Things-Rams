@@ -6,7 +6,7 @@ p.tp-content {
 }
 /* Changes by id */
 #tp-section {
-  padding-bottom: 1.5vw;
+  padding-bottom: 2vw;
 }
 /* Content Container */
 #tp-wrapper {
@@ -25,11 +25,6 @@ p.tp-content {
   padding-top: 1.5vw;
 }
 
-/* list for terms page */
-#tp-list {
-  font-size: 0.9vw;
-  margin-left: 2vw;
-}
 #terms-date {
   padding-top: 1.5vw;
 }
@@ -48,24 +43,25 @@ p.tp-content {
 
 /* Contact details contianer */
 .terms-contact {
-  font-size: 0.75vw;
   margin-top: 2vw;
   margin-bottom: -1vw;
 }
 
 /* Contact details content */
-.tp-contact{
+.tp-contact {
   margin-left: 5vw;
-  font-size: .9vw;
-  margin-top: -.75vw;
+  font-size: 1vw;
+  margin-top: -0.75vw;
 }
 
 
 
+/* Ipad */
 @media screen and (max-width: 800px) {
-  .tp-content {
+  p.tp-content {
     font-size: 2vw;
-
+    text-align: justify;
+    line-height: 3vw;
   }
   #tp-list {
     font-size: 3vw;
@@ -75,4 +71,50 @@ p.tp-content {
     width: 75%;
     min-height: 60vw;
   }
+  #tp-title {
+    font-size: 2.5vw;
+  }
+  .tp-subtitle{
+    font-size: 2vw;
+  }
+  .terms-contact {
+    margin-top: 3vw;
+    margin-bottom: -1vw;
+  }
+  .tp-contact {
+    font-size: 1.5vw;
+    line-height: 1.5vw;
+  }
 }
+
+/* Iphone */
+@media screen and (max-width: 600px) {
+  p.tp-content {
+    font-size: 3vw;
+    text-align: justify;
+    line-height: 4vw;
+  }
+  #tp-list {
+    font-size: 3vw;
+    margin-left: -1.5vw;
+  }
+  #tp-wrapper {
+    width: 80%;
+    min-height: 60vw;
+  }
+  #tp-title {
+    font-size: 3.5vw;
+  }
+  .tp-subtitle{
+    font-size: 3vw;
+  }
+  .terms-contact {
+    margin-top: 6vw;
+    margin-bottom: -1vw;
+  }
+  .tp-contact {
+    font-size: 3vw;
+    line-height: 2vw;
+  }
+}
+

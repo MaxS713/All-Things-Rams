@@ -16,7 +16,7 @@ export default function Footer() {
     <>
       <footer>
         <p id="main-disclaimer">
-          &copy; {getCopyrightYear()} - AllThingsFootball.us - All Rights
+          &copy; {getCopyrightYear()} - AllThingsRams.com - All Rights
           Reserved. The content on this site is for entertainment and
           educational purposes only.
           <br></br> All Things Rams is not affiliated with the L.A. Rams or the

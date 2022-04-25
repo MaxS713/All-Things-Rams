@@ -5,6 +5,7 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
+  width:33%
 }
 
 #tweets-wrapper {
@@ -49,16 +50,29 @@
   background-color: rgb(4, 9, 135);
 }
 /* Media Querys for mobile and small display responsiveness */
-@media screen and (width: 600px) {
+@media screen and (width: 400px) {
+#tweets-wrapper{
+  align-items: start;
+  justify-content: start;
+}
+#tweets-embed{
+  align-items: start;
+  justify-content: start;
+
+}
 }
 @media only screen and (max-width: 800px) {
+  #tweets-container {
+    width:100%;
+  }
   #tweets-wrapper {
-    height: 30vh;
+    height: 40vh;
   }
   #tweets-embed p span {
-    font-size: 2vw;
+    font-size: 2vh;
   }
   #tweets-embed p {
-    font-size: 1.5vw;
+    font-size: 1.5vh;
+    padding:0;
   }
 }

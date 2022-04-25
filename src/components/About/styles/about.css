@@ -1,33 +1,35 @@
 /* Page Container */
 #about {
   margin: auto;
-  width: 70vw;
+  width: 85vw;
   background-color: white;
   border-radius: 5px;
   margin-bottom: 1rem;
   margin-top: 1rem;
   padding-bottom: 2vw;
 }
-/* About Content Container - both columns */
-#about-wrapper {
-  display: flex;
-}
+
 /* About All Things Rams */
 #about-title {
   font-family: "Graduate", cursive;
   font-size: 2vw;
   color: rgb(4, 9, 135);
-  padding-top: .75vw;
+  padding-top: 2vw;
+  margin-left: 1.5vw;
 }
 /* About Paragraph */
 #about-head p {
-  max-width: 90%;
+  max-width: 100%;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.9vw;
+  font-size: 1vw;
+  line-height: 1.5vw;
   text-align: justify;
+  margin-left: 1.5vw;
+  margin-Right: 1.5vw;
 }
 #about-head {
   margin-left: 2vw;
+  margin-right: 1.5vw;
 }
 /* ---------------------------------------------------------- */
 
@@ -39,68 +41,96 @@
   padding: 0.5vw;
   border-radius: 5px;
   font-size: 1.5vw;
-  margin-top: 7vw;
-  margin-right: 2vw;
-  
+  margin-top: 3vw;
+  margin-right: 3vw;
+  margin-left: 3vw;
 }
 
 /* Team member about paragraph */
 .staff-about p {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.9vw;
+  font-size: 1vw;
   text-align: justify;
-  width: 28vw;
+  width: 50vw;
   padding-left: 1vw;
-  padding-right: 4vw;
+  padding-right: 2.5vw;
+  line-height: 1.5vw;
 }
 
 /* Team member name */
 .staff-about h3 {
   margin-left: 1vw;
-  font-size: 1.1vw;
+  font-size: 1.5vw;
 }
 
 /* Right column container for image and text */
 .staff {
   display: flex;
+  margin-left: 4.5vw;
 }
 
 /* Photograph of team member */
-.about-photo{
-    max-width: 12.25vw;
-    margin: 1vw;
-    border: 3px solid rgba(255, 201, 92);
-    border-radius: 10px;
-    margin-top: 1.25vw;
+.about-photo {
+  max-width: 20vw;
+  margin: 1vw;
+  border: 3px solid rgba(255, 201, 92);
+  border-radius: 10px;
+  margin-top: 1.5vw;
 }
 
 /* ---------- Media Query --------- */
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 800px) {
+  #about-head p {
+    font-size: 2vw;
+    line-height: 2.5vw;
+  }
+  .staff-about h3 {
+    margin-left: 1vw;
+    font-size: 1.5vw;
+  }
+  .staff-about p {
+    font-size: 2vw;
+    line-height: 2.5vw;
+  }
+  #team-wrapper h2 {
+    font-size: 2.5vw;
+  }
+  .staff-about h3 {
+
+    font-size: 2.5vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #about-title {
+    font-size: 4vw;
+  }
   #about-wrapper {
     display: flex;
     flex-direction: column;
-  }#team-wrapper h2 {
+  }
+  #team-wrapper h2 {
     font-family: "Graduate", cursive;
     color: white;
     background-color: rgba(3, 7, 124);
     padding: 0.5vw;
     border-radius: 5px;
     font-size: 1.5vw;
-    margin-top: 3vw;
-    margin-right: 2vw;
-    margin-left: 2vw;
+    margin-right: auto;
   }
-  #about-head p{
+  #about-head p {
     max-width: 100%;
-    margin-right:2vw;
+    font-size: 3vw;
+    line-height: 4vw;
   }
-  .staff{
-    justify-content: center;
-    
+  .staff {
+    display: flex;
+    flex-direction: column;
   }
-  .staff-about p{
-    width: 45vw;
+  .staff-about p {
+    width: 75vw;
+    font-size: 3vw;
+    line-height: 4vw;
   }
-
 }

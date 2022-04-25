@@ -48,7 +48,6 @@ export default function Header() {
             </div>
           </Link>
         </div>
-
         <Navbar />
       </div>
     </>

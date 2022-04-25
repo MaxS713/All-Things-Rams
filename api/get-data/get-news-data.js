@@ -15,6 +15,9 @@ module.exports = async function getLatestNewsData() {
   });
   let ramblinLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".article-meta .title a");
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((links) => {
       let link = links.href;
@@ -23,30 +26,40 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-
-  for (let link of ramblinLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".article-header h1").innerText;
-      let time = document.querySelector("time");
-      time = time.getAttribute("datetime");
-      let summary = document.querySelector(".speakable-content").innerText;
-      let imageLink = document.querySelector('[property="og:image"]');
-      if (imageLink !== null) {
-        imageLink = imageLink.getAttribute("content");
+  if (ramblinLinks) {
+    for (let link of ramblinLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".article-header h1");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector("time");
+        if (time) {
+          time = time.getAttribute("datetime");
+        } else {
+          return;
+        }
+        let imageLink = document.querySelector('[property="og:image"]');
+        if (imageLink) {
+          imageLink = imageLink.getAttribute("content");
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "Ramblin Fan",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
       }
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "Ramblin Fan",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
     }
   }
 
@@ -57,6 +70,9 @@ module.exports = async function getLatestNewsData() {
   });
   let ramsWireLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll("header .bundle .post .post__title");
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((links) => {
       let link = links.href;
@@ -65,31 +81,40 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of ramsWireLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "networkidle2", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".entry__title__wrapper h1").innerText;
-      let time = document.querySelector('[itemprop="datePublished"]');
-      time = time.getAttribute("content");
-      let summary = document.querySelector(
-        "#content-container .articleBody p"
-      ).innerText;
-      let imageLink = document.querySelector(".article__thumbnail img");
-      if (imageLink !== null) {
-        imageLink = imageLink.src;
+  if (ramsWireLinks) {
+    for (let link of ramsWireLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "networkidle2", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".entry__title__wrapper h1");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector('[itemprop="datePublished"]');
+        if (time) {
+          time = time.getAttribute("content");
+        } else {
+          return;
+        }
+        let imageLink = document.querySelector(".article__thumbnail img");
+        if (imageLink) {
+          imageLink = imageLink.src;
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "Ramswire - USA Today",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
       }
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "Ramswire - USA Today",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
     }
   }
 
@@ -100,6 +125,9 @@ module.exports = async function getLatestNewsData() {
   });
   let turfLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll('[data-analytics-link="article"]');
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((links) => {
       let link = links.href;
@@ -108,29 +136,40 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of turfLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".c-page-title").innerText;
-      let time = document.querySelector('[data-ui="timestamp"]');
-      time = time.getAttribute("datetime");
-      let summary = document.querySelector(".c-entry-content p").innerText;
-      let imageLink = document.querySelector(".c-picture img");
-      if (imageLink !== null) {
-        imageLink = imageLink.src;
+  if (turfLinks) {
+    for (let link of turfLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".c-page-title");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector('[data-ui="timestamp"]');
+        if (time) {
+          time = time.getAttribute("datetime");
+        } else {
+          return;
+        }
+        let imageLink = document.querySelector(".c-picture img");
+        if (imageLink) {
+          imageLink = imageLink.src;
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "Turf Show Times",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
       }
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "Turf Show Times",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
     }
   }
 
@@ -141,6 +180,9 @@ module.exports = async function getLatestNewsData() {
   });
   let downtownRamsLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".list-post .entry-title a");
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((links) => {
       let link = links.href;
@@ -149,29 +191,40 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of downtownRamsLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".post-title").innerText;
-      let time = document.querySelector(".entry-date");
-      time = time.getAttribute("datetime");
-      let summary = document.querySelector(".entry-content p").innerText;
-      let imageLink = document.querySelector(".post-image a");
-      if (imageLink !== null) {
-        imageLink = imageLink.href;
+  if (downtownRamsLinks) {
+    for (let link of downtownRamsLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".post-title");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector(".entry-date");
+        if (time) {
+          time = time.getAttribute("datetime");
+        } else {
+          return;
+        }
+        let imageLink = document.querySelector(".post-image a");
+        if (imageLink) {
+          imageLink = imageLink.href;
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "Downtown Rams",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
       }
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "Downtown Rams",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
     }
   }
 
@@ -182,6 +235,9 @@ module.exports = async function getLatestNewsData() {
   );
   let proFootballTalkLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".entry-header .entry-title a");
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((links) => {
       let link = links.href;
@@ -190,28 +246,40 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of proFootballTalkLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".entry-title").innerText;
-      let time = document.querySelector(".entry-date").innerText;
-      let summary = document.querySelector(".entry-content p").innerText;
-      let imageLink = document.querySelector(".entry-content img");
-      if (imageLink !== null) {
-        imageLink = imageLink.src;
+  if (proFootballTalkLinks) {
+    for (let link of proFootballTalkLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".entry-title");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector(".entry-date");
+        if (time) {
+          time = time.innerText;
+        } else {
+          return;
+        }
+        let imageLink = document.querySelector(".entry-content img");
+        if (imageLink) {
+          imageLink = imageLink.src;
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "NBC Sports",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
       }
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "NBC Sports",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
     }
   }
 
@@ -224,6 +292,9 @@ module.exports = async function getLatestNewsData() {
     let posts = document.querySelectorAll(
       "#archive-list-wrap .infinite-post a"
     );
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((links) => {
       let link = links.href;
@@ -232,33 +303,40 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of ramsTalkLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "networkidle2", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let findPodcast = document.querySelector("#content-main iframe");
-      if (findPodcast !== null) {
-        return;
+  if (ramsTalkLinks) {
+    for (let link of ramsTalkLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "networkidle2", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let findPodcast = document.querySelector("#content-main iframe");
+        if (findPodcast !== null) {
+          return;
+        }
+        let title = document.querySelector(".post-title");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector(".post-date time");
+        time = time.getAttribute("datetime");
+        let imageLink = document.querySelector("#post-feat-img img");
+        if (imageLink) {
+          imageLink = imageLink.src;
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "Rams Talk",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
       }
-      let title = document.querySelector(".post-title").innerText;
-      let time = document.querySelector(".post-date time");
-      time = time.getAttribute("datetime");
-      let summary = document.querySelector("#content-main p").innerText;
-      let imageLink = document.querySelector("#post-feat-img img");
-      if (imageLink !== null) {
-        imageLink = imageLink.src;
-      }
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "Rams Talk",
-      };
-    });
-    if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
-      newsArticleArray.push(newsData);
     }
   }
 
@@ -269,6 +347,9 @@ module.exports = async function getLatestNewsData() {
   });
   let fanSidedLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".title a");
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((link) => {
       articleLinksList.push(link.href);
@@ -276,27 +357,36 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of fanSidedLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".article-header h1").innerText;
-      let time = document.querySelector(".byline time");
-      time = time.getAttribute("datetime");
-      let summary = document.querySelector(".speakable-content").innerText;
-      let imageLink = document.querySelector('head [property="og:image"]');
-      imageLink = imageLink.getAttribute("content");
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "Fansided",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
+  if (fanSidedLinks) {
+    for (let link of fanSidedLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".article-header h1");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector(".byline time");
+        time = time.getAttribute("datetime");
+        let imageLink = document.querySelector('head [property="og:image"]');
+        if (imageLink) {
+          imageLink = imageLink.getAttribute("content");
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "Fansided",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
+      }
     }
   }
 
@@ -307,6 +397,9 @@ module.exports = async function getLatestNewsData() {
   });
   let espnLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".contentItem__content--standard");
+    if (!posts) {
+      return;
+    }
     let postsImages = document.querySelectorAll(
       ".contentItem__content--standard .media-wrapper img"
     );
@@ -322,30 +415,33 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of espnLinks) {
-    console.log(`Fetching data from ${link.postURL}...`);
-    await page.goto(link.postURL, {
-      waitUntil: "domcontentloaded",
-      timeout: 0,
-    });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".article-header h1").innerText;
-      let time = document.querySelector(".article-meta .timestamp");
-      time = time.getAttribute("data-date");
-      let summary = document.querySelector(
-        ".article .article-body p"
-      ).innerText;
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        newsSource: "ESPN",
-      };
-    });
-    newsData = {...newsData, imageLink: link.imageLink};
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
+  if (espnLinks) {
+    for (let link of espnLinks) {
+      console.log(`Fetching data from ${link.postURL}...`);
+      await page.goto(link.postURL, {
+        waitUntil: "domcontentloaded",
+        timeout: 0,
+      });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".article-header h1");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector(".article-meta .timestamp");
+        time = time.getAttribute("data-date");
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          newsSource: "ESPN",
+        };
+      });
+      newsData = { ...newsData, imageLink: link.imageLink };
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
+      }
     }
   }
 
@@ -356,6 +452,9 @@ module.exports = async function getLatestNewsData() {
   });
   let laTimesLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll(".promo-title .link");
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((link) => {
       articleLinksList.push(link.href);
@@ -363,27 +462,36 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-  for (let link of laTimesLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(".headline").innerText;
-      let time = document.querySelector(".byline time");
-      time = time.getAttribute("datetime");
-      let summary = document.querySelector(".page-article-body p").innerText;
-      let imageLink = document.querySelector(".image");
-      imageLink = imageLink.src;
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "LA Times",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
+  if (laTimesLinks) {
+    for (let link of laTimesLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".headline");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector(".byline time");
+        time = time.getAttribute("datetime");
+        let imageLink = document.querySelector(".image");
+        if (imageLink) {
+          imageLink = imageLink.src;
+        } else {
+          return;
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "LA Times",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
+      }
     }
   }
 
@@ -395,6 +503,9 @@ module.exports = async function getLatestNewsData() {
   });
   let dailyNewsLinks = await page.evaluate(() => {
     let posts = document.querySelectorAll("main .entry-title .article-title");
+    if (!posts) {
+      return;
+    }
     let articleLinksList = [];
     posts.forEach((link) => {
       articleLinksList.push(link.href);
@@ -402,30 +513,36 @@ module.exports = async function getLatestNewsData() {
     articleLinksList = articleLinksList.slice(0, 3);
     return articleLinksList;
   });
-
-  for (let link of dailyNewsLinks) {
-    console.log(`Fetching data from ${link}...`);
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
-    let newsData = await page.evaluate(() => {
-      let title = document.querySelector(
-        ".headline-area .entry-title"
-      ).innerText;
-      let time = document.querySelector("main .time time");
-      time = time.getAttribute("datetime");
-      let summary = document.querySelector(".article-body p").innerText;
-      let imageLink = document.querySelector(".image-wrapper img");
-      imageLink = imageLink.src;
-      return {
-        title: title,
-        articleLink: window.location.href,
-        time: time,
-        summary: summary,
-        imageLink: imageLink,
-        newsSource: "LA Daily News",
-      };
-    });
-    if (Date.parse(newsData.time) > lastNewsCall.time) {
-    newsArticleArray.push(newsData);
+  if (dailyNewsLinks) {
+    for (let link of dailyNewsLinks) {
+      console.log(`Fetching data from ${link}...`);
+      await page.goto(link, { waitUntil: "domcontentloaded", timeout: 0 });
+      let newsData = await page.evaluate(() => {
+        let title = document.querySelector(".headline-area .entry-title");
+        if (title) {
+          title = title.innerText;
+        } else {
+          return;
+        }
+        let time = document.querySelector("main .time time");
+        time = time.getAttribute("datetime");
+        let imageLink = document.querySelector(".image-wrapper img");
+        if (imageLink) {
+          imageLink = imageLink.src;
+        } else {
+          return
+        }
+        return {
+          title: title,
+          articleLink: window.location.href,
+          time: time,
+          imageLink: imageLink,
+          newsSource: "LA Daily News",
+        };
+      });
+      if (newsData && Date.parse(newsData.time) > lastNewsCall.time) {
+        newsArticleArray.push(newsData);
+      }
     }
   }
 
@@ -437,7 +554,6 @@ module.exports = async function getLatestNewsData() {
       link: newsArticle.articleLink,
       time: newsArticle.time,
       imgSrc: newsArticle.imageLink,
-      summary: newsArticle.summary,
       source: newsArticle.newsSource,
       sourceLogoRef: newsArticle.newsSource.replace(/\s/g, ""),
       isFeatured: false,

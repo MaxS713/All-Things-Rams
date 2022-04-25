@@ -5,6 +5,7 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
+  width:33%
 }
 
 #instagram-wrapper {
@@ -48,4 +49,9 @@ p.source {
   padding-left: 1.5vw;
   border-bottom: 3px solid rgb(4, 9, 135);
   width: 100%;
+}
+@media only screen and (max-width:800px){
+  #instagram-container{
+    width:100%;
+  }
 }

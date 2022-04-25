@@ -16,7 +16,7 @@ textarea {
   padding: 7px;
   border: 2px solid #ffc95c;
   border-radius: 5px;
-  font-size: .75vw;
+  font-size: 1vw;
 }
 
 /* Changes by Id */
@@ -34,24 +34,25 @@ textarea {
   font-family: Arial, Helvetica, sans-serif;
   width: 34%;
   margin-left: 3vw;
-  font-size: 0.9vw;
+  font-size: 1vw;
   text-align: justify;
+  line-height: 1.5vw;
 }
 
-#suggest-tag{
+#suggest-tag {
   font-family: Arial, Helvetica, sans-serif;
   width: 34%;
   margin-left: 3vw;
-  font-size: 0.9vw;
+  font-size: 1vw;
   /* text-align: justify; */
-  color:rgb(3, 7, 124);
+  color: rgb(3, 7, 124);
   font-style: italic;
-  
+  line-height: 1.5vw;
 }
 
 /* Button */
 #submit {
-  padding: 1vw;
+  padding: .6vw;
   font-size: 1vw;
   color: white;
   background-color: rgb(3, 7, 124);
@@ -89,8 +90,8 @@ textarea {
 /* Outer Container for form */
 .form-container {
   margin: auto;
-  max-width: 90%;
-  min-width: 90%;
+  max-width: 70%;
+  min-width: 70%;
   /* use image in styles folder as background */
   background-image: url("./sofiStadium.png");
   background-size: cover;
@@ -103,7 +104,7 @@ button[disabled] {
   opacity: 60%;
   pointer-events: none;
 }
-
+/* Ipad */
 @media screen and (max-width: 800px) {
   .form-container {
     background-color: white;
@@ -111,32 +112,88 @@ button[disabled] {
   /* text */
   #suggestions {
     font-family: Arial, Helvetica, sans-serif;
-    width: 40%;
+    width: 75%;
     margin-left: 3vw;
-    font-size: 1.25vw;
+    font-size: 2.15vw;
+    line-height: 3.5vw;
   }
-  #suggest-tag{
+  #suggest-tag {
     font-family: Arial, Helvetica, sans-serif;
-    width: 40%;
+    width: 75%;
     margin-left: 3vw;
-    font-size: 1.25vw;
+    font-size: 2.15vw;
+    line-height: 3.5vw;
   }
   /* message box */
   #message {
-    min-width: 35%;
+    min-width: 75%;
+    height: 180px;
+    margin-top: 3vw;
+  }
+  /* button */
+  #contact {
+    font-size: 3vw;
+    line-height: 3.5vw;
+  }
+  #submit {
+    min-width: 10vw;
+    font-size: 2vw;
+    padding: 1.5vw;
+    margin-bottom: 3vw;
+  }
+  input {
+    min-width: 20vw;
+    font-size: 2vw;
+  }
+  textarea {
+    font-size: 2vw;
+  }
+}
+/* Iphone */
+@media screen and (max-width: 600px) {
+  .form-container {
+    background-color: white;
+    justify-content: center;
+  }
+  /* text */
+  #suggestions {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 80%;
+    margin-left: 3vw;
+    font-size: 3.25vw;
+    line-height: 4.75vw;
+  }
+  #suggest-tag {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 80%;
+    margin-left: 3vw;
+    font-size: 3.25vw;
+    line-height: 4.75vw;
+  }
+
+  /* message box */
+  #message {
+    min-width: 75%;
     height: 180px;
   }
   /* button */
+  #contact {
+    font-size: 4.5vw;
+    line-height: 3.5vw;
+  }
   #submit {
-    padding: 1vw;
-    font-size: 1.5vw;
+    min-width: 10vw;
+    font-size: 3vw;
+    padding: 2vw;
     margin-bottom: 3vw;
   }
+  input {
+    min-width: 20vw;
+    font-size: 3vw;
+    margin-top: 3vw;
+  }
+  textarea {
+    margin-top: 6vw;
+    font-size: 3vw;
+  }
 }
-
-@media screen and (max-width: 600px) {
-  #message {
-    min-width: 60%;
-    height: 180px;
-  
-  }}

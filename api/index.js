@@ -24,7 +24,7 @@ const getTikTokVideos = require("./get-data/get-tiktok-data.js");
 const getLatestPickTweets = require("./get-data/get-picks-twitter-data.js");
 
 const app = require("express")();
-const {v4} = require("uuid");
+const { v4 } = require("uuid");
 const port = 5000;
 
 const twitterRoutes = require("./routes/admin-routes/twitterRoutes");
@@ -39,13 +39,13 @@ app.use(express.json());
 
 (async function checkTimeOfLatestAPICall() {
   let currentTime = Date.now();
-  let lastTwitterCall = await LastAPICallTime.findOne({API: "twitter"});
-  let lastInstagramCall = await LastAPICallTime.findOne({API: "instagram"});
-  let lastTikTokCall = await LastAPICallTime.findOne({API: "tiktok"});
-  let lastNewsCall = await LastAPICallTime.findOne({API: "news"});
-  let lastPodcastCall = await LastAPICallTime.findOne({API: "podcast"});
-  let lastVideoCall = await LastAPICallTime.findOne({API: "videos"});
-  let lastPicksCall = await LastAPICallTime.findOne({API: "picks"});
+  let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
+  let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
+  let lastTikTokCall = await LastAPICallTime.findOne({ API: "tiktok" });
+  let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
+  let lastPodcastCall = await LastAPICallTime.findOne({ API: "podcast" });
+  let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
+  let lastPicksCall = await LastAPICallTime.findOne({ API: "picks" });
 
   if (!lastNewsCall || currentTime - lastNewsCall.time > 3600000) {
     await getLatestNewsData();
@@ -86,7 +86,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/item/:slug", (req, res) => {
-  const {slug} = req.params;
+  const { slug } = req.params;
   res.end(`Item: ${slug}`);
 });
 
@@ -222,7 +222,7 @@ app.get("/api/get-more-tiktok-posts", async (req, res) => {
 });
 
 app.get("/api/get-featured-news", async (req, res) => {
-  let allFeaturedArticles = await NewsArticle.find({isFeatured: true});
+  let allFeaturedArticles = await NewsArticle.find({ isFeatured: true });
   if (allFeaturedArticles.length === 0) {
     let allLatestNewsArticle = await NewsArticle.find({});
     allLatestNewsArticle = allLatestNewsArticle.sort(
@@ -323,12 +323,11 @@ app.post("/api/post-survey-vote", async (req, res) => {
   }
 });
 
-
 //-------- Contact -------- //
 
 //Needs better authorization
 let transporter = nodemailer.createTransport({
-  service: 'SendinBlue',
+  service: "SendinBlue",
   auth: {
     user: "allthingsrams.official@gmail.com",
     pass: "tqVfBDMnGN7vWKrc",
@@ -358,9 +357,9 @@ app.post("/api/contact", async (req, res) => {
   };
   await transporter.sendMail(mail, (error) => {
     if (error) {
-      res.json({status: "ERROR"});
+      res.json({ status: "ERROR" });
     } else {
-      res.json({status: "Message Sent"});
+      res.json({ status: "Message Sent" });
     }
   });
 });
@@ -368,6 +367,7 @@ app.post("/api/contact", async (req, res) => {
 //-------- Submit -------- //
 
 app.post("/api/submit", async (req, res) => {
+  console.log(req.body)
   const name = req.body.name;
   const email = req.body.email;
   // const attachment = req.body.attachment;
@@ -375,21 +375,19 @@ app.post("/api/submit", async (req, res) => {
     from: name,
     to: "allthingsramstest1234@gmail.com",
     subject: "article-submission",
-    // attachment: [
-    //   {
-    //     filename: attachment + ".jpg",
-    //     contentType: "image/jpeg",
-    //     content: new Buffer.from(req.body.image.split("base64,")[1], "base64"),
-    //   },
-    // ],
+    attachments: [
+      {
+        content: req.files.file,
+      },
+    ],
     html: `<p>Name: ${name}</p>
     <p>Email: ${email}</p>`,
   };
   await transporter.sendMail(mail, (error) => {
     if (error) {
-      res.json({status: "ERROR"});
+      res.json({ status: "ERROR" });
     } else {
-      res.json({status: "Submission Sent"});
+      res.json({ status: "Submission Sent" });
     }
   });
 });

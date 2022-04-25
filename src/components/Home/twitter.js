@@ -70,7 +70,7 @@ export default function Twitter(props) {
   }
   useEffect(() => {
     getServerData();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

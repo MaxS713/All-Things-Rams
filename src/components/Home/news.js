@@ -22,7 +22,7 @@ export default function LatestNews(props) {
   }
   useEffect(() => {
     getServerData();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function trimTitleLength(string) {
     let trimmedString = string.substr(0, 140);
@@ -47,32 +47,30 @@ export default function LatestNews(props) {
             {newsArticleData.map((newsArticle, index) => {
               return (
                 <div key={index}>
-                  <div key={index + 1} className="news-header">
+                  <div className="news-header">
                     <a
-                      key={index + 2}
                       href={newsArticle.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <div key={index + 3} className="logo-container">
+                      <div className="logo-container">
                         <img
-                          key={index + 4}
                           src={require(`../../images/news-logo/${newsArticle.sourceLogoRef}.png`)}
                           alt={`${newsArticle.source}'s logo`}
                           height="50"
                           className="news-logo"
                         />
                       </div>
-                      <div key={index + 5} className="title-container">
-                        <h3 key={index + 6} className="article-title">
+                      <div className="title-container">
+                        <h3 className="article-title">
                           {newsArticle.title}
                         </h3>
                       </div>
                     </a>
                   </div>
 
-                  <div key={index + 7} className="source-date">
-                    <p key={index + 8} className="source">
+                  <div className="source-date">
+                    <p className="source">
                       Date: {newsArticle.time} &nbsp;|&nbsp; Source:
                       {newsArticle.source}
                     </p>

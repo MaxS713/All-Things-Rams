@@ -59,9 +59,9 @@ export default function Navbar() {
       </div> */}
 
       {/* conditionally renders the hamburger menu if site is in mobile view */}
-      <section className="top-nav">
+      <div className="top-nav">
         <input id="menu-toggle" type="checkbox" />
-        <label className="menu-button-container" for="menu-toggle">
+        <label className="menu-button-container" htmlFor="menu-toggle">
           <div className="menu-button"></div>
         </label>
         <ul className="menu">
@@ -81,6 +81,13 @@ export default function Navbar() {
                 Team
               </NavLink>
               <div className="dropdown-content">
+                <a
+                  href="https://www.espn.com/nfl/team/injuries/_/name/lar/los-angeles-rams"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Injury Update
+                </a>
                 <a
                   href="https://www.therams.com/"
                   target="_blank"
@@ -107,23 +114,12 @@ export default function Navbar() {
           </li>
 
           <li>
-            <a
-              className="navItem"
-              id="injury-link"
-              href="https://www.espn.com/nfl/team/injuries/_/name/lar/los-angeles-rams"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Injury Update
-            </a>
-          </li>
-          <li>
             <NavLink to="/contact" className="navItem">
               Contact
             </NavLink>
           </li>
         </ul>
-      </section>
+      </div>
       {/* DONATE BUTTON ----------------------------------------- */}
       {/* <div id="donate-button" className="navItem">
       <button onClick={()=>setPopUp(true)}>

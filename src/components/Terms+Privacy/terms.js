@@ -287,6 +287,7 @@ export default function Terms() {
           <p className="tp-content">
             ATR welcomes your questions or comments regarding the Terms:
           </p>
+          <br></br>
           <div className="terms-contact">
             <p className="tp-contact">
               <b>Address:</b>
@@ -307,6 +308,7 @@ export default function Terms() {
             </p>
             <p className="tp-contact">802-497-3161</p>
           </div>
+          <br></br>
           <p className="tp-content" id="terms-date">
             Effective as of April 22, 2022
           </p>

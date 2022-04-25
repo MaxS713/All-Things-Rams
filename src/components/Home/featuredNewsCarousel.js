@@ -24,7 +24,7 @@ export default function FeaturedNewsCarousel() {
   }
   useEffect(() => {
     getServerData();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function trimTitleLength(string) {
     let trimmedString = string.substr(0, 140);
@@ -66,25 +66,21 @@ export default function FeaturedNewsCarousel() {
                   return (
                     <div key={index} className="carousel-item">
                       <img
-                        key={index + 1}
                         src={newsArticle.imgSrc}
                         className="carousel-img"
                         alt="news article main illustration"
                       />
-                      <div key={index + 2} className="carousel-article-title">
-                        <div key={index + 3} className="carousel-news-header">
+                      <div className="carousel-article-title">
+                        <div className="carousel-news-header">
                           <a
-                            key={index + 4}
                             href={newsArticle.link}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             <div
-                              key={index + 5}
                               className="carousel-logo-and-title"
                             >
                               <div
-                                key={index + 6}
                                 className="carousel-logo-container"
                               >
                                 <img
@@ -95,11 +91,9 @@ export default function FeaturedNewsCarousel() {
                                 />
                               </div>
                               <div
-                                key={index + 7}
                                 className="carousel-title-container"
                               >
                                 <h3
-                                  key={index + 8}
                                   className="featured-headline"
                                 >
                                   {newsArticle.title}

@@ -105,7 +105,7 @@ export default function About() {
                     className="about-photo"
                   />
                 </div>
-                <div className="staff-about">
+                <div className="staff-about" id="catherine-about">
                   <h3>Catherine Viner</h3>
                   <p>
                     Catherine Viner is our chief organizer and taskmaster. She

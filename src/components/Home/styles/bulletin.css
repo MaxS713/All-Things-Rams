@@ -11,6 +11,7 @@
   margin-left: auto;
   margin-right: auto;
   gap: 1rem;
+  grid-template-rows: 1/2 120vh;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
     "feat feat feat feat feat news"
@@ -19,7 +20,6 @@
     "podcast podcast customnews customnews customnews videos"
     "podcast podcast customnews customnews customnews videos"
     "googlead googlead googlead googlead googlead googlead"
-    "socials socials socials socials socials socials"
     "socials socials socials socials socials socials";
 
     
@@ -30,6 +30,7 @@
 #socials-wrapper{
   grid-area: socials;
   display:flex;
+  justify-content: center;
   width:100%;
   gap:1vw;
   

@@ -60,7 +60,7 @@ export default function Instagram(props) {
   }
   useEffect(() => {
     getServerData();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

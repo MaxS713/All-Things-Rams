@@ -4,7 +4,7 @@
 
 #carousel-wrapper{
   max-width:80vw;
-  max-height:50vh;
+  /* max-height:100%; */
   padding: 1.5rem 3rem;
 }
 
@@ -13,12 +13,14 @@
 }
 
 .carousel-img{
-  max-height:50vh;
-  max-width:80vh;
+  object-fit: cover;
+  /* max-height:50vh;
+  max-width: 100%; */
+  /* max-height: 100%; */
   margin:0 auto;
   padding:0;
   justify-content: center;
-  align-items: end;
+  align-items: center;
 }
 
 .carousel-article-title{
@@ -29,7 +31,7 @@
   background-color: rgba(255, 255, 255, 0.796);
   display:flex;
   flex-direction: column;
-  width:90%;
+  width:80%;
 }
 
 .carousel-logo-and-title{
@@ -52,7 +54,7 @@
   text-align:right;
   margin:0;
   margin-right:25px;
-  font-size: 0.7vh;
+  font-size: 1vh;
 }
 
 @media only screen and (max-width: 800px){

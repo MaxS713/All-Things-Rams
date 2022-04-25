@@ -14,7 +14,7 @@ export default function LatestPodcasts() {
   }
   useEffect(() => {
     getServerData();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function trimTitleLength(string) {
     let trimmedString = string.substr(0, 100);
@@ -39,31 +39,29 @@ export default function LatestPodcasts() {
             {podcastData.map((podcast, index) => {
               return (
                 <div key={index}>
-                  <div key={index + 1} className="podcast-header">
+                  <div className="podcast-header">
                     <a
-                      key={index + 2}
                       href={podcast.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <div key={index + 3} className="podcast-logo-container">
+                      <div className="podcast-logo-container">
                         <img
-                          key={index + 4}
                           src={require(`../../images/podcast-logo/${podcast.sourceLogoRef}.png`)}
                           alt={`${podcast.author}'s logo`}
                           height="50"
                           className="podcast-logo"
                         />
                       </div>
-                      <div key={index + 5} className="podcast-title-container">
-                        <h3 key={index + 6} className="podcast-title">
+                      <div className="podcast-title-container">
+                        <h3 className="podcast-title">
                           {podcast.title}
                         </h3>
                       </div>
                     </a>
                   </div>
 
-                  <div key={index + 7} className="source-date">
+                  <div className="source-date">
                     <p className="source">Date: {podcast.timeString}</p>
                   </div>
                 </div>

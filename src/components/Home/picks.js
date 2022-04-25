@@ -65,7 +65,7 @@ export default function Picks() {
   }
   useEffect(() => {
     getServerData();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

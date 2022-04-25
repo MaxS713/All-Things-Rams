@@ -50,7 +50,6 @@ const newsArticleSchema = new mongoose.Schema({
   link: String,
   time: String,
   imgSrc: String,
-  summary: String,
   source: String,
   sourceLogoRef: String,
   isFeatured: Boolean,

@@ -6,11 +6,11 @@
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
   width:100%;
+  max-width: 40vh;
 }
 
 #picks-wrapper {
-
-  height: 32.5vh;
+  max-height: 35vh;
   overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
@@ -18,6 +18,9 @@
   align-items: center;
 }
 
+.twitter-tweet.twitter-tweet-rendered {
+  max-width: 25vh;
+}
 #picks-embed {
   margin: 0.5rem;
   width: 80%;
@@ -55,6 +58,9 @@
 @media screen and (width: 600px) {
 }
 @media only screen and (max-width: 800px) {
+  #jp-picks {
+    max-width:100%
+  }
   #picks-wrapper {
     height: 40vh;
   }

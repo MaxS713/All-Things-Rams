@@ -11,17 +11,12 @@ export default function NewsPage() {
   const [gridID, setGridID] = useState("hidden");
 
   useEffect(() => {
-    if (document.readyState === "complete") {
       completeLoading();
-    } else {
-      window.addEventListener("load", completeLoading);
-    }
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function completeLoading() {
     setTimeout(() => setLoadingID("hidden"), 2000);
     setTimeout(() => setGridID(""), 2000);
-    window.removeEventListener("load", completeLoading);
   }
 
   return (
