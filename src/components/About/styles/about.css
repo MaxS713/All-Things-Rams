@@ -1,7 +1,7 @@
 /* Page Container */
 #about {
   margin: auto;
-  width: 85vw;
+  width: 90vw;
   background-color: white;
   border-radius: 5px;
   margin-bottom: 1rem;
@@ -25,11 +25,14 @@
   line-height: 1.5vw;
   text-align: justify;
   margin-left: 1.5vw;
-  margin-Right: 1.5vw;
+  /* margin-Right: 1.5vw; */
 }
 #about-head {
   margin-left: 2vw;
   margin-right: 1.5vw;
+}
+#about-wrapper{
+  display: flex;
 }
 /* ---------------------------------------------------------- */
 
@@ -41,7 +44,7 @@
   padding: 0.5vw;
   border-radius: 5px;
   font-size: 1.5vw;
-  margin-top: 3vw;
+  margin-top: 9vw;
   margin-right: 3vw;
   margin-left: 3vw;
 }
@@ -51,32 +54,28 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1vw;
   text-align: justify;
-  width: 50vw;
-  padding-left: 1vw;
-  padding-right: 2.5vw;
+  width: 30vw;
   line-height: 1.5vw;
 }
 
 /* Team member name */
-.staff-about h3 {
-  margin-left: 1vw;
-  font-size: 1.5vw;
-}
+
 
 /* Right column container for image and text */
 .staff {
   display: flex;
-  margin-left: 4.5vw;
+  margin-left: 8vw;
 }
 
 /* Photograph of team member */
 .about-photo {
-  max-width: 20vw;
+  max-width: 15vw;
   margin: 1vw;
   border: 3px solid rgba(255, 201, 92);
   border-radius: 10px;
   margin-top: 1.5vw;
 }
+
 
 /* ---------- Media Query --------- */
 

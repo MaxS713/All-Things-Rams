@@ -65,7 +65,7 @@ export default function About() {
               <h2>Our Team</h2>
 
               {/* ------------------- Joey -------------------  */}
-
+              <h3>Joey Viner</h3>
               <div className="staff">
                 <div className="staff-img">
                   <img
@@ -76,7 +76,6 @@ export default function About() {
                   />
                 </div>
                 <div className="staff-about">
-                  <h3>Joey Viner</h3>
                   <p>
                     Joey Viner is our number one Rams fan! It's true no one
                     watches the game with more intensity or cheers louder for
@@ -95,7 +94,7 @@ export default function About() {
               </div>
 
               {/* ------------------- Catherine -------------------  */}
-
+              <h3>Catherine Viner</h3>
               <div className="staff">
                 <div className="staff-img">
                   <img
@@ -106,7 +105,6 @@ export default function About() {
                   />
                 </div>
                 <div className="staff-about" id="catherine-about">
-                  <h3>Catherine Viner</h3>
                   <p>
                     Catherine Viner is our chief organizer and taskmaster. She
                     keeps the ball rolling. Never gives up. Knows how to get
@@ -123,7 +121,7 @@ export default function About() {
               </div>
 
               {/* ------------------- Pierson -------------------  */}
-
+              <h3>Pierson Beatty</h3>
               <div className="staff">
                 <div className="staff-img">
                   <img
@@ -134,7 +132,6 @@ export default function About() {
                   />
                 </div>
                 <div className="staff-about">
-                  <h3>Pierson Beatty</h3>
                   <p>
                     Pierson Beatty is passionate about the NFL. Sometimes he
                     claims that he's a journalism student. Other times he is
