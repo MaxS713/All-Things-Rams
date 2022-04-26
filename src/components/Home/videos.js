@@ -5,7 +5,7 @@ export default function LatestVideos() {
   const [videosData, setVideosData] = useState([]);
 
   async function getServerData() {
-    let data = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-latest-videos");
+    let data = await fetch("http://localhost:5000/api/get-latest-videos");
     data = await data.json();
     setVideosData(data);
   }

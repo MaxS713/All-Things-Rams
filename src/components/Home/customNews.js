@@ -5,7 +5,7 @@ export default function CustomNews() {
   const [articleData, setArticleData] = useState([]);
 
   async function getServerData() {
-    let data = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-custom-article");
+    let data = await fetch("http://localhost:5000/api/get-custom-article");
     data = await data.json();
     setArticleData(data);
   }

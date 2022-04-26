@@ -58,9 +58,9 @@ export default function Twitter(props) {
   async function getServerData() {
     let tweetsData;
     if (props.location === "socials") {
-      tweetsData = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-more-tweets");
+      tweetsData = await fetch("http://localhost:5000/api/get-more-tweets");
     } else {
-      tweetsData = await fetch("https://all-thing-rams-server.herokuapp.com/api/get-latest-tweets");
+      tweetsData = await fetch("http://localhost:5000/api/get-latest-tweets");
     }
     tweetsData = await tweetsData.json();
     tweetsData.forEach((tweet) => {

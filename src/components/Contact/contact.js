@@ -24,7 +24,7 @@ export default function ContactForm() {
       message: message.value,
     };
 
-    let response = await fetch("https://all-thing-rams-server.herokuapp.com/api/contact", {
+    let response = await fetch("http://localhost:5000/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
