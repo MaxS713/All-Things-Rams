@@ -53,7 +53,6 @@ export default function ContactForm() {
                   and let us know what you think!
                 </p>
                 <p id="suggest-tag">
-                  {" "}
                   Suggest a Website, Blog, Podcast or Social Media Account that
                   you would like us to link to.
                 </p>

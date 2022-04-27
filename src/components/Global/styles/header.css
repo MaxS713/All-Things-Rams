@@ -274,19 +274,33 @@ button {
   /* .li {
     display: none;
   } */
-  #menu-toggle:checked + .navItem {
+  #menu-toggle:checked.navItem {
     display:flex;
   }
+  
   .menu-button-container {
     display: flex;
   }
   .menu {
-    top: 0;
+    display:none;
+    top: 17vh;
     left: 0;
+    position:absolute;
     /* flex-direction: column; */
     width: 100%;
     justify-content: center;
     align-items: center;
+  }
+  #menu-toggle ~ .menu {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #menu-toggle:checked ~ .menu {
+    display:flex;
+
   }
 
   #menu-toggle ~ .menu li {
@@ -297,6 +311,7 @@ button {
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   #menu-toggle:checked ~ .menu li {
+    display:flex;
     border: 1px solid white;
     height: 1.5em;
     padding: 0.5em;

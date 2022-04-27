@@ -74,9 +74,9 @@ const podcastUserSchema = new mongoose.Schema({
 const videosLinkSchema = new mongoose.Schema({
   title: String,
   link: String,
-  time: String,
+  time: Number,
+  author: String,
   imgSrc: String,
-  summary: String,
 });
 
 const customArticleSchema = new mongoose.Schema({

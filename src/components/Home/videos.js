@@ -2,6 +2,48 @@ import React, { useState, useEffect } from "react";
 import "./styles/videos.css";
 
 export default function LatestVideos() {
+
+  function relativeTime(vidTime) {
+    let diff = Date.now() - vidTime;
+    if (diff < 0) {
+      return "From the future!";
+    }
+    const datetimeUnits = [
+      "year",
+      "month",
+      "day",
+      "hour",
+      "minute",
+      "second",
+      "millisecond",
+    ];
+    let datetimeParts = new Date(diff)
+      .toISOString()
+      .split(/\D/)
+      .map((x) => parseInt(x));
+    datetimeParts[0] -= 1970;
+    datetimeParts[1] -= 1;
+    datetimeParts[2] -= 1;
+    let primaryUnit, secondaryUnit, primaryQuotient, secondaryQuotient;
+    for (let i = 0; i < datetimeUnits.length - 1; i++) {
+      if (datetimeParts[i] === 0) {
+        continue;
+      }
+      [primaryUnit, secondaryUnit] = datetimeUnits.slice(i, i + 2);
+      [primaryQuotient, secondaryQuotient] = datetimeParts.slice(i, i + 2);
+      break;
+    }
+    let diffStr = `${primaryQuotient} ${primaryUnit}${
+      primaryQuotient !== 1 ? "s" : ""
+    }`;
+    if (secondaryQuotient > 0) {
+      diffStr += ` and ${secondaryQuotient} ${secondaryUnit}${
+        secondaryQuotient !== 1 ? "s" : ""
+      }`;
+    }
+    return `${diffStr} ago`;
+  }
+
   const [videosData, setVideosData] = useState([]);
 
   async function getServerData() {
@@ -24,6 +66,7 @@ export default function LatestVideos() {
             {videosData.map((video, index) => {
               return (
                 <div key={index} className="video-item">
+                  <p>{video.author} posted:</p>
                   <a
                     href={video.link}
                     target="_blank"
@@ -39,7 +82,7 @@ export default function LatestVideos() {
                     </div>
                   </a>
                   <p className="video-date">
-                    {video.time}
+                    {relativeTime(video.time)}
                   </p>
                 </div>
               );

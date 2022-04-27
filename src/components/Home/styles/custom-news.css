@@ -85,7 +85,7 @@ p.source {
   text-indent: 2.5vw;
   line-height: 1.5vw;
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
   .custom-article-content {
     font-size: 2vw;
     line-height: 3vw;

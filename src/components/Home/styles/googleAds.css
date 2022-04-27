@@ -1,6 +1,5 @@
 .google-ad {
   grid-area: googlead;
-  margin-bottom:1rem;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;

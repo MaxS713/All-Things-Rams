@@ -24,7 +24,7 @@ const getTikTokVideos = require("./get-data/get-tiktok-data.js");
 const getLatestPickTweets = require("./get-data/get-picks-twitter-data.js");
 
 const app = require("express")();
-const {v4} = require("uuid");
+const { v4 } = require("uuid");
 const port = process.env.PORT || 5000;
 
 const twitterRoutes = require("./routes/admin-routes/twitterRoutes");
@@ -37,15 +37,17 @@ const customArticleRoutes = require("./routes/admin-routes/customArticleRoutes")
 app.use(cors());
 app.use(express.json());
 
+
+
 async function checkTimeOfLatestAPICall() {
   let currentTime = Date.now();
-  let lastTwitterCall = await LastAPICallTime.findOne({API: "twitter"});
-  let lastInstagramCall = await LastAPICallTime.findOne({API: "instagram"});
-  let lastTikTokCall = await LastAPICallTime.findOne({API: "tiktok"});
-  let lastNewsCall = await LastAPICallTime.findOne({API: "news"});
-  let lastPodcastCall = await LastAPICallTime.findOne({API: "podcast"});
-  let lastVideoCall = await LastAPICallTime.findOne({API: "videos"});
-  let lastPicksCall = await LastAPICallTime.findOne({API: "picks"});
+  let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
+  let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
+  let lastTikTokCall = await LastAPICallTime.findOne({ API: "tiktok" });
+  let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
+  let lastPodcastCall = await LastAPICallTime.findOne({ API: "podcast" });
+  let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
+  let lastPicksCall = await LastAPICallTime.findOne({ API: "picks" });
 
   if (!lastTwitterCall || currentTime - lastTwitterCall.time > 3600000) {
     await getLatestTweets();
@@ -91,7 +93,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/item/:slug", (req, res) => {
-  const {slug} = req.params;
+  const { slug } = req.params;
   res.end(`Item: ${slug}`);
 });
 
@@ -227,7 +229,7 @@ app.get("/api/get-more-tiktok-posts", async (req, res) => {
 });
 
 app.get("/api/get-featured-news", async (req, res) => {
-  let allFeaturedArticles = await NewsArticle.find({isFeatured: true});
+  let allFeaturedArticles = await NewsArticle.find({ isFeatured: true });
   if (allFeaturedArticles.length === 0) {
     let allLatestNewsArticle = await NewsArticle.find({});
     allLatestNewsArticle = allLatestNewsArticle.sort(
@@ -285,11 +287,11 @@ app.get("/api/get-latest-podcasts", async (req, res) => {
   let allLatestPodcasts = await Podcast.find({});
   allLatestPodcasts = allLatestPodcasts.sort((a, b) => b.time - a.time);
   let dataToSend = [allLatestPodcasts[0]];
-  for (let data of allLatestPodcasts) {
+  allLatestPodcasts.forEach((data) => {
     if (!dataToSend.some((e) => e.author === data.author)) {
       dataToSend.push(data);
     }
-  }
+  });
   allLatestPodcasts.forEach((data) => {
     if (dataToSend.includes(data) === false) {
       dataToSend.push(data);
@@ -301,9 +303,20 @@ app.get("/api/get-latest-podcasts", async (req, res) => {
 
 app.get("/api/get-latest-videos", async (req, res) => {
   let allLatestVideos = await Video.find({});
-  allLatestVideos.sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
-  allLatestVideos = allLatestVideos.slice(0, 6);
-  res.send(allLatestVideos);
+  allLatestVideos.sort((a, b) => b.time - a.time);
+  let dataToSend = [allLatestVideos[0]];
+  allLatestVideos.forEach((data) => {
+    if (!dataToSend.some((e) => e.author === data.author)) {
+      dataToSend.push(data);
+    }
+  });
+  allLatestVideos.forEach((data) => {
+    if (dataToSend.includes(data) === false) {
+      dataToSend.push(data);
+    }
+  });
+  dataToSend = dataToSend.slice(0, 6);
+  res.send(dataToSend);
 });
 
 app.get("/api/get-survey-data", async (req, res) => {
@@ -332,10 +345,12 @@ app.post("/api/post-survey-vote", async (req, res) => {
 
 //Needs better authorization
 let transporter = nodemailer.createTransport({
-  service: "SendinBlue",
+  host: "smtp-relay.sendinblue.com",
+  port: 587,
+  secure: false,
   auth: {
-    user: "allthingsrams.official@gmail.com",
-    pass: "tqVfBDMnGN7vWKrc",
+    user: "allthingsrams.official@gmail.com", 
+    pass: "tqVfBDMnGN7vWKrc", 
   },
 });
 
@@ -353,18 +368,20 @@ app.post("/api/contact", async (req, res) => {
   const subject = req.body.subject;
   const message = req.body.message;
   const mail = {
-    from: name,
-    to: "allthingsramstest1234@gmail.com",
+    from: `${name} <${email}>`,
+    to: "allthingsrams.official@gmail.com",
+    subject: "Contact from All Things Rams website",
     html: `<p>Name: ${name}</p>
 <p>Email: ${email}</p>
-<p>Subject: ${subject}</p>
+<p>Subject:  ${subject}</p>
 <p>Message: ${message}</p>`,
   };
   await transporter.sendMail(mail, (error) => {
     if (error) {
-      res.json({status: "ERROR"});
+      console.log(error)
+      res.json({ status: "ERROR" });
     } else {
-      res.json({status: "Message Sent"});
+      res.json({ status: "Message Sent" });
     }
   });
 });
@@ -390,9 +407,9 @@ app.post("/api/submit", async (req, res) => {
   };
   await transporter.sendMail(mail, (error) => {
     if (error) {
-      res.json({status: "ERROR"});
+      res.json({ status: "ERROR" });
     } else {
-      res.json({status: "Submission Sent"});
+      res.json({ status: "Submission Sent" });
     }
   });
 });

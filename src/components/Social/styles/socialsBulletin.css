@@ -27,18 +27,27 @@
     margin-top: 3vw;
   }
 }
+#tiktok-container{
+  width:100%;
+}
+#instagram-container {
+  width:100%
+}
+#tweets-container{
+  width:100%;
+}
 
 /* Instagram */
 #insta-bulletin {
   /* had to make equal to twitter width or would not display correctly on mobile view */
-  min-width: 60vh;
+  max-width: 60vh;
   justify-content: center;
   margin-right: 1vw;
 }
 /* Twitter */
 #twitter-bulletin {
   /* This must have a width or it does that odd loading glitch */
-  width: 60vh;
+  max-width: 60vh;
   justify-content: center;
   margin-right: 1vw;
 }

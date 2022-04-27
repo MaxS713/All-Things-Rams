@@ -17,7 +17,7 @@ import CustomNews from "./customNews"
 //Style Imports
 import "./styles/bulletin.css";
 
-export default function Bulletin(props) {
+export default function Bulletin() {
   return (
     <>
       <section>

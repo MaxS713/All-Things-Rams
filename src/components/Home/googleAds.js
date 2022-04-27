@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import "./styles/googleAds.css";
 
 export default function GoogleAdPlaceholder() {

@@ -1,9 +1,10 @@
 #news-container {
   grid-area: news;
+  grid-template-rows: 1fr 0.25fr;
   flex-direction: column;
   flex-grow: 1;
-
-  max-width:40vh;
+  /* width:40vh; */
+  overflow: auto;
   animation: fadeIn 3s;
   -webkit-animation: fadeIn 3s;
   -moz-animation: fadeIn 3s;
@@ -12,12 +13,13 @@
 }
 
 #latest-news {
-  max-height: clamp(46vh, 1.5rem, 25vh);
-
+  max-height: clamp(47.5vh, 1.5rem, 25vh);
+  object-fit:cover;
   width:100%;
-  position: relative;
-  overflow-y:auto;
+  /* position: relative; */
+  overflow:auto;
   overflow-x: hidden;
+
   flex-direction: column;
   flex-grow: 1;
 }
@@ -87,6 +89,16 @@ img.news-logo {
 @media screen and (max-width: 800px) {
   #news-container{
     max-width: 100%;
+
+  }
+  #latest-news {
+    height:23.5vh;
+  }
+}
+@media screen and (max-width: 400px) {
+  #news-container{
+    width:100%;
+
   }
   #latest-news {
     height:23.5vh;

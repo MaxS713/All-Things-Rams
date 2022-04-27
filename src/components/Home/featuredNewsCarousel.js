@@ -58,7 +58,7 @@ export default function FeaturedNewsCarousel() {
           <h2>Featured News</h2>
         </div>
 
-        <div className="container-content">
+        <div id="feat" className="container-content">
           <div id="carousel-wrapper">
             <div id="carousel">
               <Slider {...carouselSettings}>

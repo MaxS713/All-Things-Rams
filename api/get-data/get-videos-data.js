@@ -17,7 +17,6 @@ module.exports = async function getVideoData() {
     let titles = document.querySelectorAll(".d3-o-media-object__title");
     let links = document.querySelectorAll(".d3-o-media-object a");
     let times = document.querySelectorAll(".d3-o-media-object__date");
-    let summaries = document.querySelectorAll(".d3-o-media-object__summary");
     let imageLinks = document.querySelectorAll(
       ".d3-o-media-object__figure img"
     );
@@ -26,8 +25,37 @@ module.exports = async function getVideoData() {
         title: titles[i].innerText,
         link: links[i].href,
         time: times[i].innerText,
-        summary: summaries[i].innerText,
+        author: "Official Rams Website",
         imageLink: imageLinks[i].src.replace("/t_lazy", ""),
+      });
+    }
+    return videosDataArray;
+  });
+
+  await page.goto(
+    "https://www.youtube.com/channel/UCUdw5lcggxzfecHU9mfxVGw?app=desktop",
+    {
+      waitUntil: "networkidle2",
+      timeout: 0,
+    }
+  );
+
+  console.log("Getting Rams Loyal Nation Data");
+  let youTubeData = await page.evaluate(() => {
+    let videosDataArray = [];
+    let titles = document.querySelectorAll("#video-title");
+    let links = document.querySelectorAll("#video-title");
+    let times = document.querySelectorAll("#metadata-line span:nth-child(2)");
+    let imageLinks = document.querySelectorAll(
+      "ytd-grid-video-renderer #thumbnail #img"
+    );
+    for (let i = 0; i < titles.length; i++) {
+      videosDataArray.push({
+        title: titles[i].innerText,
+        link: links[i].href,
+        time: times[i].innerText,
+        author: "Rams Loyal Nation",
+        imageLink: imageLinks[i].src,
       });
     }
     return videosDataArray;
@@ -38,6 +66,20 @@ module.exports = async function getVideoData() {
   let videosToAdd = [];
 
   videosData.forEach((video) => {
+    video.time = Date.parse(video.time);
+    let hasDuplicate = false;
+    for (let storedVideo of storedVideoData) {
+      if (video.title === storedVideo.title) {
+        hasDuplicate = true;
+      }
+    }
+    if (hasDuplicate !== true) {
+      videosToAdd.push(video);
+    }
+  });
+
+  youTubeData.forEach((video) => {
+    video.time = parseTimeAgo(video.time);
     let hasDuplicate = false;
     for (let storedVideo of storedVideoData) {
       if (video.title === storedVideo.title) {
@@ -54,16 +96,14 @@ module.exports = async function getVideoData() {
       title: data.title,
       link: data.link,
       time: data.time,
-      summary: data.summary,
+      author: data.author,
       imgSrc: data.imageLink,
     });
     await newVideo.save();
   }
 
   let vidData = await Video.find({});
-  vidData = vidData.sort(
-    (a, b) => Date.parse(b.time) - Date.parse(a.time)
-  );
+  vidData = vidData.sort((a, b) => b.time - a.time);
   if (vidData.length > 50) {
     for (let i = 0; i < vidData.length; i++) {
       if (i > 50) {
@@ -72,7 +112,6 @@ module.exports = async function getVideoData() {
       }
     }
   }
-
 
   console.log("Success!");
   if (videosToAdd.length !== 0) {
@@ -88,3 +127,29 @@ module.exports = async function getVideoData() {
   });
   await timeOfApiCallRequest.save();
 };
+
+function parseTimeAgo(timeAgo) {
+  timeAgo = timeAgo.replace("s", "");
+  timeAgo = timeAgo.split(" ");
+  let numberOf;
+  let multiplier;
+  if (timeAgo[0] === "a") {
+    numberOf = 1;
+  } else {
+    numberOf = parseInt(timeAgo[0]);
+  }
+  if (timeAgo[1] === "hour") {
+    multiplier = 3600000;
+  } else if (timeAgo[1] === "minute") {
+    multiplier = 60000;
+  } else if (timeAgo[1] === "day") {
+    multiplier = 86400000;
+  } else if (timeAgo[1] === "week") {
+    multiplier = 604800000;
+  } else if (timeAgo[1] === "month") {
+    multiplier = 2629746000;
+  } else if (timeAgo[1] === "year") {
+    multiplier = 31557600000;
+  }
+  return Date.now() - numberOf * multiplier;
+}
