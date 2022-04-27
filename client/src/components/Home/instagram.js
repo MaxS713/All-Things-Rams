@@ -1,12 +1,12 @@
 //Library Imports
 import React, { useState, useEffect } from "react";
-import { TikTokEmbed } from 'react-social-media-embed';
-import "./styles/tiktok.css";
+import { InstagramEmbed } from "react-social-media-embed";
+import "./styles/instagram.css";
 
-export default function Tiktok(props) {
+export default function Instagram(props) {
 
-  function relativeTime(tiktokTime) {
-    let diff = Date.now() - tiktokTime;
+  function relativeTime(instaTime) {
+    let diff = Date.now() - instaTime;
     if (diff < 0) {
       return "From the future!";
     }
@@ -45,18 +45,18 @@ export default function Tiktok(props) {
     }
     return `${diffStr} ago`;
   }
-
-  const [tiktokData, setTiktokData] = useState([]);
+  
+  const [instagramData, setInstagramData] = useState([]);
 
   async function getServerData() {
-    let tiktokPostsData;
+    let instagramPostsData
     if (props.location === "socials") {
-      tiktokPostsData = await fetch("http://localhost:5000/api/get-more-tiktok-posts");
+      instagramPostsData = await fetch("api/get-more-instagram-posts");
     } else {
-      tiktokPostsData = await fetch("http://localhost:5000/api/get-tiktok-posts");
+      instagramPostsData = await fetch("api/get-instagram-posts");
     }
-    tiktokPostsData = await tiktokPostsData.json();
-    setTiktokData(tiktokPostsData);
+    instagramPostsData = await instagramPostsData.json();
+    setInstagramData(instagramPostsData);
   }
   useEffect(() => {
     getServerData();
@@ -64,19 +64,19 @@ export default function Tiktok(props) {
 
   return (
     <>
-      <div id="tiktok-container">
+      <div id="instagram-container">
         <div className="container-header">
-          <h2>Tik-Tok</h2>
+          <h2>Instagram</h2>
         </div>
 
         <div className="container-content">
-          <div id="tiktok-wrapper">
-            {tiktokData.map((tiktokPost, index) => {
+          <div id="instagram-wrapper">
+            {instagramData.map((instagramPost, index) => {
               return (
-                <div key={index} id="tiktok-embed">
-                  <p key={index+1} className="source"><span key={index+2}>{tiktokPost.author}</span> posted {relativeTime(tiktokPost.time)}</p>
-                  <TikTokEmbed
-                    url={`https://www.tiktok.com/@${tiktokPost.author}/video/${tiktokPost.linkID}`}
+                <div key={index} id="instagram-embed">
+                  <p key={index+1} className="source"><span>{instagramPost.author}</span> posted {relativeTime(instagramPost.time)}</p>
+                  <InstagramEmbed
+                    url={`https://www.instagram.com${instagramPost.path}`}
                     width="100%"
                     linkText="Loading"
                   />

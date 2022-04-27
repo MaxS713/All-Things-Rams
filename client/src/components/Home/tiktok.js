@@ -1,10 +1,12 @@
+//Library Imports
 import React, { useState, useEffect } from "react";
-import "./styles/videos.css";
+import { TikTokEmbed } from 'react-social-media-embed';
+import "./styles/tiktok.css";
 
-export default function LatestVideos() {
+export default function Tiktok(props) {
 
-  function relativeTime(vidTime) {
-    let diff = Date.now() - vidTime;
+  function relativeTime(tiktokTime) {
+    let diff = Date.now() - tiktokTime;
     if (diff < 0) {
       return "From the future!";
     }
@@ -44,12 +46,17 @@ export default function LatestVideos() {
     return `${diffStr} ago`;
   }
 
-  const [videosData, setVideosData] = useState([]);
+  const [tiktokData, setTiktokData] = useState([]);
 
   async function getServerData() {
-    let data = await fetch("http://localhost:5000/api/get-latest-videos");
-    data = await data.json();
-    setVideosData(data);
+    let tiktokPostsData;
+    if (props.location === "socials") {
+      tiktokPostsData = await fetch("api/get-more-tiktok-posts");
+    } else {
+      tiktokPostsData = await fetch("api/get-tiktok-posts");
+    }
+    tiktokPostsData = await tiktokPostsData.json();
+    setTiktokData(tiktokPostsData);
   }
   useEffect(() => {
     getServerData();
@@ -57,33 +64,22 @@ export default function LatestVideos() {
 
   return (
     <>
-      <div id="videos-container">
+      <div id="tiktok-container">
         <div className="container-header">
-          <h2>Latest Videos</h2>
+          <h2>Tik-Tok</h2>
         </div>
+
         <div className="container-content">
-          <div id="latest-videos">
-            {videosData.map((video, index) => {
+          <div id="tiktok-wrapper">
+            {tiktokData.map((tiktokPost, index) => {
               return (
-                <div key={index} className="video-item">
-                  <p>{video.author} posted:</p>
-                  <a
-                    href={video.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <div>
-                      <img
-                        src={video.imgSrc}
-                        alt={"Highlight Video Thumbnail"}
-                        className="video-thumbnail"
-                      />
-                      <h3>{video.title}</h3>
-                    </div>
-                  </a>
-                  <p className="video-date">
-                    {relativeTime(video.time)}
-                  </p>
+                <div key={index} id="tiktok-embed">
+                  <p key={index+1} className="source"><span key={index+2}>{tiktokPost.author}</span> posted {relativeTime(tiktokPost.time)}</p>
+                  <TikTokEmbed
+                    url={`https://www.tiktok.com/@${tiktokPost.author}/video/${tiktokPost.linkID}`}
+                    width="100%"
+                    linkText="Loading"
+                  />
                 </div>
               );
             })}

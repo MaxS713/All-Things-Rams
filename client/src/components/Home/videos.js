@@ -1,19 +1,10 @@
-//Library Imports
 import React, { useState, useEffect } from "react";
+import "./styles/videos.css";
 
-// Need to alter imports
-//Embed Content Import
-import { TwitterEmbed } from "react-social-media-embed";
+export default function LatestVideos() {
 
-import "./styles/picks.css";
-
-export default function Picks() {
-  function tweetIDToTime(tweetId) {
-    return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
-  }
-
-  function relativeTime(tweetTime) {
-    let diff = Date.now() - tweetTime;
+  function relativeTime(vidTime) {
+    let diff = Date.now() - vidTime;
     if (diff < 0) {
       return "From the future!";
     }
@@ -53,15 +44,12 @@ export default function Picks() {
     return `${diffStr} ago`;
   }
 
-  const [twitterData, setTwitterData] = useState([]);
+  const [videosData, setVideosData] = useState([]);
 
   async function getServerData() {
-    let tweetsData = await fetch("http://localhost:5000/api/get-tweet-picks");
-    tweetsData = await tweetsData.json();
-    tweetsData.forEach((tweet) => {
-      tweet.time = tweetIDToTime(parseInt(tweet.ID));
-    });
-    setTwitterData(tweetsData);
+    let data = await fetch("api/get-latest-videos");
+    data = await data.json();
+    setVideosData(data);
   }
   useEffect(() => {
     getServerData();
@@ -69,27 +57,33 @@ export default function Picks() {
 
   return (
     <>
-      <div id="jp-picks">
+      <div id="videos-container">
         <div className="container-header">
-          <h2>Joey &amp; Pierson Picks</h2>
+          <h2>Latest Videos</h2>
         </div>
         <div className="container-content">
-          <div id="picks-wrapper">
-            {twitterData.map((tweet, index) => {
+          <div id="latest-videos">
+            {videosData.map((video, index) => {
               return (
-                <div key={index} id="picks-embed">
-                  <p key={index+1} className="source">
-                    <span key={index+2}>{tweet.author}</span> tweeted{" "}
-                    {relativeTime(tweet.time)}
+                <div key={index} className="video-item">
+                  <p>{video.author} posted:</p>
+                  <a
+                    href={video.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div>
+                      <img
+                        src={video.imgSrc}
+                        alt={"Highlight Video Thumbnail"}
+                        className="video-thumbnail"
+                      />
+                      <h3>{video.title}</h3>
+                    </div>
+                  </a>
+                  <p className="video-date">
+                    {relativeTime(video.time)}
                   </p>
-                  <TwitterEmbed
-                    url={`https://twitter.com/PixelAndBracket/status/${tweet.ID}`}
-                    width="100%"
-                    linkText="Loading"
-                    style={{
-                      marginBottom: 10,
-                    }}
-                  />
                 </div>
               );
             })}

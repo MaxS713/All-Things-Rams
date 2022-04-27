@@ -1,12 +1,19 @@
 //Library Imports
 import React, { useState, useEffect } from "react";
-import { InstagramEmbed } from "react-social-media-embed";
-import "./styles/instagram.css";
 
-export default function Instagram(props) {
+// Need to alter imports
+//Embed Content Import
+import { TwitterEmbed } from "react-social-media-embed";
 
-  function relativeTime(instaTime) {
-    let diff = Date.now() - instaTime;
+import "./styles/picks.css";
+
+export default function Picks() {
+  function tweetIDToTime(tweetId) {
+    return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
+  }
+
+  function relativeTime(tweetTime) {
+    let diff = Date.now() - tweetTime;
     if (diff < 0) {
       return "From the future!";
     }
@@ -45,18 +52,16 @@ export default function Instagram(props) {
     }
     return `${diffStr} ago`;
   }
-  
-  const [instagramData, setInstagramData] = useState([]);
+
+  const [twitterData, setTwitterData] = useState([]);
 
   async function getServerData() {
-    let instagramPostsData
-    if (props.location === "socials") {
-      instagramPostsData = await fetch("http://localhost:5000/api/get-more-instagram-posts");
-    } else {
-      instagramPostsData = await fetch("http://localhost:5000/api/get-instagram-posts");
-    }
-    instagramPostsData = await instagramPostsData.json();
-    setInstagramData(instagramPostsData);
+    let tweetsData = await fetch("api/get-tweet-picks");
+    tweetsData = await tweetsData.json();
+    tweetsData.forEach((tweet) => {
+      tweet.time = tweetIDToTime(parseInt(tweet.ID));
+    });
+    setTwitterData(tweetsData);
   }
   useEffect(() => {
     getServerData();
@@ -64,21 +69,26 @@ export default function Instagram(props) {
 
   return (
     <>
-      <div id="instagram-container">
+      <div id="jp-picks">
         <div className="container-header">
-          <h2>Instagram</h2>
+          <h2>Joey &amp; Pierson Picks</h2>
         </div>
-
         <div className="container-content">
-          <div id="instagram-wrapper">
-            {instagramData.map((instagramPost, index) => {
+          <div id="picks-wrapper">
+            {twitterData.map((tweet, index) => {
               return (
-                <div key={index} id="instagram-embed">
-                  <p key={index+1} className="source"><span>{instagramPost.author}</span> posted {relativeTime(instagramPost.time)}</p>
-                  <InstagramEmbed
-                    url={`https://www.instagram.com${instagramPost.path}`}
+                <div key={index} id="picks-embed">
+                  <p key={index+1} className="source">
+                    <span key={index+2}>{tweet.author}</span> tweeted{" "}
+                    {relativeTime(tweet.time)}
+                  </p>
+                  <TwitterEmbed
+                    url={`https://twitter.com/PixelAndBracket/status/${tweet.ID}`}
                     width="100%"
                     linkText="Loading"
+                    style={{
+                      marginBottom: 10,
+                    }}
                   />
                 </div>
               );

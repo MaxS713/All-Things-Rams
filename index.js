@@ -1,7 +1,15 @@
 //Library Imports -----------//
 const express = require("express");
+const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+require("dotenv").config()
+
 const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
 const {
   Tweet,
   InstagramPost,
@@ -14,6 +22,8 @@ const {
   PickTweet,
   SurveyData,
 } = require("./models.js");
+
+
 const getLatestTweets = require("./get-data/get-twitter-data.js");
 const getLatestInstagramPosts = require("./get-data/get-instagram-data.js");
 const getLatestNewsData = require("./get-data/get-news-data.js");
@@ -23,31 +33,15 @@ const getPodcastData = require("./get-data/get-podcasts-data.js");
 const getTikTokVideos = require("./get-data/get-tiktok-data.js");
 const getLatestPickTweets = require("./get-data/get-picks-twitter-data.js");
 
-const app = require("express")();
-const { v4 } = require("uuid");
-const port = process.env.PORT || 5000;
-
-const twitterRoutes = require("./routes/admin-routes/twitterRoutes");
-const twitterUserRoutes = require("./routes/admin-routes/twitterUserRoutes");
-const instaRoutes = require("./routes/admin-routes/instaRoutes");
-const instaUserRoutes = require("./routes/admin-routes/instaUserRoutes");
-const newsRoutes = require("./routes/admin-routes/newsRoutes");
-const surveyRoutes = require("./routes/admin-routes/surveyRoutes");
-const customArticleRoutes = require("./routes/admin-routes/customArticleRoutes");
-app.use(cors());
-app.use(express.json());
-
-
-
 async function checkTimeOfLatestAPICall() {
   let currentTime = Date.now();
-  let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
-  let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
-  let lastTikTokCall = await LastAPICallTime.findOne({ API: "tiktok" });
-  let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
-  let lastPodcastCall = await LastAPICallTime.findOne({ API: "podcast" });
-  let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
-  let lastPicksCall = await LastAPICallTime.findOne({ API: "picks" });
+  let lastTwitterCall = await LastAPICallTime.findOne({API: "twitter"});
+  let lastInstagramCall = await LastAPICallTime.findOne({API: "instagram"});
+  let lastTikTokCall = await LastAPICallTime.findOne({API: "tiktok"});
+  let lastNewsCall = await LastAPICallTime.findOne({API: "news"});
+  let lastPodcastCall = await LastAPICallTime.findOne({API: "podcast"});
+  let lastVideoCall = await LastAPICallTime.findOne({API: "videos"});
+  let lastPicksCall = await LastAPICallTime.findOne({API: "picks"});
 
   if (!lastTwitterCall || currentTime - lastTwitterCall.time > 3600000) {
     await getLatestTweets();
@@ -72,6 +66,15 @@ async function checkTimeOfLatestAPICall() {
   }
 }
 
+
+const twitterRoutes = require("./routes/admin-routes/twitterRoutes");
+const twitterUserRoutes = require("./routes/admin-routes/twitterUserRoutes");
+const instaRoutes = require("./routes/admin-routes/instaRoutes");
+const instaUserRoutes = require("./routes/admin-routes/instaUserRoutes");
+const newsRoutes = require("./routes/admin-routes/newsRoutes");
+const surveyRoutes = require("./routes/admin-routes/surveyRoutes");
+const customArticleRoutes = require("./routes/admin-routes/customArticleRoutes");
+
 instaRoutes(app);
 twitterRoutes(app);
 newsRoutes(app);
@@ -79,23 +82,6 @@ instaUserRoutes(app);
 twitterUserRoutes(app);
 surveyRoutes(app);
 customArticleRoutes(app);
-
-app.get("/", (req, res) => {
-  checkTimeOfLatestAPICall();
-  res.status(200).send("All Things Rams Server").end();
-});
-
-app.get("/api", (req, res) => {
-  const path = `/api/item/${v4()}`;
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-});
-
-app.get("/api/item/:slug", (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
-});
 
 app.get("/api/get-latest-tweets", async (req, res) => {
   let allLatestPicksTweets = await Tweet.find({});
@@ -414,6 +400,16 @@ app.post("/api/submit", async (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log("Now listening on http://localhost:" + port);
+const PORT = process.env.PORT || 5000;
+
+const path = require("path");
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+
+app.listen(PORT, () => {
+  console.log("Now listening on " + PORT);
 });
