@@ -51,9 +51,9 @@ export default function Tiktok(props) {
   async function getServerData() {
     let tiktokPostsData;
     if (props.location === "socials") {
-      tiktokPostsData = await fetch("http://localhost:5000/api/get-more-tiktok-posts");
+      tiktokPostsData = await fetch("api/get-more-tiktok-posts");
     } else {
-      tiktokPostsData = await fetch("http://localhost:5000/api/get-tiktok-posts");
+      tiktokPostsData = await fetch("api/get-tiktok-posts");
     }
     tiktokPostsData = await tiktokPostsData.json();
     setTiktokData(tiktokPostsData);

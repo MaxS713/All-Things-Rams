@@ -403,13 +403,13 @@ app.post("/api/submit", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// const path = require("path");
+const path = require("path");
 
-// app.use(express.static(path.resolve(__dirname, "./client/build")));
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 
-// app.get("*", function (request, response) {
-//   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-// });
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log("Now listening on " + PORT);
