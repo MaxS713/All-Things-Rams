@@ -11,12 +11,12 @@
 /coverage
 
 # production
-client/build
+/client/build
 /build
 
 # misc
 .env
-client/.env
+/client/.env
 .DS_Store
 .env.local
 .env.development.local
