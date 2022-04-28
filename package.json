@@ -14,7 +14,7 @@
     "nodemailer": "^6.7.3",
     "nodemon": "^2.0.15",
     "podcast-index-api": "^1.1.10",
-    "puppeteer": "^13.6.0",
+    "puppeteer": "^13.7.0",
     "twitter-api-v2": "^1.12.0"
   },
   "scripts": {
