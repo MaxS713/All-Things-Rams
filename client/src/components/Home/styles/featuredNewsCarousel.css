@@ -1,11 +1,16 @@
 #featured-news-container {
   grid-area: feat;
-  grid-template-rows: 1fr 0.25fr
+  grid-template-rows: 1fr 0.25fr;
+  /* min-width:50vw;
+  max-height:50vh; */
+  overflow: hidden;
 }
 
 #feat.container-content {
-  height: 47.5vh;
+  overflow: hidden;
+  /* height: 50vh; */
 }
+
 #carousel-wrapper{
 
   /* max-height:100%; */
@@ -81,12 +86,11 @@
     width:100%;
   }
   #feat.container-content {
-    height: fit-content;
   }
 
   .carousel-img{
   width: 100%;
-  max-height:50vh;
+  /* max-height:50vh; */
   margin:0 auto;
   margin-top: 3vw;
   padding:0;

@@ -12,7 +12,7 @@ export default function FeaturedNewsCarousel() {
   const [newsArticleData, setNewsArticleData] = useState([]);
 
   async function getServerData() {
-    let newsArticlesData = await fetch("api/get-featured-news");
+    let newsArticlesData = await fetch("http://localhost:5000/api/get-featured-news");
     newsArticlesData = await newsArticlesData.json();
     newsArticlesData.forEach((article) => {
       article.time = Date.parse(article.time);

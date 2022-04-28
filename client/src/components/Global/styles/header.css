@@ -15,6 +15,11 @@
 .atr-logo {
   width: 12vw;
   margin-left: -1vw;
+  max-height:20vh;
+}
+
+.atr-logo:hover {
+  cursor: url('football_small.png'), pointer;
 }
 
 .header {

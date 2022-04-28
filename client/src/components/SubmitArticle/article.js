@@ -28,7 +28,7 @@ export default function SubmitForm() {
     data.append("email", email.value);
     data.append("file", file);
     console.log(...data);
-    let response = await fetch("api/submit", {
+    let response = await fetch("http://localhost:5000/api/submit", {
       method: "POST",
       body: data,
     });

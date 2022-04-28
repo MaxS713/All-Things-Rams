@@ -5,15 +5,13 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
-  width:34%;
+  overflow:hidden;
+  max-height:100%;
 }
 
 #tiktok-wrapper {
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding-left: 20px;
-  padding-right: 20px;
+  max-height: 100vh;
+  padding:1rem;
 }
 
 #tiktok-embed p {

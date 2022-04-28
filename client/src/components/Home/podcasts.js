@@ -5,7 +5,7 @@ export default function LatestPodcasts() {
   const [podcastData, setPodcastData] = useState([]);
 
   async function getServerData() {
-    let podcastData = await fetch("api/get-latest-podcasts");
+    let podcastData = await fetch("http://localhost:5000/api/get-latest-podcasts");
     podcastData = await podcastData.json();
     podcastData.forEach((podcast) => {
       podcast.title = trimTitleLength(podcast.title);

@@ -39,7 +39,7 @@ import CustomArticleEdit from "./components/customArticle/CustomArticleEdit";
 // STYLE IMPORTS
 import "./app.css";
 
-const dataProvider = DataProvider("api", httpClient);
+const dataProvider = DataProvider("http://localhost:5000/api", httpClient);
 
 // APP FUNCTION
 const AdminApp = () => {

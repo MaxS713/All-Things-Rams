@@ -6,15 +6,18 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
+  /* max-height: 40vh; */
+  overflow:hidden;
+  max-height:100%
 }
 
 #survey-wrapper {
-  min-height:30vh;
+  /* min-height:30vh; */
   padding: 0.5rem;
 }
 
 #voted-survey-wrapper{
-  min-height:30vh;
+  /* min-height:30vh; */
   padding: 0.5rem;
 }
 
@@ -29,8 +32,8 @@
 #voted-survey-wrapper .results{
   display:flex;
   flex-direction: column;
-
 }
+
 #voted-survey-wrapper .result{
   color: rgb(4, 9, 135);
   font-weight:600;

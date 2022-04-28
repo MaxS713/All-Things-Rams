@@ -5,13 +5,13 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
-  width:33%
+  /* width:33% */
+  overflow:hidden;
+  max-height:100%;
 }
 
 #tweets-wrapper {
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,10 @@
   font-size: 0.9vw;
   padding-bottom: 5px;
 }
-
+.twitter-tweet twitter-tweet-rendered{
+  max-width: 40vh;
+  justify-content: start;
+}
 #tweets-embed p span {
   font-size: 1vw;
   font-style: normal;

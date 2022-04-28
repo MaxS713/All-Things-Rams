@@ -31,11 +31,9 @@ export default function Bulletin() {
           <LatestPodcasts />
           <Survey />
           <GoogleAdPlaceholder />
-          <div id="socials-wrapper">
           <Twitter />
           <Tiktok />
           <Instagram />
-          </div>
         </div>
       </section>
     </>

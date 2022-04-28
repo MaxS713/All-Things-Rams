@@ -4,41 +4,30 @@
 
 #grid {
   display: grid;
-  box-sizing: border-box;
-
+  /* box-sizing: border-box; */
   justify-content: center;
-  flex-grow: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 100%;  
+  /* flex-grow: 1; */
+  /* max-height: 100%;   */
   max-width: 80%;
+  overflow: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
   gap: 1rem;
-  grid-template-rows: 1fr 0.25fr 0.25fr 0.75fr 0.25fr 2fr;
-  grid-template-columns: repeat(6, 1fr);
+  /* grid-template-rows: 3fr 1fr 1fr 2fr 1fr 3fr; */
+  grid-template-rows: 50vh 20vh 40vh 40vh 20vh 75vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    "feat feat feat feat feat news"
-    "googlead2 googlead2 googlead2 googlead2  googlead2 googlead2"
-    "survey survey customnews customnews customnews jppicks "
-    "podcast podcast customnews customnews customnews videos"
-    "googlead googlead googlead googlead googlead googlead"
-    "socials socials socials socials socials socials";
+    "feat feat feat feat feat feat news news news"
+    "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
+    "survey survey survey customnews customnews customnews jppicks jppicks jppicks "
+    "podcast podcast podcast customnews customnews customnews videos videos videos"
+    "googlead googlead googlead googlead googlead googlead googlead googlead googlead"
+    "twitter twitter twitter tiktok tiktok tiktok instagram instagram instagram";
 
     
     /* "podcast podcast . . . ."; Joey+Pierson's picks, article*/
-}
-
-
-#socials-wrapper{
-  grid-area: socials;
-  display:flex;
-  justify-content: center;
-  width:100%;
-  gap:1vw;
-  
 }
 
 
@@ -103,7 +92,26 @@
   border-left: 2px solid rgb(235, 235, 235);
   border-right: 2px solid rgb(235, 235, 235);
   max-height:100%;
+  overflow-y:auto;
+  overflow-x:hidden;
+  /* align-items: start; */
 }
+
+.container-content::-webkit-scrollbar {
+  width: 20px;
+}
+
+.container-content::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+.container-content::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+  background-color: rgb(4, 9, 135);
+}
+
 
 .hidden {
   display: none !important;
@@ -112,6 +120,7 @@
 .during-popup {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 }
+
 
 @keyframes fadeIn {
   0% {

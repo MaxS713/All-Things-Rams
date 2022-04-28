@@ -56,7 +56,7 @@ export default function Picks() {
   const [twitterData, setTwitterData] = useState([]);
 
   async function getServerData() {
-    let tweetsData = await fetch("api/get-tweet-picks");
+    let tweetsData = await fetch("http://localhost:5000/api/get-tweet-picks");
     tweetsData = await tweetsData.json();
     tweetsData.forEach((tweet) => {
       tweet.time = tweetIDToTime(parseInt(tweet.ID));

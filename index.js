@@ -2,7 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
-require("dotenv").config()
+require("dotenv").config();
 
 const cors = require("cors");
 
@@ -23,7 +23,6 @@ const {
   SurveyData,
 } = require("./models.js");
 
-
 const getLatestTweets = require("./get-data/get-twitter-data.js");
 const getLatestInstagramPosts = require("./get-data/get-instagram-data.js");
 const getLatestNewsData = require("./get-data/get-news-data.js");
@@ -35,13 +34,13 @@ const getLatestPickTweets = require("./get-data/get-picks-twitter-data.js");
 
 async function checkTimeOfLatestAPICall() {
   let currentTime = Date.now();
-  let lastTwitterCall = await LastAPICallTime.findOne({API: "twitter"});
-  let lastInstagramCall = await LastAPICallTime.findOne({API: "instagram"});
-  let lastTikTokCall = await LastAPICallTime.findOne({API: "tiktok"});
-  let lastNewsCall = await LastAPICallTime.findOne({API: "news"});
-  let lastPodcastCall = await LastAPICallTime.findOne({API: "podcast"});
-  let lastVideoCall = await LastAPICallTime.findOne({API: "videos"});
-  let lastPicksCall = await LastAPICallTime.findOne({API: "picks"});
+  let lastTwitterCall = await LastAPICallTime.findOne({ API: "twitter" });
+  let lastInstagramCall = await LastAPICallTime.findOne({ API: "instagram" });
+  let lastTikTokCall = await LastAPICallTime.findOne({ API: "tiktok" });
+  let lastNewsCall = await LastAPICallTime.findOne({ API: "news" });
+  let lastPodcastCall = await LastAPICallTime.findOne({ API: "podcast" });
+  let lastVideoCall = await LastAPICallTime.findOne({ API: "videos" });
+  let lastPicksCall = await LastAPICallTime.findOne({ API: "picks" });
 
   if (!lastTwitterCall || currentTime - lastTwitterCall.time > 3600000) {
     await getLatestTweets();
@@ -65,7 +64,6 @@ async function checkTimeOfLatestAPICall() {
     await getLatestNewsData();
   }
 }
-
 
 const twitterRoutes = require("./routes/admin-routes/twitterRoutes");
 const twitterUserRoutes = require("./routes/admin-routes/twitterUserRoutes");
@@ -306,17 +304,20 @@ app.get("/api/get-latest-videos", async (req, res) => {
 });
 
 app.get("/api/get-survey-data", async (req, res) => {
-  let surveyData = await SurveyData.findOne({});
+  let surveyData = await SurveyData.find({});
+  surveyData = surveyData[surveyData.length - 1];
   res.send(surveyData);
 });
 
 app.get("/api/get-custom-article", async (req, res) => {
-  let data = await CustomArticle.findOne({});
+  let data = await CustomArticle.find({});
+  data = data[data.length - 1];
   res.send(data);
 });
 
 app.post("/api/post-survey-vote", async (req, res) => {
-  let surveyData = await SurveyData.findOne({});
+  let surveyData = await SurveyData.find({});
+  surveyData = surveyData[surveyData.length - 1];
   surveyData.ipAddresses.push(req.body.ip);
   if (req.body.text === surveyData.textAnswer1) {
     surveyData.votesAnswer1++;
@@ -335,8 +336,8 @@ let transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: "allthingsrams.official@gmail.com", 
-    pass: "tqVfBDMnGN7vWKrc", 
+    user: "allthingsrams.official@gmail.com",
+    pass: "tqVfBDMnGN7vWKrc",
   },
 });
 
@@ -364,7 +365,7 @@ app.post("/api/contact", async (req, res) => {
   };
   await transporter.sendMail(mail, (error) => {
     if (error) {
-      console.log(error)
+      console.log(error);
       res.json({ status: "ERROR" });
     } else {
       res.json({ status: "Message Sent" });
@@ -402,13 +403,13 @@ app.post("/api/submit", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-const path = require("path");
+// const path = require("path");
 
-app.use(express.static(path.resolve(__dirname, "./client/build")));
+// app.use(express.static(path.resolve(__dirname, "./client/build")));
 
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
+// app.get("*", function (request, response) {
+//   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+// });
 
 app.listen(PORT, () => {
   console.log("Now listening on " + PORT);

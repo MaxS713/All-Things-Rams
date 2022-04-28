@@ -1,18 +1,25 @@
 #news-grid {
-  width: 85%;
-  margin: 1rem auto 1rem auto;
-  gap:1rem;
-  
-  
-  grid-template-columns: repeat(6, 1fr);
   display: grid;
-
+  /* box-sizing: border-box; */
+  justify-content: center;
+  /* flex-grow: 1; */
+  /* max-height: 100%;   */
+  max-width: 80%;
+  overflow: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1rem;
+  /* grid-template-rows: 3fr 1fr 1fr 2fr 1fr 3fr; */
+  grid-template-rows: 50vh 20vh 40vh 40vh 20vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    "feat feat feat feat news news"
-    "feat feat feat feat news news"
-    "googlead googlead googlead googlead googlead googlead"
-    "videos videos videos podcast podcast podcast"
-    "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2";
+    "feat feat feat feat feat feat news news news"
+    "googlead2 googlead2 googlead2 googlead2 googlead2 googlead2 googlead2 googlead2 googlead2"
+    "podcast podcast podcast videos videos customnews customnews customnews customnews "
+    "podcast podcast podcast videos videos customnews customnews customnews customnews"
+    "googlead googlead googlead googlead googlead googlead googlead googlead googlead"
 }
 @media only screen and (max-width: 800px) {
   #news-grid {

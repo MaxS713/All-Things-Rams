@@ -11,6 +11,7 @@ import Navbar from "./nav";
 // import Logo from "./logo.js"
 import logo1 from "./styles/ATR1.png";
 import logo2 from "./styles/ATR2.png";
+import steve from "./styles/football_steve.gif"
 
 //Style Imports
 import "./styles/header.css";
@@ -26,6 +27,8 @@ export default function Header() {
               onClick={() => {
                 if (logoSrc === logo2) {
                   setLogoSrc(logo1);
+                } else if (logoSrc === logo1) {
+                  setLogoSrc(steve);
                 } else {
                   setLogoSrc(logo2);
                 }

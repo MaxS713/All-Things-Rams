@@ -5,13 +5,15 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
-  width:100%
+  width:100%;
+  overflow:hidden;
+  max-height:100%
 }
 
 #latest-podcast {
-  max-height: 35vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  /* max-height: 35vh; */
+  /* overflow-x: hidden;
+  overflow-y: scroll; */
   display: flex;
   flex-direction: column;
 }
@@ -80,5 +82,13 @@ img.podcast-logo {
 @media screen and (max-width: 900px) {
   #latest-podcast {
   max-height:27.5vh;
+  }
+  h3.podcast-title {
+    font-size: 2.5vw;
+  }
+}
+@media screen and (max-width: 400px) {
+  h3.podcast-title {
+    font-size: 4.5vw;
   }
 }

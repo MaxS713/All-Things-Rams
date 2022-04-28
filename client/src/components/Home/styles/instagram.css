@@ -5,15 +5,12 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
-  width:33%
+  overflow: hidden;
 }
 
 #instagram-wrapper {
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding-left: 20px;
-  padding-right: 20px;
+  max-height:100vh;
+  padding:1rem;
 }
 
 #instagram-embed p {
@@ -51,7 +48,13 @@ p.source {
   width: 100%;
 }
 @media only screen and (max-width:900px){
-  #instagram-container{
-    width:100%;
+  #instagram-wrapper {
+    max-height:60vh;
+
   }
+  #instagram-container{
+    max-width:100%;
+
+  }
+
 }
