@@ -82,6 +82,7 @@ surveyRoutes(app);
 customArticleRoutes(app);
 
 app.get("/api/get-latest-tweets", async (req, res) => {
+  checkTimeOfLatestAPICall()
   let allLatestPicksTweets = await Tweet.find({});
   allLatestPicksTweets = allLatestPicksTweets.sort(
     (a, b) => parseInt(b.ID) - parseInt(a.ID)
