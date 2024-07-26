@@ -7,7 +7,7 @@ export default function LatestNews(props) {
   async function getServerData() {
     let newsArticlesData;
     if (props.location === "news") {
-      newsArticlesData = await fetch("api/get-more-news-article");
+      newsArticlesData = await fetch("api/get-news-article");
     } else {
       newsArticlesData = await fetch("api/get-news-article");
     }
