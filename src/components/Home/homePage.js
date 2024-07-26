@@ -14,7 +14,7 @@ export default function HomePage() {
 
   useEffect(() => {
     completeLoading();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   function completeLoading() {
     setTimeout(() => setLoadingID("hidden"), 3000);

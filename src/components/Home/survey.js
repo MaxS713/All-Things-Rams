@@ -57,7 +57,7 @@ export default function Survey() {
   }
   useEffect(() => {
     getSurveyData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const customTheme = {
     textColor: "black",

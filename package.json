@@ -1,11 +1,8 @@
 {
-  "name": "atrserver",
+  "name": "atr",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:5000",
   "dependencies": {
-    "all": "^0.0.0",
     "body-parser": "^1.20.0",
     "concurrently": "^7.1.0",
     "cors": "^2.8.5",
@@ -16,18 +13,37 @@
     "nodemon": "^2.0.15",
     "podcast-index-api": "^1.1.10",
     "puppeteer": "^13.7.0",
-    "twitter-api-v2": "^1.12.0"
+    "twitter-api-v2": "^1.12.0",
+    "@auth0/auth0-react": "^1.10.1",
+    "axios": "^0.27.2",
+    "cra-template": "1.2.0",
+    "react": "^18.1.0",
+    "react-admin": "^4.0.1",
+    "react-dom": "^18.1.0",
+    "react-leaf-polls": "^1.1.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-social-media-embed": "^2.0.12",
+    "slick-carousel": "^1.8.1",
+    "uuid": "^9.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "server": "nodemon index.js",
-    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

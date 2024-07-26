@@ -1,9 +1,9 @@
 //Database Connect
 const mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://allthingsramsofficial:eOb6pAo0Yq4KJ10w@cluster0.jyqgg.mongodb.net/all-things-rams"
-);
+require("dotenv").config();
+
+mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 

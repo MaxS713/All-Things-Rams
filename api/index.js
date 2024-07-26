@@ -1,14 +1,14 @@
 //Library Imports -----------//
 const express = require("express");
+const cors = require("cors");
+const app = require("express")();
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+const { v4 } = require("uuid");
+
 require("dotenv").config();
 
-const cors = require("cors");
-
-const app = express();
-app.use(cors());
-app.use(express.json());
+const port = 5000;
 
 const {
   Tweet,
@@ -65,13 +65,13 @@ async function checkTimeOfLatestAPICall() {
   }
 }
 
-const twitterRoutes = require("./routes/admin-routes/twitterRoutes");
-const twitterUserRoutes = require("./routes/admin-routes/twitterUserRoutes");
-const instaRoutes = require("./routes/admin-routes/instaRoutes");
-const instaUserRoutes = require("./routes/admin-routes/instaUserRoutes");
-const newsRoutes = require("./routes/admin-routes/newsRoutes");
-const surveyRoutes = require("./routes/admin-routes/surveyRoutes");
-const customArticleRoutes = require("./routes/admin-routes/customArticleRoutes");
+const twitterRoutes = require("./routes/admin-routes/twitterRoutes.js");
+const twitterUserRoutes = require("./routes/admin-routes/twitterUserRoutes.js");
+const instaRoutes = require("./routes/admin-routes/instaRoutes.js");
+const instaUserRoutes = require("./routes/admin-routes/instaUserRoutes.js");
+const newsRoutes = require("./routes/admin-routes/newsRoutes.js");
+const surveyRoutes = require("./routes/admin-routes/surveyRoutes.js");
+const customArticleRoutes = require("./routes/admin-routes/customArticleRoutes.js");
 
 instaRoutes(app);
 twitterRoutes(app);
@@ -81,8 +81,20 @@ twitterUserRoutes(app);
 surveyRoutes(app);
 customArticleRoutes(app);
 
+app.get("/api", (_, res) => {
+  const path = `/api/item/${v4()}`;
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+});
+
+app.get("/api/item/:slug", (req, res) => {
+  const { slug } = req.params;
+  res.end(`Item: ${slug}`);
+});
+
 app.get("/api/get-latest-tweets", async (req, res) => {
-  checkTimeOfLatestAPICall()
+  // checkTimeOfLatestAPICall()
   let allLatestPicksTweets = await Tweet.find({});
   allLatestPicksTweets = allLatestPicksTweets.sort(
     (a, b) => parseInt(b.ID) - parseInt(a.ID)
@@ -402,16 +414,8 @@ app.post("/api/submit", async (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-
-const path = require("path");
-
-app.use(express.static(path.resolve(__dirname, "./client/build")));
-
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+app.listen(port, () => {
+  console.log("Now listening on " + port);
 });
 
-app.listen(PORT, () => {
-  console.log("Now listening on " + PORT);
-});
+module.exports = app;

@@ -5,9 +5,7 @@
   -moz-animation: fadeIn 3s;
   -o-animation: fadeIn 3s;
   -ms-animation: fadeIn 3s;
-  width:100%;
   overflow:hidden;
-  max-height:100%
 }
 
 #latest-podcast {

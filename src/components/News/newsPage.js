@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 
 //Component Imports
 import Header from "../Global/header";
-import SocialsBulletin from "./socialsBulletin";
+import NewsBulletin from "./newsBulletin";
 import Footer from "../Global/footer";
 import LoadingScreen from "../Global/loadingScreen";
 
-export default function SocialsPage() {
+export default function NewsPage() {
   const [loadingID, setLoadingID] = useState("");
   const [gridID, setGridID] = useState("hidden");
 
   useEffect(() => {
       completeLoading();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   function completeLoading() {
     setTimeout(() => setLoadingID("hidden"), 2000);
@@ -23,7 +23,7 @@ export default function SocialsPage() {
     <main>
       <Header />
       <div id={gridID}>
-        <SocialsBulletin />
+        <NewsBulletin />
       </div>
       <div id={loadingID}>
         <LoadingScreen />

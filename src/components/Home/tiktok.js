@@ -1,19 +1,12 @@
 //Library Imports
 import React, { useState, useEffect } from "react";
+import { TikTokEmbed } from 'react-social-media-embed';
+import "./styles/tiktok.css";
 
-// Need to alter imports
-//Embed Content Import
-import { TwitterEmbed } from "react-social-media-embed";
+export default function Tiktok(props) {
 
-import "./styles/twitter.css";
-
-export default function Twitter(props) {
-  function tweetIDToTime(tweetId) {
-    return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
-  }
-
-  function relativeTime(tweetTime) {
-    let diff = Date.now() - tweetTime;
+  function relativeTime(tiktokTime) {
+    let diff = Date.now() - tiktokTime;
     if (diff < 0) {
       return "From the future!";
     }
@@ -53,47 +46,39 @@ export default function Twitter(props) {
     return `${diffStr} ago`;
   }
 
-  const [twitterData, setTwitterData] = useState([]);
+  const [tiktokData, setTiktokData] = useState([]);
 
   async function getServerData() {
-    let tweetsData;
+    let tiktokPostsData;
     if (props.location === "socials") {
-      tweetsData = await fetch("api/get-more-tweets");
+      tiktokPostsData = await fetch("api/get-more-tiktok-posts");
     } else {
-      tweetsData = await fetch("api/get-latest-tweets");
+      tiktokPostsData = await fetch("api/get-tiktok-posts");
     }
-    tweetsData = await tweetsData.json();
-    tweetsData.forEach((tweet) => {
-      tweet.time = tweetIDToTime(parseInt(tweet.ID));
-    });
-    setTwitterData(tweetsData);
+    tiktokPostsData = await tiktokPostsData.json();
+    setTiktokData(tiktokPostsData);
   }
   useEffect(() => {
     getServerData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <div id="tweets-container">
+      <div id="tiktok-container">
         <div className="container-header">
-          <h2>Twitter</h2>
+          <h2>Tik-Tok</h2>
         </div>
+
         <div className="container-content">
-          <div id="tweets-wrapper">
-            {twitterData.map((tweet, index) => {
+          <div id="tiktok-wrapper">
+            {tiktokData.map((tiktokPost, index) => {
               return (
-                <div key={index} id="tweets-embed">
-                  <p key={index+1} className="source">
-                    <span key={index+2}>{tweet.author}</span> tweeted{" "}
-                    {relativeTime(tweet.time)}
-                  </p>
-                  <TwitterEmbed
-                    url={`https://twitter.com/PixelAndBracket/status/${tweet.ID}`}
+                <div key={index} id="tiktok-embed">
+                  <p key={index+1} className="source"><span key={index+2}>{tiktokPost.author}</span> posted {relativeTime(tiktokPost.time)}</p>
+                  <TikTokEmbed
+                    url={`https://www.tiktok.com/@${tiktokPost.author}/video/${tiktokPost.linkID}`}
                     width="100%"
                     linkText="Loading"
-                    style={{
-                      marginBottom: 10,
-                    }}
                   />
                 </div>
               );

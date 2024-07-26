@@ -11,7 +11,7 @@ export default function CustomNews() {
   }
   useEffect(() => {
     getServerData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <div id="custom-news">

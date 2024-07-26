@@ -5,9 +5,9 @@ import React, { useState, useEffect } from "react";
 //Embed Content Import
 import { TwitterEmbed } from "react-social-media-embed";
 
-import "./styles/picks.css";
+import "./styles/twitter.css";
 
-export default function Picks() {
+export default function Twitter(props) {
   function tweetIDToTime(tweetId) {
     return new Date(parseInt(tweetId / 2 ** 22) + 1288834974657).getTime();
   }
@@ -56,7 +56,12 @@ export default function Picks() {
   const [twitterData, setTwitterData] = useState([]);
 
   async function getServerData() {
-    let tweetsData = await fetch("api/get-tweet-picks");
+    let tweetsData;
+    if (props.location === "socials") {
+      tweetsData = await fetch("api/get-more-tweets");
+    } else {
+      tweetsData = await fetch("api/get-latest-tweets");
+    }
     tweetsData = await tweetsData.json();
     tweetsData.forEach((tweet) => {
       tweet.time = tweetIDToTime(parseInt(tweet.ID));
@@ -65,19 +70,19 @@ export default function Picks() {
   }
   useEffect(() => {
     getServerData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <div id="jp-picks">
+      <div id="tweets-container">
         <div className="container-header">
-          <h2>Joey &amp; Pierson Picks</h2>
+          <h2>Twitter</h2>
         </div>
         <div className="container-content">
-          <div id="picks-wrapper">
+          <div id="tweets-wrapper">
             {twitterData.map((tweet, index) => {
               return (
-                <div key={index} id="picks-embed">
+                <div key={index} id="tweets-embed">
                   <p key={index+1} className="source">
                     <span key={index+2}>{tweet.author}</span> tweeted{" "}
                     {relativeTime(tweet.time)}

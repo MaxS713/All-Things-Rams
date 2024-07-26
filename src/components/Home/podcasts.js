@@ -14,7 +14,7 @@ export default function LatestPodcasts() {
   }
   useEffect(() => {
     getServerData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   function trimTitleLength(string) {
     let trimmedString = string.substr(0, 100);

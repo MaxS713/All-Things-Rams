@@ -1,12 +1,12 @@
-//Library Imports
 import React, { useState, useEffect } from "react";
-import { InstagramEmbed } from "react-social-media-embed";
-import "./styles/instagram.css";
 
-export default function Instagram(props) {
+import "./styles/videos.css";
 
-  function relativeTime(instaTime) {
-    let diff = Date.now() - instaTime;
+export default function LatestVideos() {
+
+  function relativeTime(vidTime) {
+    let diff = Date.now() - vidTime;
+    if (!diff) return;
     if (diff < 0) {
       return "From the future!";
     }
@@ -45,41 +45,46 @@ export default function Instagram(props) {
     }
     return `${diffStr} ago`;
   }
-  
-  const [instagramData, setInstagramData] = useState([]);
+
+  const [videosData, setVideosData] = useState([]);
 
   async function getServerData() {
-    let instagramPostsData
-    if (props.location === "socials") {
-      instagramPostsData = await fetch("api/get-more-instagram-posts");
-    } else {
-      instagramPostsData = await fetch("api/get-instagram-posts");
-    }
-    instagramPostsData = await instagramPostsData.json();
-    setInstagramData(instagramPostsData);
+    let data = await fetch("api/get-latest-videos");
+    data = await data.json();
+    setVideosData(data);
   }
   useEffect(() => {
     getServerData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <div id="instagram-container">
+      <div id="videos-container">
         <div className="container-header">
-          <h2>Instagram</h2>
+          <h2>Latest Videos</h2>
         </div>
-
         <div className="container-content">
-          <div id="instagram-wrapper">
-            {instagramData.map((instagramPost, index) => {
+          <div id="latest-videos">
+            {videosData.map((video, index) => {
               return (
-                <div key={index} id="instagram-embed">
-                  <p key={index+1} className="source"><span>{instagramPost.author}</span> posted {relativeTime(instagramPost.time)}</p>
-                  <InstagramEmbed
-                    url={`https://www.instagram.com${instagramPost.path}`}
-                    width="auto"
-                    linkText="Loading"
-                  />
+                <div key={index} className="video-item">
+                  <a
+                    href={video.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div>
+                      <img
+                        src={video.imgSrc}
+                        alt={"Highlight Video Thumbnail"}
+                        className="video-thumbnail"
+                      />
+                      <h3>{video.title}</h3>
+                    </div>
+                  </a>
+                  <p className="video-date">
+                    {relativeTime(video.time)}
+                  </p>
                 </div>
               );
             })}
